@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public interface IShortestPath {
 	
-	/*Test functionality*/
+	/*Test functionality still testing.*/
 	
 	public double setStart();
 	public double getStart();
