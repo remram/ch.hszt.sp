@@ -11,6 +11,6 @@ public interface IShortestPath {
 	public double setTarget();
 	public double getTarget();
 	
-	public ArrayList<CNode> getNode();
-	public ArrayList<CEdge> getEdge();	
+	public ArrayList<CNode> getNodes();
+	public ArrayList<CEdge> getEdges();	
 }
