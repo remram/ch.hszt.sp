@@ -2,6 +2,7 @@ package ch.hszt.sp.models;
 
 /**
  * CNode is a node class
+ * 
  * @author Ramy Hasan
  * @since 10.04.2011
  */
