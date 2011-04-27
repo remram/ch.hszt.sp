@@ -1,5 +1,10 @@
 package ch.hszt.sp.models;
 
+/**
+ * CNode is a node class
+ * @author Ramy Hasan
+ * @since 10.04.2011
+ */
 public class CNode {
 	private int id;
 	private double xCoordinate;
