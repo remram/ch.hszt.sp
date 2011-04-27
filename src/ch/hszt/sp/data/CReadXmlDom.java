@@ -16,7 +16,7 @@ import org.xml.sax.SAXParseException;
 public class CReadXmlDom {
 	private String xmlFile;
 	private String tagName;
-	private NodeList nodeList;
+	private NodeList xmlNodeList;
 	
 	public CReadXmlDom(String xmlFile, String tagName) {
 		this.xmlFile = xmlFile;
@@ -32,8 +32,15 @@ public class CReadXmlDom {
 			Document document = builder.parse(new File("src/ch/hszt/sp/data/"
 					+ this.xmlFile));
 			// Get list of nodes by tag name
-			this.nodeList = document.getElementsByTagName(this.tagName);
-			printNodesFromList(this.nodeList); // printNodesFromList see below
+			
+			this.xmlNodeList = document.getElementsByTagName(this.tagName);
+			//printNodesFromList(this.xmlNodeList); // printNodesFromList see below
+			
+			
+			
+			
+			//System.out.print( document.getAttributes() );
+			
 			// Error and exception handling
 		} catch (SAXParseException spe) {
 			System.out.println("\n** Parsing error, line "
@@ -52,7 +59,7 @@ public class CReadXmlDom {
 			ioe.printStackTrace();
 		}
 		
-		return this.nodeList;
+		return this.xmlNodeList;
 	}
 
 	// ---- Helper methods ----
@@ -73,14 +80,28 @@ public class CReadXmlDom {
 			printObjIfVisible("getNodeName()        = ", node.getNodeName());
 			printObjIfVisible("getLocalName()       = ", node.getLocalName());
 			printObjIfVisible("getNodeValue()       = ", node.getNodeValue());
-			if (node.hasAttributes())
-				printObjIfVisible("getAttributes()      = ",
-						node.getAttributes());
+			
+			//get node id
+			if (node.hasAttributes() && node.getAttributes().getLength() == 1) {
+				printObjIfVisible("ID      = ",
+						node.getAttributes().item(0).getNodeValue());
+			}
+			
+			//coordinate attributes
+			if (node.hasAttributes() && node.getAttributes().getLength() == 2) {
+				printObjIfVisible("X      = ",
+						node.getAttributes().item(0).getNodeValue());
+				printObjIfVisible("Y      = ",
+					node.getAttributes().item(1).getNodeValue());
+			}
+				
 			if (node.hasChildNodes()) {
 				printObjIfVisible("getChildNodes()      = ",
 						node.getChildNodes());
+				
+				
 				printObjIfVisible("getFirstChild()      = ",
-						node.getFirstChild());
+						node.getFirstChild().getNodeValue());
 			}
 			printObjIfVisible("getPreviousSibling() = ",
 					node.getPreviousSibling());
@@ -112,10 +133,10 @@ public class CReadXmlDom {
 	
 	// Test the class
 	public static void main(String[] args) {
-		CReadXmlDom rxd = new CReadXmlDom("nodes.xml", "name");
+		CReadXmlDom rxd = new CReadXmlDom("nodes.xml", "*");
 		rxd.parseXmlFile();
-		rxd.setXmlFile("edges.xml");
+		/*rxd.setXmlFile("edges.xml");
 		rxd.setTagName("edge");
-		rxd.parseXmlFile();
+		rxd.parseXmlFile();*/
 	}
 }
