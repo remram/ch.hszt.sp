@@ -8,11 +8,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
+/**
+ * The class tries to open a xml file and return a NodeList  
+ * @author Ramy Hasan
+ */
 public class CReadXmlDom {
 	private String xmlFile;
 	private String tagName;
@@ -23,25 +26,21 @@ public class CReadXmlDom {
 		this.tagName = tagName;
 	}
 	
+	/**
+	 * Parse the xml file
+	 * @return NodeList
+	 */
 	public NodeList parseXmlFile() {
 		try {
-			// Parse XML file
+			//Parse XML file
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
 			Document document = builder.parse(new File("src/ch/hszt/sp/data/"
 					+ this.xmlFile));
-			// Get list of nodes by tag name
-			
+			//Get list of nodes by tag name			
 			this.xmlNodeList = document.getElementsByTagName(this.tagName);
-			//printNodesFromList(this.xmlNodeList); // printNodesFromList see below
-			
-			
-			
-			
-			//System.out.print( document.getAttributes() );
-			
-			// Error and exception handling
+			//Error and exception handling
 		} catch (SAXParseException spe) {
 			System.out.println("\n** Parsing error, line "
 					+ spe.getLineNumber() + ", uri " + spe.getSystemId());
@@ -62,59 +61,6 @@ public class CReadXmlDom {
 		return this.xmlNodeList;
 	}
 
-	// ---- Helper methods ----
-
-	private static void printObjIfVisible(String sValName, Object obj) {
-		if (null == obj)
-			return;
-		String s = obj.toString();
-		if (null != s && 0 < s.trim().length() && !s.trim().equals("\n"))
-			System.out.println(sValName + s);
-	}
-
-	public static void printNodeInfos(String sNodeName, Node node) {
-		System.out.println("\n---------------------- " + sNodeName);
-		if (null != node) {
-			printObjIfVisible("getNodeType()        = ",
-					"" + node.getNodeType());
-			printObjIfVisible("getNodeName()        = ", node.getNodeName());
-			printObjIfVisible("getLocalName()       = ", node.getLocalName());
-			printObjIfVisible("getNodeValue()       = ", node.getNodeValue());
-			
-			//get node id
-			if (node.hasAttributes() && node.getAttributes().getLength() == 1) {
-				printObjIfVisible("ID      = ",
-						node.getAttributes().item(0).getNodeValue());
-			}
-			
-			//coordinate attributes
-			if (node.hasAttributes() && node.getAttributes().getLength() == 2) {
-				printObjIfVisible("X      = ",
-						node.getAttributes().item(0).getNodeValue());
-				printObjIfVisible("Y      = ",
-					node.getAttributes().item(1).getNodeValue());
-			}
-				
-			if (node.hasChildNodes()) {
-				printObjIfVisible("getChildNodes()      = ",
-						node.getChildNodes());
-				
-				
-				printObjIfVisible("getFirstChild()      = ",
-						node.getFirstChild().getNodeValue());
-			}
-			printObjIfVisible("getPreviousSibling() = ",
-					node.getPreviousSibling());
-			printObjIfVisible("getNextSibling()     = ", node.getNextSibling());
-		}
-		System.out.println("----------------------\n");
-	}
-
-	public static void printNodesFromList(NodeList nodeList) {
-		for (int i = 0; i < nodeList.getLength(); i++)
-			printNodeInfos("nodeList.item(" + i + ")", nodeList.item(i));
-	}
-
 	public String getXmlFile() {
 		return xmlFile;
 	}
@@ -129,14 +75,5 @@ public class CReadXmlDom {
 
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
-	}
-	
-	// Test the class
-	public static void main(String[] args) {
-		CReadXmlDom rxd = new CReadXmlDom("nodes.xml", "*");
-		rxd.parseXmlFile();
-		/*rxd.setXmlFile("edges.xml");
-		rxd.setTagName("edge");
-		rxd.parseXmlFile();*/
 	}
 }

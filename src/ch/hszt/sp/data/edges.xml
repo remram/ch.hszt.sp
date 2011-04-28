@@ -9,7 +9,7 @@
             value: if one way
                    save the id of the node
         -->
-        <direction type="none"></direction>
+        <direction type="none">0</direction>
         <nodes>
             <node-start>1</node-start>
             <node-target>2</node-target>
@@ -17,7 +17,7 @@
     </edge>
     <edge id="2">
         <weight>2</weight>
-        <direction type="none"></direction>
+        <direction type="one">3</direction>
         <nodes>
             <node-start>2</node-start>
             <node-target>3</node-target>
@@ -25,7 +25,7 @@
     </edge>
     <edge id="3">
         <weight>1</weight>
-        <direction type="none"></direction>
+        <direction type="none">0</direction>
         <nodes>
             <node-start>3</node-start>
             <node-target>4</node-target>
@@ -33,7 +33,7 @@
     </edge>
     <edge id="4">
         <weight>2</weight>
-        <direction type="none"></direction>
+        <direction type="both">0</direction>
         <nodes>
             <node-start>4</node-start>
             <node-target>5</node-target>
@@ -41,7 +41,7 @@
     </edge>
     <edge id="5">
         <weight>5</weight>
-        <direction type="none"></direction>
+        <direction type="none">0</direction>
         <nodes>
             <node-start>2</node-start>
             <node-target>4</node-target>
@@ -49,7 +49,7 @@
     </edge>
     <edge id="6">
         <weight>3</weight>
-        <direction type="none"></direction>
+        <direction type="none">0</direction>
         <nodes>
             <node-start>4</node-start>
             <node-target>5</node-target>
