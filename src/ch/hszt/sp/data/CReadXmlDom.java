@@ -21,6 +21,11 @@ public class CReadXmlDom {
 	private String tagName;
 	private NodeList xmlNodeList;
 	
+	/**
+	 * Constructor to setup the xml file and the tag name
+	 * @param xmlFile
+	 * @param tagName
+	 */
 	public CReadXmlDom(String xmlFile, String tagName) {
 		this.xmlFile = xmlFile;
 		this.tagName = tagName;
