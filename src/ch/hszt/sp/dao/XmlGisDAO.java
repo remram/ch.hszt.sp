@@ -148,29 +148,4 @@ public class XmlGisDAO implements IGisDAO {
 
 		return cEdgeList;
 	}
-
-	/**
-	 * This main method is just for testing
-	 * @param args
-	 * @throws DataAccessException
-	 */
-	public static void main(String[] args) throws DataAccessException {
-		XmlGisDAO xgd = new XmlGisDAO();
-		for (CNode cNode : xgd.getNodes()) {
-			System.out.print("ID: " + cNode.getId());
-			System.out.print(", x: " + cNode.getxCoordinate());
-			System.out.print(", y: " + cNode.getyCoordinate());
-			System.out.println(", name: " + cNode.getName());
-		}
-
-		for (CEdge cEdge : xgd.getEdges()) {
-			System.out.print("ID: " + cEdge.getId());
-			System.out.print(", Weight: " + cEdge.getWeight());
-			System.out.print(", DirectionType: " + cEdge.getDirectionType());
-			System.out.print(", DirectionId: " + cEdge.getDirectionId());
-			System.out.print(", StartNode: " + cEdge.getStartNode());
-			System.out.println(", TargetNode: " + cEdge.getTargetNode());
-		}
-	}
-
 }

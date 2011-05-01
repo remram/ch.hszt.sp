@@ -2,15 +2,9 @@ package ch.hszt.sp.models;
 
 import java.util.ArrayList;
 
-public interface IShortestPath {
-	
-	/*Test functionality still testing.*/
-	
-	public double setStart();
-	public double getStart();
-	public double setTarget();
-	public double getTarget();
-	
-	public ArrayList<CNode> getNodes();
-	public ArrayList<CEdge> getEdges();	
+import ch.hszt.sp.exceptions.DataAccessException;
+
+public interface IShortestPath {	
+	public ArrayList<CNode> getNodes() throws DataAccessException;
+	public ArrayList<CEdge> getEdges() throws DataAccessException;	
 }
