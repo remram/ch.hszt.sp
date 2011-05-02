@@ -37,12 +37,12 @@ public class XmlGisDAO implements IGisDAO {
 				//Get and set coordinates of nodes
 				if (node.hasAttributes()
 						&& node.getAttributes().getLength() == 2) {
-					double x = Double.valueOf(
+					int x = Integer.valueOf(
 							node.getAttributes().item(0).getNodeValue())
-							.doubleValue();
-					double y = Double.valueOf(
+							.intValue();
+					int y = Integer.valueOf(
 							node.getAttributes().item(1).getNodeValue())
-							.doubleValue();
+							.intValue();
 					cNodeObj.setxCoordinate(x);
 					cNodeObj.setyCoordinate(y);
 				}

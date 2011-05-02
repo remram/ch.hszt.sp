@@ -8,8 +8,8 @@ package ch.hszt.sp.models;
  */
 public class CNode {
 	private int id;
-	private double xCoordinate;
-	private double yCoordinate;
+	private int xCoordinate;
+	private int yCoordinate;
 	private String name;
 
 	/**
@@ -30,7 +30,7 @@ public class CNode {
 	/**
 	 * @return the xCoordinate
 	 */
-	public double getxCoordinate() {
+	public int getxCoordinate() {
 		return xCoordinate;
 	}
 
@@ -38,14 +38,14 @@ public class CNode {
 	 * @param xCoordinate
 	 *            the xCoordinate to set
 	 */
-	public void setxCoordinate(double xCoordinate) {
+	public void setxCoordinate(int xCoordinate) {
 		this.xCoordinate = xCoordinate;
 	}
 
 	/**
 	 * @return the yCoordinate
 	 */
-	public double getyCoordinate() {
+	public int getyCoordinate() {
 		return yCoordinate;
 	}
 
@@ -53,7 +53,7 @@ public class CNode {
 	 * @param yCoordinate
 	 *            the yCoordinate to set
 	 */
-	public void setyCoordinate(double yCoordinate) {
+	public void setyCoordinate(int yCoordinate) {
 		this.yCoordinate = yCoordinate;
 	}
 
