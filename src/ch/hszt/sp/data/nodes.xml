@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nodes>
     <node id="1">
-        <coordinate x="10" y="10"/>
+        <coordinate x="100" y="100"/>
         <name>k1</name>
     </node>    
     <node id="2">
-        <coordinate x="70" y="30"/>
+        <coordinate x="450" y="300"/>
         <name>k2</name>
     </node>    
     <node id="3">
-        <coordinate x="40" y="40"/>
+        <coordinate x="400" y="400"/>
         <name>k3</name>
     </node>
     <node id="4">
-        <coordinate x="20" y="80"/>
+        <coordinate x="200" y="600"/>
         <name>k4</name>
     </node>
     <node id="5">
-        <coordinate x="50" y="60"/>
+        <coordinate x="500" y="600"/>
         <name>k5</name>
     </node>
 </nodes>

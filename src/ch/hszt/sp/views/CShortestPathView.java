@@ -14,12 +14,13 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
 	private JLabel label;
+	private ShortestPathsPannel mapPanel;
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
 	public void viewGUI(){
 		frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		JButton calcDistanceBtn = new JButton("Calculate Distance");
+		JButton calcDistanceBtn = new JButton("Calc Distance");
 		JButton searchPathBtn = new JButton("Search Path");
 		label = new JLabel("Ich bin hier..");
 		Image img = new ImageIcon("img/testmap.jpg").getImage();
@@ -27,10 +28,11 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		calcDistanceBtn.setSize(100, 50);
 		searchPathBtn.setSize(100, 50);
 		
-		calcDistanceBtn.addActionListener(new CalcDistList());
+		calcDistanceBtn.addActionListener(new CalcDistListener());
 		searchPathBtn.addActionListener(new SearchPathListener());
 		
-		ShortestPathsPannel mapPanel = new ShortestPathsPannel();
+		ShortestPathsPannel mapPanel = new ShortestPathsPannel("img/testmap.jpg");
+		this.mapPanel = mapPanel;
 		ButtonPanel bPanel = new ButtonPanel();
 		
 		//BoxLayout um die Buttons untereinander anzuordnen
@@ -38,7 +40,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.CENTER, mapPanel);
-		mapPanel.add(BorderLayout.EAST, label);
+		mapPanel.add(BorderLayout.NORTH, label);
 		bPanel.add(BorderLayout.NORTH, calcDistanceBtn);
 		bPanel.add(BorderLayout.SOUTH, searchPathBtn);
 		
@@ -48,7 +50,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		frame.setVisible(true);
 	}
 	
-	//Diese Klasse wird die Buttons enthalten die in der App benoetigt werden
+	//Diese Klasse wird das Panel bieten welches die Buttons enthaelt die in der App benoetigt werden
 	class ButtonPanel extends JPanel{
 
 		/**
@@ -57,6 +59,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		private static final long serialVersionUID = 1L;
 		
 		public void paintComponent(Graphics g){
+			g.setColor(Color.orange);
 			
 		}
 		
@@ -67,18 +70,20 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 
 		public void actionPerformed(ActionEvent arg0) {
 			if(label.getText()=="Ich bin hier.."){
+			frame.repaint();
 			label.setText("nicht mehr!!!");			
 			}else{
+				frame.repaint();
 				label.setText("Ich bin hier..");
 			}
 		}
 		
 	}
 	
-	class CalcDistList implements ActionListener{
+	class CalcDistListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent arg0) {
-			frame.repaint();
+			frame.setBackground(Color.BLACK);
 		}
 		
 	}
