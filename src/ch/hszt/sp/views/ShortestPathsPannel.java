@@ -2,14 +2,14 @@ package ch.hszt.sp.views;
 
 import javax.swing.*;
 
-import ch.hszt.sp.dao.XmlGisDAO;
-import ch.hszt.sp.exceptions.DataAccessException;
+
+import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 
 import java.awt.*;
-import java.awt.image.ImageObserver;
 import java.awt.Stroke;
 import java.awt.BasicStroke;
+import java.util.List;
 import java.util.ArrayList;
 
 /**
@@ -20,44 +20,55 @@ import java.util.ArrayList;
  * ShortestPathsPannel dient zur Darstellung der Nodes und der Edges in dieser Applikation.
  * 
  **/
-public class ShortestPathsPannel extends JPanel {
+public class ShortestPathsPannel extends JPanel{
 
-	private Image img;
-	private static final long serialVersionUID = 1L;	
-	private XmlGisDAO xml;
-
+	//private Image img;
+	private static final long serialVersionUID = 1L;
+	private ArrayList<CNode> cnlist;
+	private ArrayList<CEdge> cEdge;
+	
+	
 	//Der Konstruktor kann ein img path annehmen und dieses im Pannel darstellen.
-	public ShortestPathsPannel(String mapPath){
-		img = new ImageIcon(mapPath).getImage();
+	public ShortestPathsPannel(List<CNode> cnlist, List<CEdge> cEdge){
+		this.cnlist = (ArrayList<CNode>) cnlist;
+		
+		this.cEdge = (ArrayList<CEdge>) cEdge;
 	}
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
 	public void paintComponent(Graphics g){
 		//g.drawImage(img,0,0,this);
-		xml = new XmlGisDAO();
-		ArrayList<CNode> cnlist = new ArrayList<CNode>();		
+		
+		
+		
 		try {
-			for (CNode cnode : xml.getNodes()) {
+			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
 				shn.paintNode(g);
 			}
-		} catch (DataAccessException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
 		try{
-			for (CNode cnod : xml.getNodes()){
-				cnlist.add(cnod);				
+			for(CEdge cedg : this.cEdge){
+				cEdge.add(cedg);
+			}
+			for (CNode cnod : this.cnlist){
+				cnlist.add(cnod);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}
 		int i;
-		for (i=0; i < 4; i++){
-		CNode cnod = cnlist.get(i);
-		CNode cnoda = cnlist.get(i+1);
-		ShowEdge she = new ShowEdge(cnod.getxCoordinate()+5, cnod.getyCoordinate()+5, cnoda.getxCoordinate()+5, cnoda.getyCoordinate()+5);
-		she.paintComponent(g);
+		
+		for (i=0; i < (cnlist.size()-1); i++){
+			CEdge cedg = cEdge.get(i);
+			CNode cnod = cnlist.get(i);
+			System.out.println(cedg.getId() + " ist die Kante mit folgendem Startknoten: "+cedg.getStartNode() +" : "+cedg.getTargetNode());
+			CNode cnoda = cnlist.get(i+1);
+			ShowEdge she = new ShowEdge(cnod.getxCoordinate()+5, cnod.getyCoordinate()+5, cnoda.getxCoordinate()+5, cnoda.getyCoordinate()+5);
+			she.paintComponent(g);
 		}
 	}
 	
@@ -88,7 +99,8 @@ public class ShortestPathsPannel extends JPanel {
 		public void paintNode(Graphics g){
 			g.setColor(Color.RED);
 			g.fillOval(x, y, sizx, sizy);
-			System.out.println(nodeName);
+			g.setColor(Color.black);
+			g.drawString(nodeName + ": ", x-30, y+10);
 		}
 		//Soll die Position des Knotens anzeigen
 		public int returnposition(){
@@ -123,4 +135,5 @@ public class ShortestPathsPannel extends JPanel {
 			
 			}
 		}
+
 }
