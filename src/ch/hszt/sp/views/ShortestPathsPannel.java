@@ -30,16 +30,13 @@ public class ShortestPathsPannel extends JPanel{
 	
 	//Der Konstruktor kann ein img path annehmen und dieses im Pannel darstellen.
 	public ShortestPathsPannel(List<CNode> cnlist, List<CEdge> cEdge){
-		this.cnlist = (ArrayList<CNode>) cnlist;
-		
+		this.cnlist = (ArrayList<CNode>) cnlist;		
 		this.cEdge = (ArrayList<CEdge>) cEdge;
 	}
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
 	public void paintComponent(Graphics g){
 		//g.drawImage(img,0,0,this);
-		
-		
 		
 		try {
 			for (CNode cnode : this.cnlist) {
@@ -60,16 +57,15 @@ public class ShortestPathsPannel extends JPanel{
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		int i;
-		
-		for (i=0; i < (cnlist.size()-1); i++){
+		for (int i=0; i < cEdge.size() - 1; i++){
 			CEdge cedg = cEdge.get(i);
-			CNode cnod = cnlist.get(i);
-			System.out.println(cedg.getId() + " ist die Kante mit folgendem Startknoten: "+cedg.getStartNode() +" : "+cedg.getTargetNode());
-			CNode cnoda = cnlist.get(i+1);
-			ShowEdge she = new ShowEdge(cnod.getxCoordinate()+5, cnod.getyCoordinate()+5, cnoda.getxCoordinate()+5, cnoda.getyCoordinate()+5);
+			CNode cnoda = cnlist.get(cedg.getStartNode()-1);
+			CNode cnodb = cnlist.get(cedg.getTargetNode()-1);
+			System.out.println(cedg.getId() + " ist die Kante mit folgendem Startknoten: "+cedg.getStartNode() + " " +cnoda.getId() + " : "+cedg.getTargetNode());
+			ShowEdge she = new ShowEdge(cnoda.getxCoordinate()+5, cnoda.getyCoordinate()+5, cnodb.getxCoordinate()+5, cnodb.getyCoordinate()+5);
 			she.paintComponent(g);
 		}
+		
 	}
 	
 	/**
@@ -130,9 +126,8 @@ public class ShortestPathsPannel extends JPanel{
 		public void paintComponent(Graphics g){
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setStroke(stroke);
-	        g2d.setColor(Color.cyan);
-	        g2d.drawLine(ax, ay, bx, by);
-			
+	        g2d.setColor(Color.BLUE);
+	        g2d.drawLine(ax, ay, bx, by);			
 			}
 		}
 
