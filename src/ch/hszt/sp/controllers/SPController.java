@@ -6,15 +6,16 @@ import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
 import ch.hszt.sp.views.CShortestPathView;
 
+/**
+ * @author Ramy Hasan, Miroslav Mirković
+ * @since 08.05.11
+ * Der SPController Instanziert die fuer unser Programm benoetigten Klassen.
+ * 
+ **/
 public class SPController {
 	
-	
-	
-	public SPController(){
-		
-		
-	}
 	public static void main(String[] args) {
+		//Erstellt ein Model Objekt auf welchem die executIt Methode aufgerufen wird.
 		CShortestPathModel spm = new CShortestPathModel();
 		try {
 			spm.executIt();
@@ -25,7 +26,6 @@ public class SPController {
 		}
 		CShortestPathView cspv = new CShortestPathView(spm);
 		cspv.update(spm, null);
-		cspv.viewGUI();
 	}
 
 }

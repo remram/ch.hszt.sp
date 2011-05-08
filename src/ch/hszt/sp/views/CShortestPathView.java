@@ -34,9 +34,6 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		observer.addObserver(this);
 		this.cnlist = new ArrayList<CNode>();
 		this.cEdge = new ArrayList<CEdge>();
-		/*for(CNode cnod : cnlist){
-			System.out.println(cnod.getName());
-		}*/
 	}
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
@@ -177,6 +174,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cnlist = csm.getNodes();
 			this.cEdge = csm.getEdges();	
 		}
+		viewGUI();
 	}
 	
 }
