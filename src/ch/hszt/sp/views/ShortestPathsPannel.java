@@ -47,16 +47,6 @@ public class ShortestPathsPannel extends JPanel{
 			e.printStackTrace();
 		}
 		
-		try{
-			for(CEdge cedg : this.cEdge){
-				cEdge.add(cedg);
-			}
-			for (CNode cnod : this.cnlist){
-				cnlist.add(cnod);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-		}
 		for (int i=0; i < cEdge.size() - 1; i++){
 			CEdge cedg = cEdge.get(i);
 			CNode cnoda = cnlist.get(cedg.getStartNode()-1);
