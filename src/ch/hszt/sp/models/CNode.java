@@ -72,4 +72,37 @@ public class CNode {
 		this.name = name;
 	}
 
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime
+				* result
+				+ ((new Integer(this.id) == null) ? 0 : new Integer(this.id)
+						.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		CNode other = (CNode) obj;
+		if (new Integer(this.id) == null) {
+			if (new Integer(other.id) != null)
+				return false;
+		} else if (!new Integer(this.id).equals(other.id))
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return name;
+	}
+
 }
