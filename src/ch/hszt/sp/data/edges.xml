@@ -104,7 +104,7 @@
         </nodes>
     </edge>
     <edge id="7">
-        <weight>3</weight>
+        <weight>14</weight>
         <direction type="none">0</direction>
         <nodes>
             <node-start>1</node-start>

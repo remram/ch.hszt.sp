@@ -23,7 +23,6 @@ public class CDijkstra {
 	}
 
 	public void execute(CNode source) {
-		System.out.println("EXEC: " + source.getName());
 		settledNodes = new HashSet<CNode>();
 		unSettledNodes = new HashSet<CNode>();
 		distance = new HashMap<CNode, Double>();
@@ -40,14 +39,9 @@ public class CDijkstra {
 
 	private void findMinimalDistances(CNode cNode) {
 		List<CNode> adjacentNodes = getNeighbors(cNode);
-		
-		for (CNode cNode2 : adjacentNodes) {
-			System.out.println("findMinimalDistances: " + cNode2.getId());
-		}
-		
-		for (CNode target : adjacentNodes) {
+		for (CNode target : adjacentNodes) {			
 			if (getShortestDistance(target) > getShortestDistance(cNode)
-					+ getDistance(cNode, target)) {				
+					+ getDistance(cNode, target)) {
 				distance.put(target,
 						getShortestDistance(cNode) + getDistance(cNode, target));
 				predecessors.put(target, cNode);
@@ -58,30 +52,25 @@ public class CDijkstra {
 
 	private double getDistance(CNode cNode, CNode target) {
 		for (CEdge cEdge : edgeList) {
-			if (new Integer(cEdge.getStartNode()).equals(cNode)
-					&& new Integer(cEdge.getTargetNode()).equals(target)) {
+			if ((cEdge.getStartNode() == cNode.getId())	&& (cEdge.getTargetNode() == target.getId())) {
 				return cEdge.getWeight();
 			}
 		}
+		
 		throw new RuntimeException("Should not happen");
 	}
 
 	private List<CNode> getNeighbors(CNode cNode) {
-		List<CNode> neighbors = new ArrayList<CNode>();
-		CNode cn = new CNode();
+		List<CNode> neighbors = new ArrayList<CNode>();		
 		for (CEdge cEdge : edgeList) {
-			System.out.println(cNode.getId() + ". getNeighbors to: " + cEdge.getStartNode());
+			CNode cn = new CNode();
 			
 			//if (new Integer(cEdge.getStartNode()).equals(cNode.getId())	&& !isSettled(cEdge.getTargetNode())) {
 			if (cEdge.getStartNode() == cNode.getId()	&& !isSettled(cEdge.getTargetNode())) {
-				
-				System.out.println("2. getNeighbors: " + cNode.getId());
-				
 				cn.setId(cEdge.getTargetNode());
 				neighbors.add(cn);
 			}
 		}
-		System.out.println("neighbors.size(): "+neighbors.size());
 		return neighbors;
 	}
 

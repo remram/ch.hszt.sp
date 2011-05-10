@@ -22,14 +22,14 @@
     </node>   
     <node id="6">
         <coordinate x="450" y="450"/>
-        <name>k3</name>
+        <name>k6</name>
     </node>
     <node id="7">
         <coordinate x="250" y="650"/>
-        <name>k4</name>
+        <name>k7</name>
     </node>
     <node id="8">
         <coordinate x="550" y="40"/>
-        <name>k5</name>
+        <name>k8</name>
     </node>
 </nodes>
