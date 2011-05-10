@@ -55,4 +55,12 @@
             <node-target>3</node-target>
         </nodes>
     </edge>
+    <edge id="7">
+        <weight>3</weight>
+        <direction type="none">0</direction>
+        <nodes>
+            <node-start>1</node-start>
+            <node-target>5</node-target>
+        </nodes>
+    </edge>
 </edges>
