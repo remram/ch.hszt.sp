@@ -19,5 +19,17 @@
     <node id="5">
         <coordinate x="500" y="600"/>
         <name>k5</name>
+    </node>   
+    <node id="6">
+        <coordinate x="450" y="450"/>
+        <name>k3</name>
+    </node>
+    <node id="7">
+        <coordinate x="250" y="650"/>
+        <name>k4</name>
+    </node>
+    <node id="8">
+        <coordinate x="550" y="40"/>
+        <name>k5</name>
     </node>
 </nodes>

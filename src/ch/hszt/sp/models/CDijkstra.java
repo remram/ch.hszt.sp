@@ -10,14 +10,6 @@ import java.util.Map;
 import java.util.Set;
 
 public class CDijkstra {
-	/*
-	 * private List<CEdge> spList; private List<CEdge> settledList;
-	 * 
-	 * private List<CNode> nodeList; private List<CEdge> edgeList;
-	 * 
-	 * private int startNode; private int targetNode;
-	 */
-
 	private final List<CNode> nodeList;
 	private final List<CEdge> edgeList;
 	private Set<CNode> settledNodes;
@@ -48,16 +40,20 @@ public class CDijkstra {
 
 	private void findMinimalDistances(CNode cNode) {
 		List<CNode> adjacentNodes = getNeighbors(cNode);
+		
+		for (CNode cNode2 : adjacentNodes) {
+			System.out.println("findMinimalDistances: " + cNode2.getId());
+		}
+		
 		for (CNode target : adjacentNodes) {
 			if (getShortestDistance(target) > getShortestDistance(cNode)
-					+ getDistance(cNode, target)) {
+					+ getDistance(cNode, target)) {				
 				distance.put(target,
 						getShortestDistance(cNode) + getDistance(cNode, target));
 				predecessors.put(target, cNode);
 				unSettledNodes.add(target);
 			}
 		}
-
 	}
 
 	private double getDistance(CNode cNode, CNode target) {
@@ -74,12 +70,18 @@ public class CDijkstra {
 		List<CNode> neighbors = new ArrayList<CNode>();
 		CNode cn = new CNode();
 		for (CEdge cEdge : edgeList) {
-			if (new Integer(cEdge.getStartNode()).equals(cNode)
-					&& !isSettled(cEdge.getTargetNode())) {
+			System.out.println(cNode.getId() + ". getNeighbors to: " + cEdge.getStartNode());
+			
+			//if (new Integer(cEdge.getStartNode()).equals(cNode.getId())	&& !isSettled(cEdge.getTargetNode())) {
+			if (cEdge.getStartNode() == cNode.getId()	&& !isSettled(cEdge.getTargetNode())) {
+				
+				System.out.println("2. getNeighbors: " + cNode.getId());
+				
 				cn.setId(cEdge.getTargetNode());
 				neighbors.add(cn);
 			}
 		}
+		System.out.println("neighbors.size(): "+neighbors.size());
 		return neighbors;
 	}
 
@@ -116,34 +118,21 @@ public class CDijkstra {
 	 */
 	public LinkedList<CNode> getPath(CNode target) {
 		LinkedList<CNode> path = new LinkedList<CNode>();
-		CNode step = target;
+
 		// Check if a path exists
-		if (predecessors.get(step) == null) {
+		if (predecessors.get(target) == null) {
 			return null;
 		}
-		path.add(step);
-		while (predecessors.get(step) != null) {
-			step = predecessors.get(step);
-			path.add(step);
+		path.add(target);
+		while (predecessors.get(target) != null) {
+			target = predecessors.get(target);
+			path.add(target);
 		}
 		// Put it into the correct order
 		Collections.reverse(path);
 		return path;
 	}
-
-	/*
-	 * public ArrayList<CEdge> getShortestPath(int startNode, int targetNode) {
-	 * this.startNode = startNode; this.targetNode = targetNode; CEdge cEdge =
-	 * new CEdge();
-	 * 
-	 * for (CNode cNode : this.nodeList) { cEdge.setId(cNode.getId());
-	 * System.out.println(cNode.getId()); this.spList.add(cEdge); }
-	 * 
-	 * 
-	 * 
-	 * return (ArrayList<CEdge>) this.spList; }
-	 */
-
+	
 	public void hasValue(int value) {
 		for (CEdge cEdge : this.edgeList) {
 			// System.out.println(cEdge.getStartNode() + " - " +

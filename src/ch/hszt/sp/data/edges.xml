@@ -19,7 +19,7 @@
         <weight>2</weight>
         <direction type="one">3</direction>
         <nodes>
-            <node-start>2</node-start>
+            <node-start>1</node-start>
             <node-target>3</node-target>
         </nodes>
     </edge>
@@ -27,7 +27,7 @@
         <weight>1</weight>
         <direction type="none">0</direction>
         <nodes>
-            <node-start>3</node-start>
+            <node-start>1</node-start>
             <node-target>4</node-target>
         </nodes>
     </edge>
@@ -35,8 +35,8 @@
         <weight>2</weight>
         <direction type="both">0</direction>
         <nodes>
-            <node-start>4</node-start>
-            <node-target>1</node-target>
+            <node-start>2</node-start>
+            <node-target>3</node-target>
         </nodes>
     </edge>
     <edge id="5">
@@ -51,8 +51,56 @@
         <weight>3</weight>
         <direction type="none">0</direction>
         <nodes>
+            <node-start>3</node-start>
+            <node-target>4</node-target>
+        </nodes>
+    </edge>
+    <edge id="7">
+        <weight>2</weight>
+        <direction type="both">0</direction>
+        <nodes>
             <node-start>4</node-start>
-            <node-target>3</node-target>
+            <node-target>5</node-target>
+        </nodes>
+    </edge>
+    <edge id="8">
+        <weight>5</weight>
+        <direction type="none">0</direction>
+        <nodes>
+            <node-start>5</node-start>
+            <node-target>6</node-target>
+        </nodes>
+    </edge>
+    <edge id="9">
+        <weight>3</weight>
+        <direction type="none">0</direction>
+        <nodes>
+            <node-start>6</node-start>
+            <node-target>7</node-target>
+        </nodes>
+    </edge>
+    <edge id="10">
+        <weight>2</weight>
+        <direction type="both">0</direction>
+        <nodes>
+            <node-start>5</node-start>
+            <node-target>7</node-target>
+        </nodes>
+    </edge>
+    <edge id="11">
+        <weight>5</weight>
+        <direction type="none">0</direction>
+        <nodes>
+            <node-start>5</node-start>
+            <node-target>8</node-target>
+        </nodes>
+    </edge>
+    <edge id="12">
+        <weight>3</weight>
+        <direction type="none">0</direction>
+        <nodes>
+            <node-start>6</node-start>
+            <node-target>8</node-target>
         </nodes>
     </edge>
 </edges>
