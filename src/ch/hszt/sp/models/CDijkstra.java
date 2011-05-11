@@ -22,18 +22,18 @@ public class CDijkstra {
 		this.edgeList = (List<CEdge>) cEdge;
 	}
 
-	public void execute(CNode source) {
+	public void execute(CNode startNode) {
 		settledNodes = new HashSet<CNode>();
 		unSettledNodes = new HashSet<CNode>();
 		distance = new HashMap<CNode, Double>();
 		predecessors = new HashMap<CNode, CNode>();
-		distance.put(source, (double) 0);
-		unSettledNodes.add(source);
+		distance.put(startNode, (double) 0);		
+		unSettledNodes.add(startNode);
 		while (unSettledNodes.size() > 0) {
-			CNode node = getMinimum(unSettledNodes);
-			settledNodes.add(node);
-			unSettledNodes.remove(node);
-			findMinimalDistances(node);
+			CNode minNode = getMinimum(unSettledNodes);
+			settledNodes.add(minNode);
+			unSettledNodes.remove(minNode);
+			findMinimalDistances(minNode);
 		}
 	}
 
@@ -67,16 +67,18 @@ public class CDijkstra {
 			
 			//if (new Integer(cEdge.getStartNode()).equals(cNode.getId())	&& !isSettled(cEdge.getTargetNode())) {
 			if (cEdge.getStartNode() == cNode.getId()	&& !isSettled(cEdge.getTargetNode())) {
-				cn.setId(cEdge.getTargetNode());
+				int nodeId = cEdge.getTargetNode();
+				cn.setId(nodeId);				
+				cn.setName(nodeList.get(--nodeId).getName());
 				neighbors.add(cn);
 			}
 		}
 		return neighbors;
 	}
 
-	private CNode getMinimum(Set<CNode> CNodees) {
+	private CNode getMinimum(Set<CNode> cNodeSet) {
 		CNode minimum = null;
-		for (CNode CNode : CNodees) {
+		for (CNode CNode : cNodeSet) {
 			if (minimum == null) {
 				minimum = CNode;
 			} else {
@@ -88,10 +90,20 @@ public class CDijkstra {
 		return minimum;
 	}
 
+	/**
+	 * Checks if the node id is already settled
+	 * @param nodeId Integer
+	 * @return boolean
+	 */
 	private boolean isSettled(int nodeId) {
 		return settledNodes.contains(nodeId);
 	}
 
+	/**
+	 * 
+	 * @param destination CNode
+	 * @return
+	 */
 	private double getShortestDistance(CNode destination) {
 		Double d = distance.get(destination);
 		if (d == null) {
@@ -100,10 +112,11 @@ public class CDijkstra {
 			return d;
 		}
 	}
-
-	/*
-	 * This method returns the path from the source to the selected target and
-	 * NULL if no path exists
+	
+	/**
+	 * Returns the shortest path depending to the target as LinkedList
+	 * @param traget CNode
+	 * @return path LinkedList
 	 */
 	public LinkedList<CNode> getPath(CNode target) {
 		LinkedList<CNode> path = new LinkedList<CNode>();
@@ -114,35 +127,11 @@ public class CDijkstra {
 		}
 		path.add(target);
 		while (predecessors.get(target) != null) {
-			target = predecessors.get(target);
+			target = predecessors.get(target);			
 			path.add(target);
 		}
 		// Put it into the correct order
 		Collections.reverse(path);
 		return path;
-	}
-	
-	public void hasValue(int value) {
-		for (CEdge cEdge : this.edgeList) {
-			// System.out.println(cEdge.getStartNode() + " - " +
-			// cEdge.getTargetNode());
-
-			System.out.println("[" + cEdge.getStartNode() + "]"
-					+ this.nodeList.get(cEdge.getStartNode()).getId() + " - "
-					+ "[" + cEdge.getTargetNode() + "]"
-					+ this.nodeList.get(cEdge.getTargetNode()).getId());
-			System.out.println(this.nodeList.get(cEdge.getStartNode())
-					.getName()
-					+ " - "
-					+ this.nodeList.get(cEdge.getTargetNode()).getName());
-
-			// System.out.println(this.nodeList.get(cEdge.getTargetNode()).getName());
-
-			/*
-			 * if(this.nodeList.contains(new Integer(cEdge.getStartNode()))) {
-			 * System.out.println(cEdge.getStartNode());
-			 * System.out.println(this.nodeList.get(cEdge.getStartNode())); }
-			 */
-		}
 	}
 }

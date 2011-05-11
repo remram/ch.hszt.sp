@@ -1,6 +1,7 @@
 package ch.hszt.sp.models;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Observable;
 
 import ch.hszt.sp.dao.IGisDAO;
@@ -49,6 +50,14 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 		this.cEdge = new ArrayList<CEdge>();
 		IGisDAO xgd = new XmlGisDAO();
 		this.cEdge = (ArrayList<CEdge>) xgd.getEdges();
+	}
+
+	@Override
+	public LinkedList<CNode> getShortestPath(int start, int target) {
+		CDijkstra cd = new CDijkstra(getNodes(), getEdges());		
+		cd.execute(getNodes().get(start));
+		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
+		return path;
 	}
 
 	@Override

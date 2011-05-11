@@ -2,7 +2,6 @@ package ch.hszt.sp.controllers;
 
 
 import ch.hszt.sp.exceptions.DataAccessException;
-import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
 import ch.hszt.sp.views.CShortestPathView;
 
