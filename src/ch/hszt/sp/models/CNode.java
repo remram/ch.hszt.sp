@@ -74,13 +74,14 @@ public class CNode {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
+		/*final int prime = 31;
 		int result = 1;
 		result = prime
 				* result
 				+ ((new Integer(this.id) == null) ? 0 : new Integer(this.id)
 						.hashCode());
-		return result;
+		return result;*/
+		return 0;
 	}
 
 	@Override
@@ -104,5 +105,4 @@ public class CNode {
 	public String toString() {
 		return name;
 	}
-
 }

@@ -1,7 +1,7 @@
 package ch.hszt.sp.dao;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.w3c.dom.*;
 
@@ -12,8 +12,8 @@ import ch.hszt.sp.models.*;
 public class XmlGisDAO implements IGisDAO {
 
 	@Override
-	public List<CNode> getNodes() throws DataAccessException {
-		List<CNode> cNodeList = new ArrayList<CNode>();
+	public Map<Integer, CNode> getNodes() throws DataAccessException {
+		Map<Integer,CNode> cNodeMap = new HashMap<Integer, CNode>();
 
 		try {
 
@@ -58,7 +58,7 @@ public class XmlGisDAO implements IGisDAO {
 				 * new row!
 				 */
 				if (listCounter == 3) {
-					cNodeList.add(cNodeObj);
+					cNodeMap.put(cNodeObj.getId(), cNodeObj);
 					cNodeObj = null;
 					cNodeObj = new CNode();
 					listCounter = 0;
@@ -70,12 +70,12 @@ public class XmlGisDAO implements IGisDAO {
 			throw new DataAccessException();
 		}
 
-		return cNodeList;
+		return cNodeMap;
 	}
 
 	@Override
-	public List<CEdge> getEdges() throws DataAccessException {
-		List<CEdge> cEdgeList = new ArrayList<CEdge>();
+	public Map<Integer, CEdge> getEdges() throws DataAccessException {		
+		Map<Integer,CEdge> cEdgeMap = new HashMap<Integer, CEdge>();
 
 		try {
 			CReadXmlDom rxd = new CReadXmlDom("edges.xml", "*");
@@ -134,7 +134,7 @@ public class XmlGisDAO implements IGisDAO {
 				 * new row!
 				 */
 				if (listCounter == 6) {
-					cEdgeList.add(cEdgeObj);
+					cEdgeMap.put(cEdgeObj.getId(), cEdgeObj);
 					cEdgeObj = null;
 					cEdgeObj = new CEdge();
 					listCounter = 0;
@@ -146,6 +146,6 @@ public class XmlGisDAO implements IGisDAO {
 			throw new DataAccessException();
 		}
 
-		return cEdgeList;
+		return cEdgeMap;
 	}
 }

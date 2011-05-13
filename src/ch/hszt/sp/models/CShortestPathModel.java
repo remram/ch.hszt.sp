@@ -1,7 +1,7 @@
 package ch.hszt.sp.models;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Observable;
 
 import ch.hszt.sp.dao.IGisDAO;
@@ -9,8 +9,8 @@ import ch.hszt.sp.dao.XmlGisDAO;
 import ch.hszt.sp.exceptions.DataAccessException;
 
 public class CShortestPathModel extends Observable implements IShortestPathModel {
-	private ArrayList<CNode> cNode;
-	private ArrayList<CEdge> cEdge;
+	private Map<Integer,CNode> mpNode;
+	private Map<Integer,CEdge> mpEdge;
 	
 	public CShortestPathModel(){}
 	
@@ -29,35 +29,34 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 	}
 
 	@Override
-	public ArrayList<CNode> getNodes() {
-		return this.cNode;
+	public Map<Integer,CNode> getNodes() {
+		return this.mpNode;
 	}
 
 	@Override
 	public void setNodes() throws DataAccessException {
-		this.cNode = new ArrayList<CNode>();
+		this.mpNode = new HashMap<Integer, CNode>();
 		IGisDAO xgd = new XmlGisDAO();
-		this.cNode = (ArrayList<CNode>) xgd.getNodes();
+		this.mpNode = xgd.getNodes();
 	}
 
 	@Override
-	public ArrayList<CEdge> getEdges() {
-		return this.cEdge;
+	public Map<Integer,CEdge> getEdges() {
+		return this.mpEdge;
 	}
 
 	@Override
 	public void setEdges() throws DataAccessException {
-		this.cEdge = new ArrayList<CEdge>();
+		this.mpEdge = new HashMap<Integer, CEdge>();
 		IGisDAO xgd = new XmlGisDAO();
-		this.cEdge = (ArrayList<CEdge>) xgd.getEdges();
+		this.mpEdge = xgd.getEdges();
 	}
 
 	@Override
-	public LinkedList<CNode> getShortestPath(int start, int target) {
+	public Map<Integer,CNode> getShortestPath(int start, int target) {
 		CDijkstra cd = new CDijkstra(getNodes(), getEdges());		
 		cd.execute(getNodes().get(start));
-		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
-		return path;
+		return cd.getPath(getNodes().get(target));
 	}
 
 	@Override

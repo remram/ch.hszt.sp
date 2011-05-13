@@ -1,15 +1,14 @@
 package ch.hszt.sp.models;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Map;
 
 import ch.hszt.sp.exceptions.DataAccessException;
 
 public interface IShortestPathModel {	
-	public ArrayList<CNode> getNodes();
+	public Map<Integer,CNode> getNodes();
 	public void setNodes() throws DataAccessException;	
-	public ArrayList<CEdge> getEdges();
+	public Map<Integer,CEdge> getEdges();
 	public void setEdges() throws DataAccessException;
-	public LinkedList<CNode> getShortestPath(int start, int target);
+	public Map<Integer,CNode> getShortestPath(int start, int target);
 	public double getDistance(CEdge start, CEdge target);
 }
