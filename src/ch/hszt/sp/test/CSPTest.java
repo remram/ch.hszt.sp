@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import ch.hszt.sp.exceptions.DataAccessException;
+import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
 
@@ -30,7 +31,23 @@ public class CSPTest {
 			
 		}
 		
-		Map<Integer, CNode> nodeMap = cs.getShortestPath(1, 5);
+		Iterator<Entry<Integer, CEdge>> edgeIter = cs.getEdges().entrySet().iterator();
+		while (edgeIter.hasNext()) {
+			Map.Entry<Integer, CEdge> m = (Map.Entry<Integer, CEdge>)edgeIter.next();
+			CEdge ce = (CEdge) m.getValue();
+
+			System.out.print("Id: " + ce.getId());
+			System.out.print(", {" + ce.getStartNode());
+			System.out.print(" : " + ce.getTargetNode());
+			System.out.println("}, weight: " + ce.getWeight());
+			
+		}
+		
+		int start = 1;
+		int target = 6;
+		
+		Map<Integer, CNode> nodeMap = cs.getShortestPath(start, target);
 		System.out.println(nodeMap);
+		System.out.println(cs.getDistance(start, target));
 	}
 }

@@ -87,12 +87,12 @@ public class CDijkstra {
 
 	private CNode getMinimum(Set<CNode> cNodeSet) {
 		CNode minimum = null;
-		for (CNode CNode : cNodeSet) {
+		for (CNode cNode : cNodeSet) {
 			if (minimum == null) {
-				minimum = CNode;
+				minimum = cNode;
 			} else {
-				if (getShortestDistance(CNode) < getShortestDistance(minimum)) {
-					minimum = CNode;
+				if (getShortestDistance(cNode) < getShortestDistance(minimum)) {
+					minimum = cNode;
 				}
 			}
 		}
@@ -109,23 +109,23 @@ public class CDijkstra {
 	}
 
 	/**
-	 * 
+	 * Returns the shortest distance
 	 * @param destination CNode
-	 * @return
+	 * @return distanceLength
 	 */
 	private double getShortestDistance(CNode destination) {
-		Double d = distance.get(destination);
-		if (d == null) {
+		Double distanceLength = distance.get(destination);
+		if (distanceLength == null) {
 			return Double.MAX_VALUE;
 		} else {
-			return d;
+			return distanceLength;
 		}
 	}
 	
 	/**
-	 * Returns the shortest path depending to the target as LinkedList
+	 * Returns the shortest path depending to the target
 	 * @param traget CNode
-	 * @return path LinkedList
+	 * @return path
 	 */
 	public Map<Integer,CNode> getPath(CNode target) {
 		Map<Integer,CNode> path = new HashMap<Integer,CNode>();
@@ -141,9 +141,10 @@ public class CDijkstra {
 			target = predecessors.get(target);			
 			path.put(target.getId(),target);
 		}
-		// Put it into the correct order
-		//Collections.reverse(path);
-		//Collections.reverseOrder(path);
 		return path;
+	}
+	
+	public double getDistance(CNode cNode) {
+		return getShortestDistance(cNode);
 	}
 }

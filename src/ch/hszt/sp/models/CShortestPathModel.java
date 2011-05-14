@@ -60,7 +60,9 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 	}
 
 	@Override
-	public double getDistance(CEdge start, CEdge target) {
-		return 0;
+	public double getDistance(int start, int target) {
+		CDijkstra cd = new CDijkstra(getNodes(), getEdges());		
+		cd.execute(getNodes().get(start));
+		return cd.getDistance(getNodes().get(target));
 	}
 }

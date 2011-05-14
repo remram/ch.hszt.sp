@@ -10,5 +10,5 @@ public interface IShortestPathModel {
 	public Map<Integer,CEdge> getEdges();
 	public void setEdges() throws DataAccessException;
 	public Map<Integer,CNode> getShortestPath(int start, int target);
-	public double getDistance(CEdge start, CEdge target);
+	public double getDistance(int start, int target);
 }
