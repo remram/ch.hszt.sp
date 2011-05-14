@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import ch.hszt.sp.controllers.CShortestPathController;
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
@@ -16,7 +17,7 @@ public class CSPTest {
 		int target = 1;
 		
 		CShortestPathModel csp = new CShortestPathModel();
-		csp.executIt();
+		csp.execut();
 		
 		Iterator<Entry<Integer, CEdge>> edgeIter = csp.getEdgesAsMap().entrySet().iterator();
 		while (edgeIter.hasNext()) {
@@ -39,5 +40,13 @@ public class CSPTest {
 		}
 		
 		System.out.println("Distance: " + csp.getDistance(start, target));
+		
+		
+		//arbeiten mit dem controller!!!
+		System.out.println("\n\n=====================\nController output:\n=====================");
+		CShortestPathController spc = new CShortestPathController();
+		System.out.println("ShortestPath from Controller: " + spc.getPath(start, target));
+		System.out.println("ShortestDist from Controller: " + spc.getDistance(start, target));
+		System.out.println("==============================================\nEnd of Controller output!\n==============================================\n\n");
 	}
 }

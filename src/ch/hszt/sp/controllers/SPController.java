@@ -17,7 +17,7 @@ public class SPController {
 		//Erstellt ein Model Objekt auf welchem die executIt Methode aufgerufen wird.
 		CShortestPathModel spm = new CShortestPathModel();
 		try {
-			spm.executIt();
+			spm.execut();
 			
 		} catch (DataAccessException e) {
 			// TODO Auto-generated catch block
