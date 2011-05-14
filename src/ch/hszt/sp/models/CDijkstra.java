@@ -1,23 +1,25 @@
 package ch.hszt.sp.models;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.Map.Entry;
 
 public class CDijkstra {
-	private final Map<Integer,CNode> nodeMap;
-	private final Map<Integer,CEdge> edgeMap;
+	private final List<CNode> nodeList;
+	private final List<CEdge> edgeList;
 	private Set<CNode> settledNodes;
 	private Set<CNode> unSettledNodes;
 	private Map<CNode, CNode> predecessors;
 	private Map<CNode, Double> distance;
 
-	public CDijkstra(Map<Integer,CNode> nodeMap, Map<Integer,CEdge> edgeMap) {
-		this.nodeMap = nodeMap;
-		this.edgeMap = edgeMap;
+	public CDijkstra(ArrayList<CNode> cNode, ArrayList<CEdge> cEdge) {
+		this.nodeList = (List<CNode>) cNode;
+		this.edgeList = (List<CEdge>) cEdge;
 	}
 
 	public void execute(CNode startNode) {
@@ -36,50 +38,39 @@ public class CDijkstra {
 	}
 
 	private void findMinimalDistances(CNode cNode) {
-		Map<Integer, CNode> adjacentNodes = getNeighbors(cNode);
-		
-		Iterator<Entry<Integer, CNode>> Iterator = adjacentNodes.entrySet().iterator();
-		while (Iterator.hasNext()) {
-			Map.Entry<Integer, CNode> edgeEntry = (Map.Entry<Integer, CNode>)Iterator.next();
-			CNode cn = (CNode) edgeEntry.getValue();
-			
-			if (getShortestDistance(cn) > getShortestDistance(cNode)
-					+ getDistance(cNode, cn)) {
-				distance.put(cn,
-						getShortestDistance(cNode) + getDistance(cNode, cn));
-				predecessors.put(cn, cNode);
-				unSettledNodes.add(cn);
+		List<CNode> adjacentNodes = getNeighbors(cNode);
+		for (CNode target : adjacentNodes) {			
+			if (getShortestDistance(target) > getShortestDistance(cNode)
+					+ getDistance(cNode, target)) {
+				distance.put(target,
+						getShortestDistance(cNode) + getDistance(cNode, target));
+				predecessors.put(target, cNode);
+				unSettledNodes.add(target);
 			}
 		}
 	}
 
 	private double getDistance(CNode cNode, CNode target) {
-		Iterator<Entry<Integer, CEdge>> Iterator = this.edgeMap.entrySet().iterator();		
-		while (Iterator.hasNext()) {
-			Map.Entry<Integer, CEdge> edgeEntry = (Map.Entry<Integer, CEdge>)Iterator.next();
-			CEdge cEdge = (CEdge) edgeEntry.getValue();
-			
-			if((cEdge.getStartNode() == cNode.getId()) && (cEdge.getTargetNode() == target.getId())) {
+		for (CEdge cEdge : edgeList) {
+			if ((cEdge.getStartNode() == cNode.getId())	&& (cEdge.getTargetNode() == target.getId())) {
 				return cEdge.getWeight();
 			}
 		}
-		throw new RuntimeException("Something is wrong!");
+		
+		throw new RuntimeException("Should not happen");
 	}
 
-	private Map<Integer,CNode> getNeighbors(CNode cNode) {
-		Map<Integer,CNode> neighbors = new HashMap<Integer,CNode>();	
-		
-		Iterator<Entry<Integer, CEdge>> Iterator = this.edgeMap.entrySet().iterator();		
-		while (Iterator.hasNext()) {
+	private List<CNode> getNeighbors(CNode cNode) {
+		List<CNode> neighbors = new ArrayList<CNode>();		
+		for (CEdge cEdge : edgeList) {
 			CNode cn = new CNode();
 			
-			Map.Entry<Integer, CEdge> edgeEntry = (Map.Entry<Integer, CEdge>)Iterator.next();
-			CEdge cEdge = (CEdge) edgeEntry.getValue();
-			
+			//if (new Integer(cEdge.getStartNode()).equals(cNode.getId())	&& !isSettled(cEdge.getTargetNode())) {
 			if (cEdge.getStartNode() == cNode.getId()	&& !isSettled(cEdge.getTargetNode())) {
-				cn.setId(cEdge.getTargetNode());
-				cn.setName(this.nodeMap.get(cn.getId()).getName());
-				neighbors.put(cn.getId(), cn);
+				int nodeId = cEdge.getTargetNode();
+				cn.setId(nodeId);				
+				cn.setName(nodeList.get(--nodeId).getName());
+				neighbors.add(cn);
 			}
 		}
 		return neighbors;
@@ -87,12 +78,12 @@ public class CDijkstra {
 
 	private CNode getMinimum(Set<CNode> cNodeSet) {
 		CNode minimum = null;
-		for (CNode cNode : cNodeSet) {
+		for (CNode CNode : cNodeSet) {
 			if (minimum == null) {
-				minimum = cNode;
+				minimum = CNode;
 			} else {
-				if (getShortestDistance(cNode) < getShortestDistance(minimum)) {
-					minimum = cNode;
+				if (getShortestDistance(CNode) < getShortestDistance(minimum)) {
+					minimum = CNode;
 				}
 			}
 		}
@@ -109,42 +100,42 @@ public class CDijkstra {
 	}
 
 	/**
-	 * Returns the shortest distance
+	 * 
 	 * @param destination CNode
-	 * @return distanceLength
+	 * @return
 	 */
 	private double getShortestDistance(CNode destination) {
-		Double distanceLength = distance.get(destination);
-		if (distanceLength == null) {
+		Double d = distance.get(destination);
+		if (d == null) {
 			return Double.MAX_VALUE;
 		} else {
-			return distanceLength;
+			return d;
 		}
 	}
 	
 	/**
-	 * Returns the shortest path depending to the target
+	 * Returns the shortest path depending to the target as LinkedList
 	 * @param traget CNode
-	 * @return path
+	 * @return path LinkedList
 	 */
-	public Map<Integer,CNode> getPath(CNode target) {
-		Map<Integer,CNode> path = new HashMap<Integer,CNode>();
+	public LinkedList<CNode> getPath(CNode target) {
+		LinkedList<CNode> path = new LinkedList<CNode>();
 
 		// Check if a path exists
 		if (predecessors.get(target) == null) {
 			return null;
 		}
-		
-		path.put(target.getId(),target);
-		
+		path.add(target);
 		while (predecessors.get(target) != null) {
 			target = predecessors.get(target);			
-			path.put(target.getId(),target);
+			path.add(target);
 		}
+		// Put it into the correct order
+		Collections.reverse(path);
 		return path;
 	}
 	
-	public double getDistance(CNode cNode) {
+	public double getDistanceOfShortestPath(CNode cNode) {
 		return getShortestDistance(cNode);
 	}
 }

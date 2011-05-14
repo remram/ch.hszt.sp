@@ -1,6 +1,7 @@
 package ch.hszt.sp.test;
 
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -10,28 +11,14 @@ import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
 
 public class CSPTest {
-	public static void main(String[] args) throws DataAccessException {
-		CShortestPathModel cs = new CShortestPathModel();
-		cs.executIt();
+	public static void main(String[] args) throws DataAccessException {		
+		int start = 5;
+		int target = 1;
 		
-		Map<Integer, CNode> mpNode = cs.getNodes();
-		System.out.println(mpNode.get(5).getxCoordinate());
+		CShortestPathModel csp = new CShortestPathModel();
+		csp.executIt();
 		
-		Iterator<Entry<Integer, CNode>> Iterator = cs.getNodes().entrySet().iterator();
-		
-		while (Iterator.hasNext()) {
-			Map.Entry<Integer, CNode> m = (Map.Entry<Integer, CNode>)Iterator.next();
-			CNode cn = (CNode) m.getValue();
-
-			System.out.print("Key: " + m.getKey());
-			System.out.print("  --  Id: " + cn.getId());
-			System.out.print(", Name: " + cn.getName());
-			System.out.print(", X: " + cn.getxCoordinate());
-			System.out.println(", Y: " + cn.getyCoordinate());
-			
-		}
-		
-		Iterator<Entry<Integer, CEdge>> edgeIter = cs.getEdges().entrySet().iterator();
+		Iterator<Entry<Integer, CEdge>> edgeIter = csp.getEdgesAsMap().entrySet().iterator();
 		while (edgeIter.hasNext()) {
 			Map.Entry<Integer, CEdge> m = (Map.Entry<Integer, CEdge>)edgeIter.next();
 			CEdge ce = (CEdge) m.getValue();
@@ -43,11 +30,14 @@ public class CSPTest {
 			
 		}
 		
-		int start = 1;
-		int target = 6;
+		LinkedList<CNode> path = csp.getShortestPath(--start,--target);
+		System.out.println("\nShortestpath:\n=============\nID\tNameList\tNameMap");
+		System.out.println("==\t========\t=======");
+		for (CNode cNode : path) {			
+			System.out.print(cNode.getId() + "\t" + cNode.getName());
+			System.out.println("\t\t" + csp.getNodesAsMap().get(cNode.getId()).getName());
+		}
 		
-		Map<Integer, CNode> nodeMap = cs.getShortestPath(start, target);
-		System.out.println(nodeMap);
-		System.out.println(cs.getDistance(start, target));
+		System.out.println("Distance: " + csp.getDistance(start, target));
 	}
 }
