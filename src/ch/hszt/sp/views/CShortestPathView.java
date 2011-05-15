@@ -3,6 +3,7 @@ import javax.swing.*;
 
 import com.sun.org.apache.xml.internal.utils.StopParseException;
 
+import ch.hszt.sp.controllers.SPController;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
@@ -10,6 +11,10 @@ import ch.hszt.sp.models.CShortestPathModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -27,6 +32,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private Observable observer;
 	private ArrayList<CNode> cnlist;
 	private ArrayList<CEdge> cEdge;
+	private LinkedList<CNode> uNode;
+	private Map<Integer, CNode> lnode;
+	private Map<Integer, CEdge> ledge;
 
 	
 	public CShortestPathView(Observable obs){
@@ -34,6 +42,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		observer.addObserver(this);
 		this.cnlist = new ArrayList<CNode>();
 		this.cEdge = new ArrayList<CEdge>();
+		this.uNode = new LinkedList<CNode>();
+		this.lnode = new HashMap<Integer, CNode>();
+		this.ledge = new HashMap<Integer, CEdge>();
 	}
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
@@ -42,20 +53,20 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JButton calcDistanceBtn = new JButton("Calc Distance");
 		JButton searchPathBtn = new JButton("Search Path");
-		label = new JLabel("Ich bin hier..");
+		//label = new JLabel("Ich bin hier..");
 		//Image img = new ImageIcon("img/testmap.jpg").getImage();
 		
 		calcDistanceBtn.setSize(100, 50);
 		searchPathBtn.setSize(100, 50);
 		
-		calcDistanceBtn.addActionListener(new CalcDistListener());
-		searchPathBtn.addActionListener(new SearchPathListener());
+		SPController spc = new SPController();
+		SPController.SearchPathListener spcl = spc.new SearchPathListener(); 
 		
-		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.cEdge);
+		calcDistanceBtn.addActionListener(new CalcDistListener());
+		searchPathBtn.addActionListener(spcl);
+		
+		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.cEdge, this.uNode, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
-		for (CNode cnd : this.cnlist){
-			System.out.println(cnd.getName());
-			}
 		ButtonPanel bPanel = new ButtonPanel();
 		
 		//BoxLayout um die Buttons untereinander anzuordnen
@@ -63,7 +74,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.CENTER, mapPanel);
-		mapPanel.add(BorderLayout.NORTH, label);
+		//mapPanel.add(BorderLayout.NORTH, label);
 		bPanel.add(BorderLayout.NORTH, calcDistanceBtn);
 		bPanel.add(BorderLayout.SOUTH, searchPathBtn);
 		
@@ -90,7 +101,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	}
 	
 	//
-	class SearchPathListener implements ActionListener{
+	/*class SearchPathListener implements ActionListener{
 
 		public void actionPerformed(ActionEvent arg0) {
 			if(label.getText()=="Ich bin hier.."){
@@ -102,7 +113,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			}
 		}
 		
-	}
+	}*/
 	
 	class CalcDistListener implements ActionListener{
 
@@ -172,7 +183,10 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		if(obs instanceof CShortestPathModel){
 			CShortestPathModel csm = (CShortestPathModel) obs;
 			this.cnlist = csm.getNodes();
-			this.cEdge = csm.getEdges();	
+			this.cEdge = csm.getEdges();
+			this.lnode = csm.getNodesAsMap();
+			this.ledge = csm.getEdgesAsMap();
+			this.uNode = csm.getShortestPath(1, 6);
 		}
 		viewGUI();
 	}

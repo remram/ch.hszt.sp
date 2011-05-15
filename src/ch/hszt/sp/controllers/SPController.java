@@ -1,6 +1,9 @@
 package ch.hszt.sp.controllers;
 
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CShortestPathModel;
 import ch.hszt.sp.views.CShortestPathView;
@@ -25,6 +28,16 @@ public class SPController {
 		}
 		CShortestPathView cspv = new CShortestPathView(spm);
 		cspv.update(spm, null);
+	}
+	
+	public class SearchPathListener implements ActionListener{
+
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 
 }
