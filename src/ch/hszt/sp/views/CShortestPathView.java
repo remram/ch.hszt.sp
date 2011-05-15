@@ -56,27 +56,35 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		//label = new JLabel("Ich bin hier..");
 		//Image img = new ImageIcon("img/testmap.jpg").getImage();
 		
-		calcDistanceBtn.setSize(100, 50);
-		searchPathBtn.setSize(100, 50);
+		calcDistanceBtn.setMaximumSize(new Dimension(150, 50));
+		searchPathBtn.setMaximumSize(new Dimension(150, 50));
+		//calcDistanceBtn.setSize(100, 50);
+		//searchPathBtn.setSize(100, 50);
 		
 		SPController spc = new SPController();
 		SPController.SearchPathListener spcl = spc.new SearchPathListener(); 
 		
-		calcDistanceBtn.addActionListener(new CalcDistListener());
+		calcDistanceBtn.addActionListener(spcl);
 		searchPathBtn.addActionListener(spcl);
 		
+		//System.out.println(uNode.get(1));
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.cEdge, this.uNode, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
-		ButtonPanel bPanel = new ButtonPanel();
+		JPanel bPanel = new JPanel();
 		
 		//BoxLayout um die Buttons untereinander anzuordnen
-		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.Y_AXIS));
+		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
+		bPanel.setBorder(BorderFactory.createEmptyBorder(0, 10, 10, 10));
+		bPanel.add(Box.createHorizontalGlue());
+		bPanel.add(calcDistanceBtn);
+		bPanel.add(Box.createRigidArea(new Dimension(10,0)));
+		bPanel.add(searchPathBtn);
 		
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.CENTER, mapPanel);
 		//mapPanel.add(BorderLayout.NORTH, label);
-		bPanel.add(BorderLayout.NORTH, calcDistanceBtn);
-		bPanel.add(BorderLayout.SOUTH, searchPathBtn);
+		//bPanel.add(BorderLayout.NORTH, calcDistanceBtn);
+		//bPanel.add(BorderLayout.SOUTH, searchPathBtn);
 		
 		//int wide = 1200+img.getWidth(mapPanel);
 		//int height = img.getWidth(mapPanel);
@@ -99,21 +107,6 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		}
 		
 	}
-	
-	//
-	/*class SearchPathListener implements ActionListener{
-
-		public void actionPerformed(ActionEvent arg0) {
-			if(label.getText()=="Ich bin hier.."){
-			frame.repaint();
-			label.setText("nicht mehr!!!");			
-			}else{
-				frame.repaint();
-				label.setText("Ich bin hier..");
-			}
-		}
-		
-	}*/
 	
 	class CalcDistListener implements ActionListener{
 

@@ -29,24 +29,16 @@ public class ShortestPathsPannel extends JPanel{
 	//private Image img;
 	private static final long serialVersionUID = 1L;
 	private ArrayList<CNode> cnlist;
-	private ArrayList<CEdge> cEdge;
+	//private ArrayList<CEdge> cEdge;
 	private LinkedList<CNode> uNode;
 	private Map<Integer, CEdge> ledg;
 	private Map<Integer, CNode> lnod;
-	//private CNode cnoda, cnodb, unoda, unodb;
-	/*
-	//Der Konstruktor kann ein img path annehmen und dieses im Pannel darstellen.
-	public ShortestPathsPannel(List<CNode> cnlist, List<CEdge> cEdge, List<CNode> uNode){
-		this.cnlist = (ArrayList<CNode>) cnlist;		
-		this.cEdge = (ArrayList<CEdge>) cEdge;
-		//this.uNode = (LinkedList<CNode>) uNode;
-	}*/
+	
 	
 	public ShortestPathsPannel(List<CNode> cnlist, List<CEdge> cEdge, List<CNode> uNode, Map<Integer, CNode> lnode, Map<Integer, CEdge>ledge){
-		//Map<Integer, CEdge> ledg = new HashMap<Integer, CEdge>();
-		//Map<Integer, CNode> lnod =  new HashMap<Integer, CNode>();
 		this.cnlist = (ArrayList<CNode>) cnlist;		
-		this.cEdge = (ArrayList<CEdge>) cEdge;
+		//this.cEdge = (ArrayList<CEdge>) cEdge;
+		this.uNode = (LinkedList<CNode>) uNode;
 		this.ledg = ledge;
 		this.lnod = lnode;
 	}
@@ -56,33 +48,13 @@ public class ShortestPathsPannel extends JPanel{
 		try {
 			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
-				shn.paintNode(g);/*
-					for (CEdge ced : this.cEdge){
-						ShowNode sho = new ShowNode(unod.getxCoordinate(), unod.getyCoordinate(), unod.getId(), unod.getName());
-						sho.paintNode(g);
-					}
-				}
-				ShowEdge sha = new ShowEdge(cnlist);
-			}*/
+				shn.paintNode(g);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-/*		
-		for (CEdge cedg : this.cEdge){
-			for(CNode cnodq : this.cnlist){
-				if(cedg.getStartNode() == cnodq.getId()){
-					this.cnoda = cnodq;
-				}
-				if(cedg.getTargetNode() == cnodq.getId()){
-					this.cnodb = cnodq;
-				}
-		}
-		//ShowEdge she = new ShowEdge(cnoda.getxCoordinate()+5, cnoda.getyCoordinate()+5, cnodb.getxCoordinate()+5, cnodb.getyCoordinate()+5, cedg);
-		ShowEdge she = new ShowEdge(lnod, ledg);
-		she.paintComponent(g);
-*/
-		ShowEdge she = new ShowEdge(lnod, ledg);
+
+		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
 		she.paintComponent(g);
 		}
 		
@@ -130,47 +102,51 @@ public class ShortestPathsPannel extends JPanel{
 		//private int ax, ay, bx, by, weight;
 		private Map<Integer,CNode> lnod;
 		private Map<Integer,CEdge> ledg;
+		private LinkedList<CNode> unod;
 		
-		/*public ShowEdge(int ax, int ay, int bx, int by, CEdge cedge){
-			this.weight = (int) cedge.getWeight();
-			this.ax = ax;
-			this.ay = ay;
-			this.bx = bx;
-			this.by = by;
-			
-		}
-		*/
-		public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg){
-			//lnod = new HashMap<Integer, CNode>();
-			//ledg = new HashMap<Integer, CEdge>();
+		public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg, LinkedList<CNode> unod){
 			this.lnod = lnod;
 			this.ledg = ledg;
+			this.unod = unod;
 		}
-		/*public void paintComponent(Graphics g){
-			String weight = ""+ this.weight;
-			Graphics2D g2d = (Graphics2D) g;
-			g2d.setStroke(stroke);
-	        g2d.setColor(Color.BLUE);
-	        g2d.drawLine(ax, ay, bx, by);	
-	        g2d.setColor(Color.gray);
-	        //g2d.drawString(weight, ax, bx+50);
-			}*/
+		
 		public void paintComponent(Graphics g){
-			System.out.println(ledg.get(1));
+			//System.out.println(unod.get(1));
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setStroke(stroke);
 	        g2d.setColor(Color.BLUE);
 	        Iterator ite = ledg.keySet().iterator();
-	        //Iterator itn =  lnod.keySet().iterator();
 	        while(ite.hasNext()) { 
 	        	Object ekey = ite.next(); 
 	        	CEdge eval = ledg.get(ekey);
-	        	//CNode ckey = (CNode) itn.next();
-	        	//lnod.get(eval.getStartNode()).getxCoordinate();
 	        	System.out.println(eval.getStartNode() + "<- Start : Target ->" +eval.getTargetNode());
 	        	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
 	        	}
-	        g2d.setColor(Color.gray);
-			}
+	        g2d.setColor(Color.green);
+	        CNode start = null;
+	        CNode target = null;
+	        Iterator itn = unod.iterator();
+	        if(!unod.isEmpty()){
+	        	//for(int i = 0; i < unod.size(); i++){
+	        		//for(int j = 0; j < unod.size(); j++){
+	        			while(ite.hasNext()) { 
+	        	        	Object ekey = ite.next(); 
+	        	        	CEdge eval = ledg.get(ekey);
+		        	        while(itn.hasNext()) {
+		        	        	CNode nval = (CNode) itn.next();
+		        	        	if (nval.getId() == eval.getStartNode() || nval.getId() == eval.getTargetNode()){
+		        	        		start = nval;
+		        	        		target = nval;
+		        	        	}
+		        	        }
+	        	        	//g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
+	        	        }
+	        			//g2d.drawLine(start.getxCoordinate()+5, start.getyCoordinate()+5, target.getxCoordinate(), target.getyCoordinate());
+	        			
+	        			//g2d.drawLine(unod.get(i).getxCoordinate()+5, unod.get(i).getyCoordinate()+5, unod.get(j).getxCoordinate()+5, unod.get(j).getyCoordinate()+5);
+	        		
+	        	}
+	        }
 }
+		
 
