@@ -16,9 +16,8 @@ public class CShortestPathController {
 	public CShortestPathController() throws DataAccessException {
 		this.spm = new CShortestPathModel();
 		this.spm.execut();
-		CShortestPathView spv = new CShortestPathView(this.spm); 
-		spv.update(this.spm, this);
-		this.spm.addObserver(spv);
+		/*CShortestPathView spv = new CShortestPathView(this);
+		this.spm.addObserver(spv);*/
 	}
 	
 	public ArrayList<CNode> getNodesAsList() {
