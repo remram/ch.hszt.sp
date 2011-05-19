@@ -56,6 +56,26 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		//label = new JLabel("Ich bin hier..");
 		//Image img = new ImageIcon("img/testmap.jpg").getImage();
 		
+		JMenuBar menubar = new JMenuBar();
+		JMenu file = new JMenu("File");
+		JMenu help = new JMenu("Help");
+		file.setMnemonic(KeyEvent.VK_F);
+		help.setMnemonic(KeyEvent.VK_F1);
+		
+		//ImageIcon icon = new ImageIcon(getClass().getResource("exit.png"));
+		//JMenuItem eMenuItem = new JMenuItem("Exit", icon);
+		
+		/*eMenuItem.setMnemonic(KeyEvent.VK_C);
+		eMenuItem.setToolTipText("Exit application");
+		eMenuItem.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent event){
+				System.exit(0);
+			}
+		});
+		
+		file.add(eMenuItem);
+		*/menubar.add(file);
+		
 		calcDistanceBtn.setMaximumSize(new Dimension(150, 50));
 		searchPathBtn.setMaximumSize(new Dimension(150, 50));
 		//calcDistanceBtn.setSize(100, 50);
@@ -179,7 +199,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cEdge = csm.getEdges();
 			this.lnode = csm.getNodesAsMap();
 			this.ledge = csm.getEdgesAsMap();
-			this.uNode = csm.getShortestPath(1, 6);
+			this.uNode = csm.getShortestPath(0,5 );
 		}
 		viewGUI();
 	}

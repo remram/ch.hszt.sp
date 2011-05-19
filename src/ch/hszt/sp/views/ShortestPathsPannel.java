@@ -115,38 +115,39 @@ public class ShortestPathsPannel extends JPanel{
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setStroke(stroke);
 	        g2d.setColor(Color.BLUE);
-	        Iterator ite = ledg.keySet().iterator();
+	        Iterator<Integer> ite = ledg.keySet().iterator();
 	        while(ite.hasNext()) { 
 	        	Object ekey = ite.next(); 
 	        	CEdge eval = ledg.get(ekey);
-	        	System.out.println(eval.getStartNode() + "<- Start : Target ->" +eval.getTargetNode());
 	        	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
 	        	}
-	        g2d.setColor(Color.green);
-	        CNode start = null;
-	        CNode target = null;
-	        Iterator itn = unod.iterator();
 	        if(!unod.isEmpty()){
-	        	//for(int i = 0; i < unod.size(); i++){
-	        		//for(int j = 0; j < unod.size(); j++){
-	        			while(ite.hasNext()) { 
-	        	        	Object ekey = ite.next(); 
-	        	        	CEdge eval = ledg.get(ekey);
-		        	        while(itn.hasNext()) {
-		        	        	CNode nval = (CNode) itn.next();
-		        	        	if (nval.getId() == eval.getStartNode() || nval.getId() == eval.getTargetNode()){
-		        	        		start = nval;
-		        	        		target = nval;
-		        	        	}
-		        	        }
-	        	        	//g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
-	        	        }
-	        			//g2d.drawLine(start.getxCoordinate()+5, start.getyCoordinate()+5, target.getxCoordinate(), target.getyCoordinate());
-	        			
-	        			//g2d.drawLine(unod.get(i).getxCoordinate()+5, unod.get(i).getyCoordinate()+5, unod.get(j).getxCoordinate()+5, unod.get(j).getyCoordinate()+5);
-	        		
-	        	}
+	        	showUsedEdges(g);
 	        }
+        	
+		}
+	    public void showUsedEdges(Graphics g){	
+	    	Graphics2D g2d = (Graphics2D) g;
+	    	g2d.setStroke(stroke);
+	    	g2d.setColor(Color.GREEN);
+	    	Iterator<Integer> ite = ledg.keySet().iterator();
+	    	CNode start;
+	    	CNode target;
+	    	while(ite.hasNext()){
+	    		Object key = ite.next();
+	    		CEdge eval = ledg.get(key);
+	    		
+	    		for(int i = 0; i < unod.size()-1; i++){
+	    			for(int j = 1; j<unod.size(); j++){
+	    				start = lnod.get(unod.get(i).getId());
+			        	target = lnod.get(unod.get(j).getId());
+	    				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
+				        	g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5, lnod.get(unod.get(j).getId()).getxCoordinate()+5, lnod.get(unod.get(j).getId()).getyCoordinate()+5);
+			        	}
+	    			}
+	    		}
+	    	}
+        }
 }
 		
 

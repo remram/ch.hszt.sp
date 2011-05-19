@@ -28,7 +28,13 @@ public class SPController {
 		}
 		CShortestPathView cspv = new CShortestPathView(spm);
 		cspv.update(spm, null);
+	
 	}
+	
+	
+	
+	
+	
 	
 	public class SearchPathListener implements ActionListener{
 

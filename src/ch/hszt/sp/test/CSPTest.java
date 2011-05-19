@@ -13,8 +13,8 @@ import ch.hszt.sp.models.CShortestPathModel;
 
 public class CSPTest {
 	public static void main(String[] args) throws DataAccessException {		
-		int start = 5;
-		int target = 1;
+		int start = 1;
+		int target = 7;
 		
 		CShortestPathModel csp = new CShortestPathModel();
 		csp.execut();
