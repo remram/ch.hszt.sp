@@ -8,7 +8,7 @@ import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
-import ch.hszt.sp.views.CShortestPathView;
+//import ch.hszt.sp.views.CShortestPathView;
 
 public class CShortestPathController {
 	private CShortestPathModel spm;
@@ -16,9 +16,8 @@ public class CShortestPathController {
 	public CShortestPathController() throws DataAccessException {
 		this.spm = new CShortestPathModel();
 		this.spm.execut();
-		CShortestPathView spv = new CShortestPathView(this.spm); 
-		spv.update(this.spm, this);
-		this.spm.addObserver(spv);
+		/*CShortestPathView spv = new CShortestPathView(this);
+		this.spm.addObserver(spv);*/
 	}
 	
 	public ArrayList<CNode> getNodesAsList() {
