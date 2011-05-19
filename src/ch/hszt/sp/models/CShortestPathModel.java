@@ -64,6 +64,7 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 		cd.execute(getNodes().get(start));
 		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
 		return path;
+		
 	}
 
 	@Override

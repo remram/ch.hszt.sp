@@ -55,7 +55,10 @@ public class ShortestPathsPannel extends JPanel{
 		}
 
 		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
+		try{
 		she.paintComponent(g);
+		}catch(Exception ex){
+			ex.printStackTrace();
 		}
 		
 	}
@@ -122,7 +125,10 @@ public class ShortestPathsPannel extends JPanel{
 	        	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
 	        	}
 	        if(!unod.isEmpty()){
+	        	System.out.println(unod.get(0));
 	        	showUsedEdges(g);
+	        }else{
+	        	return;
 	        }
         	
 		}
@@ -144,9 +150,8 @@ public class ShortestPathsPannel extends JPanel{
     				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
 			        	g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5, lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
 		        	}
-	    		}
+    			}
 	    	}
-        }
+	    }
 }
-		
-
+}
