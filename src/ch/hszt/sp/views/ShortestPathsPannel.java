@@ -138,13 +138,12 @@ public class ShortestPathsPannel extends JPanel{
 	    		CEdge eval = ledg.get(key);
 	    		
 	    		for(int i = 0; i < unod.size()-1; i++){
-	    			for(int j = 1; j<unod.size(); j++){
-	    				start = lnod.get(unod.get(i).getId());
-			        	target = lnod.get(unod.get(j).getId());
-	    				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
-				        	g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5, lnod.get(unod.get(j).getId()).getxCoordinate()+5, lnod.get(unod.get(j).getId()).getyCoordinate()+5);
-			        	}
-	    			}
+	    			System.out.println(unod.get(i));
+	    			start = lnod.get(unod.get(i).getId());
+		        	target = lnod.get(unod.get(i+1).getId());
+    				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
+			        	g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5, lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
+		        	}
 	    		}
 	    	}
         }

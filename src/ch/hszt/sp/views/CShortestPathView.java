@@ -199,7 +199,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cEdge = csm.getEdges();
 			this.lnode = csm.getNodesAsMap();
 			this.ledge = csm.getEdgesAsMap();
-			this.uNode = csm.getShortestPath(0,5 );
+			this.uNode = csm.getShortestPath(0,3);
 		}
 		viewGUI();
 	}
