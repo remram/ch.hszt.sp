@@ -14,7 +14,7 @@ import ch.hszt.sp.models.CShortestPathModel;
 public class CSPTest {
 	public static void main(String[] args) throws DataAccessException {		
 		int start = 1;
-		int target = 7;
+		int target = 1;
 		
 		CShortestPathModel csp = new CShortestPathModel();
 		csp.execut();
@@ -34,10 +34,13 @@ public class CSPTest {
 		LinkedList<CNode> path = csp.getShortestPath(--start,--target);
 		System.out.println("\nShortestpath:\n=============\nID\tNameList\tNameMap");
 		System.out.println("==\t========\t=======");
-		for (CNode cNode : path) {			
-			System.out.print(cNode.getId() + "\t" + cNode.getName());
-			System.out.println("\t\t" + csp.getNodesAsMap().get(cNode.getId()).getName());
+		if(path.get(0).getId() != 0) {
+			for (CNode cNode : path) {			
+				System.out.print(cNode.getId() + "\t" + cNode.getName());
+				System.out.println("\t\t" + csp.getNodesAsMap().get(cNode.getId()).getName());
+			}
 		}
+		
 		
 		System.out.println("Distance: " + csp.getDistance(start, target));
 		

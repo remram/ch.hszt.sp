@@ -60,6 +60,14 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 
 	@Override
 	public LinkedList<CNode> getShortestPath(int start, int target) {
+		if(start == target) {
+			LinkedList<CNode> path = new LinkedList<CNode>();
+			CNode cNode = new CNode();
+			cNode.setId(0);
+			cNode.setName("No path was found");
+			path.add(cNode);
+			return path;
+		}
 		CDijkstra cd = new CDijkstra(getNodes(), getEdges());		
 		cd.execute(getNodes().get(start));
 		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
@@ -93,8 +101,11 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 
 	@Override
 	public double getDistance(int start, int target) {
-		 CDijkstra cd = new CDijkstra(getNodes(), getEdges());
-		 cd.execute(getNodes().get(start));
-		 return cd.getDistanceOfShortestPath(getNodes().get(target));
+		if(start == target) {
+			return 0;
+		}
+		CDijkstra cd = new CDijkstra(getNodes(), getEdges());
+		cd.execute(getNodes().get(start));
+		return cd.getDistanceOfShortestPath(getNodes().get(target));
 	}
 }

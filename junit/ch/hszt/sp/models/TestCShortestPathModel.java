@@ -5,17 +5,29 @@ package ch.hszt.sp.models;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ch.hszt.sp.dao.IGisDAO;
+import ch.hszt.sp.dao.XmlGisDAO;
+import ch.hszt.sp.exceptions.DataAccessException;
+
 /**
  * @author ramy
  *
  */
 public class TestCShortestPathModel {
+	private static ArrayList<CNode> cNode;
+	private static ArrayList<CEdge> cEdge;
+	private static Map<Integer,CNode> mpNode;
+	private static Map<Integer,CEdge> mpEdge;
 
 	/**
 	 * @throws java.lang.Exception
@@ -36,6 +48,7 @@ public class TestCShortestPathModel {
 	 */
 	@Before
 	public void setUp() throws Exception {
+		testExecut();
 	}
 
 	/**
@@ -46,27 +59,16 @@ public class TestCShortestPathModel {
 	}
 
 	/**
-	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#CShortestPathModel()}.
-	 */
-	@Test
-	public final void testCShortestPathModel() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
-	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#notifyObserver()}.
-	 */
-	@Test
-	public final void testNotifyObserver() {
-		fail("Not yet implemented"); // TODO
-	}
-
-	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#execut()}.
+	 * @throws DataAccessException 
 	 */
 	@Test
-	public final void testExecut() {
-		fail("Not yet implemented"); // TODO
+	public final void testExecut() throws DataAccessException {
+		testSetNodes();
+		testSetEdges();
+		
+		testSetNodesAsMap();
+		testSetEdgesAsMap();
 	}
 
 	/**
@@ -79,26 +81,43 @@ public class TestCShortestPathModel {
 
 	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#setNodes()}.
+	 * @throws DataAccessException 
 	 */
 	@Test
-	public final void testSetNodes() {
-		fail("Not yet implemented"); // TODO
+	public final void testSetNodes() throws DataAccessException {
+		//set cNode as ArrayList
+		cNode = new ArrayList<CNode>();
+		IGisDAO xgd = new XmlGisDAO();
+		cNode = (ArrayList<CNode>) xgd.getNodes();
+		
+		//execute tests
+		assertNotNull(cNode);
+		assertNotNull(xgd);		
+		assertTrue("Object should be contains a list of data!", cNode.size() > 0);
 	}
 
 	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#getEdges()}.
+	 * @throws DataAccessException 
 	 */
 	@Test
 	public final void testGetEdges() {
-		fail("Not yet implemented"); // TODO
 	}
 
 	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#setEdges()}.
 	 */
 	@Test
-	public final void testSetEdges() {
-		fail("Not yet implemented"); // TODO
+	public final void testSetEdges() throws DataAccessException {
+		//set cEdge
+		cEdge = new ArrayList<CEdge>();
+		IGisDAO xgd = new XmlGisDAO();
+		cEdge = (ArrayList<CEdge>) xgd.getEdges();
+		
+		//execute tests
+		assertNotNull(cEdge);
+		assertNotNull(xgd);		
+		assertTrue("Object should be contains a list of data!", cEdge.size() > 0);
 	}
 
 	/**
@@ -119,10 +138,19 @@ public class TestCShortestPathModel {
 
 	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#setNodesAsMap()}.
+	 * @throws DataAccessException 
 	 */
 	@Test
-	public final void testSetNodesAsMap() {
-		fail("Not yet implemented"); // TODO
+	public final void testSetNodesAsMap() throws DataAccessException {
+		//set mpNode as HashMap
+		mpNode = new HashMap<Integer, CNode>();
+		IGisDAO xgd = new XmlGisDAO();
+		mpNode = xgd.getNodesAsMap();
+		
+		//execute tests
+		assertNotNull(mpNode);
+		assertNotNull(xgd);		
+		assertTrue("Object should be contains a map of data!", mpNode.size() > 0);
 	}
 
 	/**
@@ -135,10 +163,19 @@ public class TestCShortestPathModel {
 
 	/**
 	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#setEdgesAsMap()}.
+	 * @throws DataAccessException 
 	 */
 	@Test
-	public final void testSetEdgesAsMap() {
-		fail("Not yet implemented"); // TODO
+	public final void testSetEdgesAsMap() throws DataAccessException {
+		//set mpEdge as HashMap
+		mpEdge = new HashMap<Integer, CEdge>();
+		IGisDAO xgd = new XmlGisDAO();
+		mpEdge = xgd.getEdgesAsMap();
+		
+		//execute tests
+		assertNotNull(mpEdge);
+		assertNotNull(xgd);		
+		assertTrue("Object should be contains a map of data!", mpEdge.size() > 0);
 	}
 
 	/**
