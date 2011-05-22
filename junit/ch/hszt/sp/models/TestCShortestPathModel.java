@@ -7,6 +7,7 @@ import static org.junit.Assert.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
 
 import org.junit.After;
@@ -20,7 +21,7 @@ import ch.hszt.sp.dao.XmlGisDAO;
 import ch.hszt.sp.exceptions.DataAccessException;
 
 /**
- * @author ramy
+ * @author Ramy Hasan
  *
  */
 public class TestCShortestPathModel {
@@ -76,7 +77,7 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetNodes() {
-		fail("Not yet implemented"); // TODO
+		assertFalse("Object should be contains a list of data!", cNode.isEmpty());
 	}
 
 	/**
@@ -102,6 +103,7 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetEdges() {
+		assertFalse("Object should be contains a list of data!", cEdge.isEmpty());
 	}
 
 	/**
@@ -125,7 +127,13 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetShortestPath() {
-		fail("Not yet implemented"); // TODO
+		CDijkstra cd = new CDijkstra(cNode, cEdge);		
+		cd.execute(cNode.get(0));
+		LinkedList<CNode> path = cd.getPath(cNode.get(3));
+		
+		assertNotNull(cd);
+		assertNotNull(path);
+		assertFalse("Path list should contains data!", path.isEmpty());
 	}
 
 	/**
@@ -133,7 +141,7 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetNodesAsMap() {
-		fail("Not yet implemented"); // TODO
+		assertFalse("Object should be contains a map of data!", mpNode.isEmpty());
 	}
 
 	/**
@@ -158,7 +166,7 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetEdgesAsMap() {
-		fail("Not yet implemented"); // TODO
+		assertFalse("Object should be contains a map of data!", mpEdge.isEmpty());
 	}
 
 	/**
@@ -183,7 +191,12 @@ public class TestCShortestPathModel {
 	 */
 	@Test
 	public final void testGetDistance() {
-		fail("Not yet implemented"); // TODO
+		CDijkstra cd = new CDijkstra(cNode, cEdge);		
+		cd.execute(cNode.get(0));
+		double distance = cd.getDistanceOfShortestPath(cNode.get(3));
+		
+		assertNotNull(cd);
+		assertTrue("Distance must be bigger than 0!", distance > 0);
 	}
 
 }
