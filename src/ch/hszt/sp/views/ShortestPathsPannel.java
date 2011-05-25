@@ -45,6 +45,14 @@ public class ShortestPathsPannel extends JPanel{
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
 	public void paintComponent(Graphics g){
+
+		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
+		try{
+		she.paintComponent(g);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
 		try {
 			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
@@ -54,12 +62,6 @@ public class ShortestPathsPannel extends JPanel{
 			e.printStackTrace();
 		}
 
-		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
-		try{
-		she.paintComponent(g);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
 		
 	}
 	

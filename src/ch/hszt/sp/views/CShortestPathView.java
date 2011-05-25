@@ -1,8 +1,6 @@
 package ch.hszt.sp.views;
 import javax.swing.*;
 
-import com.sun.org.apache.xml.internal.utils.StopParseException;
-
 import ch.hszt.sp.controllers.SPController;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
@@ -199,7 +197,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cEdge = csm.getEdges();
 			this.lnode = csm.getNodesAsMap();
 			this.ledge = csm.getEdgesAsMap();
-			this.uNode = csm.getShortestPath(0,4);
+			//this.uNode = csm.getShortestPath(0,4);
 		}
 		viewGUI();
 	}
