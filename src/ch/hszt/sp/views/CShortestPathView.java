@@ -1,8 +1,6 @@
 package ch.hszt.sp.views;
 import javax.swing.*;
 
-import com.sun.org.apache.xml.internal.utils.StopParseException;
-
 import ch.hszt.sp.controllers.SPController;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
@@ -164,6 +162,11 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			frame.setBackground(Color.BLACK);
 		}
 		
+	}
+	
+	public Map<Integer, CNode> getSelectedNode(int in){
+		
+		return this.lnode;
 	}
 
 	@Override

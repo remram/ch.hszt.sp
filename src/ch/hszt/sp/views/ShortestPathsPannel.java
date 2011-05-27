@@ -45,6 +45,14 @@ public class ShortestPathsPannel extends JPanel{
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
 	public void paintComponent(Graphics g){
+
+		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
+		try{
+		she.paintComponent(g);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}
+		
 		try {
 			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
@@ -54,12 +62,6 @@ public class ShortestPathsPannel extends JPanel{
 			e.printStackTrace();
 		}
 
-		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
-		try{
-		she.paintComponent(g);
-		}catch(Exception ex){
-			ex.printStackTrace();
-		}
 		
 	}
 	
@@ -68,8 +70,8 @@ public class ShortestPathsPannel extends JPanel{
 	 * @author miro
 	 * @version 1.0
 	 * Darstellung der Nodes im Pannel
-	 **/
-	class ShowNode extends JPanel
+	 **//*
+	class ShowNode extends JPanel implements ActionListener
 	{
 		private static final long serialVersionUID = 1L;
 		private int x;
@@ -93,16 +95,21 @@ public class ShortestPathsPannel extends JPanel{
 			g.setColor(Color.black);
 			g.drawString(nodeName + ": ", x-25, y+11);
 		}
-	}
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			System.out.println("Hallo");
+		}
+	}*/
 	
-	class ShowEdge extends JPanel
+	/*class ShowEdge extends JPanel
 	{
-		/**
+		*//**
 		 * @author miro
 		 * @version 1.0
 		 * Die Klasse ShowEdge ist fuer die Dartsellung der Kanten zustaendig.
 		 * 
-		 * */
+		 * *//*
 		private static final long serialVersionUID = 1L;
 		private final Stroke stroke = new BasicStroke(2.0F);
 		//private int ax, ay, bx, by, weight;
@@ -156,5 +163,5 @@ public class ShortestPathsPannel extends JPanel{
     			}
 	    	}
 	    }
-}
+}*/
 }
