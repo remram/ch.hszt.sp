@@ -11,6 +11,10 @@ import ch.hszt.sp.models.CShortestPathModel;
 //import ch.hszt.sp.views.CShortestPathView;
 
 public class CShortestPathController {
+	/**
+	 * @uml.property  name="spm"
+	 * @uml.associationEnd  multiplicity="(1 1)"
+	 */
 	private CShortestPathModel spm;
 	
 	public CShortestPathController() throws DataAccessException {

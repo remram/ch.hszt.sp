@@ -72,7 +72,10 @@ public class ShortestPathsPannel extends JPanel{
 	class ShowNode extends JPanel
 	{
 		private static final long serialVersionUID = 1L;
-		private int x, y, sizx, sizy;
+		private int x;
+		private int y;
+		private int sizx;
+		private int sizy;
 		private String nodeName;
 		
 		//Konstruktor erwartet die jeweilige Position der Knoten. Soll auch die Namen der Nodes anzeigen.

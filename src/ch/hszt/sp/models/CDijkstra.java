@@ -10,11 +10,34 @@ import java.util.Map;
 import java.util.Set;
 
 public class CDijkstra {
+	/**
+	 * @uml.property  name="nodeList"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="ch.hszt.sp.models.CNode"
+	 */
 	private final List<CNode> nodeList;
+	/**
+	 * @uml.property  name="edgeList"
+	 */
 	private final List<CEdge> edgeList;
+	/**
+	 * @uml.property  name="settledNodes"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="ch.hszt.sp.models.CNode"
+	 */
 	private Set<CNode> settledNodes;
+	/**
+	 * @uml.property  name="unSettledNodes"
+	 * @uml.associationEnd  multiplicity="(0 -1)" elementType="ch.hszt.sp.models.CNode"
+	 */
 	private Set<CNode> unSettledNodes;
+	/**
+	 * @uml.property  name="predecessors"
+	 * @uml.associationEnd  qualifier="target:ch.hszt.sp.models.CNode ch.hszt.sp.models.CNode"
+	 */
 	private Map<CNode, CNode> predecessors;
+	/**
+	 * @uml.property  name="distance"
+	 * @uml.associationEnd  qualifier="destination:ch.hszt.sp.models.CNode java.lang.Double"
+	 */
 	private Map<CNode, Double> distance;
 
 	public CDijkstra(ArrayList<CNode> cNode, ArrayList<CEdge> cEdge) {

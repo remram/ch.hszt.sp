@@ -26,14 +26,44 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	 */
 	
 	private static final long serialVersionUID = 1L;
+	/**
+	 * @uml.property  name="frame"
+	 * @uml.associationEnd  
+	 */
 	private JFrame frame;
+	/**
+	 * @uml.property  name="label"
+	 * @uml.associationEnd  readOnly="true"
+	 */
 	private JLabel label;
+	/**
+	 * @uml.property  name="mapPanel"
+	 * @uml.associationEnd  
+	 */
 	private JPanel mapPanel;
+	/**
+	 * @uml.property  name="observer"
+	 */
 	private Observable observer;
+	/**
+	 * @uml.property  name="cnlist"
+	 */
 	private ArrayList<CNode> cnlist;
+	/**
+	 * @uml.property  name="cEdge"
+	 */
 	private ArrayList<CEdge> cEdge;
+	/**
+	 * @uml.property  name="uNode"
+	 */
 	private LinkedList<CNode> uNode;
+	/**
+	 * @uml.property  name="lnode"
+	 */
 	private Map<Integer, CNode> lnode;
+	/**
+	 * @uml.property  name="ledge"
+	 */
 	private Map<Integer, CEdge> ledge;
 
 	
