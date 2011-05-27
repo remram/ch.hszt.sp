@@ -16,6 +16,10 @@ import ch.hszt.sp.views.CShortestPathView;
  **/
 public class SPController {
 	
+	static CShortestPathModel spm = new CShortestPathModel();
+	static CShortestPathView cspv = new CShortestPathView(spm);
+	
+	
 	public static void main(String[] args) {
 		//Erstellt ein Model Objekt auf welchem die executIt Methode aufgerufen wird.
 		CShortestPathModel spm = new CShortestPathModel();
@@ -26,7 +30,7 @@ public class SPController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		CShortestPathView cspv = new CShortestPathView(spm);
+		//CShortestPathView cspv = new CShortestPathView(spm);
 		cspv.update(spm, null);
 	
 	}
@@ -41,7 +45,8 @@ public class SPController {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
-			
+			int in = 1;
+			System.out.println(cspv.getSelectedNode(in));
 		}
 		
 	}

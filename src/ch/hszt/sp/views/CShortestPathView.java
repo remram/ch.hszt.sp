@@ -133,6 +133,11 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		}
 		
 	}
+	
+	public Map<Integer, CNode> getSelectedNode(int in){
+		
+		return this.lnode;
+	}
 
 	@Override
 	public void getNodePosition() {
@@ -197,7 +202,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cEdge = csm.getEdges();
 			this.lnode = csm.getNodesAsMap();
 			this.ledge = csm.getEdgesAsMap();
-			//this.uNode = csm.getShortestPath(0,4);
+			this.uNode = csm.getShortestPath(0,4);
 		}
 		viewGUI();
 	}
