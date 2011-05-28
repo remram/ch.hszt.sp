@@ -117,7 +117,7 @@ public class XmlGisDAO implements IGisDAO {
 					cEdgeObj.setDirectionType(node.getAttributes().item(0)
 							.getNodeValue());
 					
-					if(cEdgeObj.getDirectionType().equals("none")) {
+					if(!cEdgeObj.getDirectionType().equals("one")) {
 						setBiDirection(true);
 					}
 				}
@@ -144,7 +144,7 @@ public class XmlGisDAO implements IGisDAO {
 				if (listCounter == 6) {
 					cEdgeList.add(cEdgeObj);
 					/**
-					 * If direction of edge is both
+					 * If direction of edge is none
 					 * We create a virtual edge for that
 					 */
 					if(isBiDirection()) {
@@ -267,7 +267,7 @@ public class XmlGisDAO implements IGisDAO {
 					cEdgeObj.setDirectionType(node.getAttributes().item(0)
 							.getNodeValue());
 					
-					if(cEdgeObj.getDirectionType().equals("none")) {
+					if(!cEdgeObj.getDirectionType().equals("one")) {
 						setBiDirection(true);
 					}
 				}
@@ -294,7 +294,7 @@ public class XmlGisDAO implements IGisDAO {
 				if (listCounter == 6) {
 					cEdgeMap.put(cEdgeObj.getId(), cEdgeObj);
 					/**
-					 * If direction of edge is both
+					 * If direction of edge is none
 					 * We create a virtual edge for that
 					 */
 					if(isBiDirection()) {
