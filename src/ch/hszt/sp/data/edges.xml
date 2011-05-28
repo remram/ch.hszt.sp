@@ -3,248 +3,125 @@
     <edge id="1">
         <weight>1</weight>
         <!--
-            type: one
-                  both
-                  none
-            value: if one way
-                   save the id of the node
+            type: none
+                  one
         -->
-        <direction type="none">0</direction>
+        <direction type="none"/>
         <nodes>
             <node-start>1</node-start>
             <node-target>2</node-target>
         </nodes>
     </edge>
     <edge id="2">
-        <weight>1</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>2</node-start>
-            <node-target>1</node-target>
-        </nodes>
-    </edge>
-    <edge id="3">
         <weight>20</weight>
-        <direction type="none">0</direction>
+        <direction type="none"/>
         <nodes>
             <node-start>1</node-start>
             <node-target>3</node-target>
         </nodes>
     </edge>
-    <edge id="4">
-        <weight>20</weight>
-        <direction type="none">0</direction>
+    <edge id="3">
+        <weight>5</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>3</node-start>
-            <node-target>1</node-target>
+            <node-start>2</node-start>
+            <node-target>4</node-target>
+        </nodes>
+    </edge>
+    <edge id="4">
+        <weight>1</weight>
+        <direction type="none"/>
+        <nodes>
+            <node-start>2</node-start>
+            <node-target>3</node-target>
         </nodes>
     </edge>
     <edge id="5">
-        <weight>5</weight>
-        <direction type="both">0</direction>
+        <weight>1</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>2</node-start>
+            <node-start>3</node-start>
             <node-target>4</node-target>
         </nodes>
     </edge>
     <edge id="6">
-        <weight>5</weight>
-        <direction type="none">0</direction>
+        <weight>20</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>4</node-start>
-            <node-target>2</node-target>
+            <node-start>3</node-start>
+            <node-target>5</node-target>
         </nodes>
     </edge>
     <edge id="7">
-        <weight>1</weight>
-        <direction type="none">0</direction>
+        <weight>3</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>2</node-start>
-            <node-target>3</node-target>
+            <node-start>3</node-start>
+            <node-target>7</node-target>
         </nodes>
     </edge>
     <edge id="8">
-        <weight>1</weight>
-        <direction type="both">0</direction>
+        <weight>6</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>3</node-start>
-            <node-target>2</node-target>
+            <node-start>4</node-start>
+            <node-target>5</node-target>
         </nodes>
     </edge>
     <edge id="9">
-        <weight>1</weight>
-        <direction type="none">0</direction>
+        <weight>8</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>3</node-start>
-            <node-target>4</node-target>
+            <node-start>5</node-start>
+            <node-target>6</node-target>
         </nodes>
     </edge>
     <edge id="10">
         <weight>1</weight>
-        <direction type="none">0</direction>
+        <direction type="none"/>
         <nodes>
-            <node-start>4</node-start>
-            <node-target>3</node-target>
+            <node-start>5</node-start>
+            <node-target>7</node-target>
         </nodes>
     </edge>
     <edge id="11">
-        <weight>20</weight>
-        <direction type="none">0</direction>
+        <weight>3</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>3</node-start>
-            <node-target>5</node-target>
+            <node-start>6</node-start>
+            <node-target>7</node-target>
         </nodes>
     </edge>
     <edge id="12">
-        <weight>20</weight>
-        <direction type="none">0</direction>
+        <weight>3</weight>
+        <direction type="none"/>
         <nodes>
-            <node-start>5</node-start>
-            <node-target>3</node-target>
+            <node-start>6</node-start>
+            <node-target>8</node-target>
         </nodes>
     </edge>
     <edge id="13">
         <weight>3</weight>
-        <direction type="none">0</direction>
+        <direction type="none"/>
         <nodes>
-            <node-start>3</node-start>
-            <node-target>7</node-target>
+            <node-start>7</node-start>
+            <node-target>8</node-target>
         </nodes>
     </edge>
     <edge id="14">
-        <weight>3</weight>
-        <direction type="none">0</direction>
+        <weight>30</weight>
+        <direction type="none"/>
         <nodes>
             <node-start>7</node-start>
-            <node-target>3</node-target>
+            <node-target>1</node-target>
         </nodes>
     </edge>
     <edge id="15">
-        <weight>6</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>4</node-start>
-            <node-target>5</node-target>
-        </nodes>
-    </edge>
-    <edge id="16">
-        <weight>6</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>5</node-start>
-            <node-target>4</node-target>
-        </nodes>
-    </edge>
-    <edge id="17">
-        <weight>8</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>5</node-start>
-            <node-target>6</node-target>
-        </nodes>
-    </edge>
-    <edge id="18">
-        <weight>8</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>6</node-start>
-            <node-target>5</node-target>
-        </nodes>
-    </edge>
-    <edge id="19">
-        <weight>1</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>5</node-start>
-            <node-target>7</node-target>
-        </nodes>
-    </edge>
-    <edge id="20">
-        <weight>1</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>7</node-start>
-            <node-target>5</node-target>
-        </nodes>
-    </edge>
-    <edge id="21">
         <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>6</node-start>
-            <node-target>7</node-target>
-        </nodes>
-    </edge>
-    <edge id="22">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>7</node-start>
-            <node-target>6</node-target>
-        </nodes>
-    </edge>
-    <edge id="23">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>6</node-start>
-            <node-target>8</node-target>
-        </nodes>
-    </edge>
-    <edge id="24">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>8</node-start>
-            <node-target>6</node-target>
-        </nodes>
-    </edge>
-    <edge id="25">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>7</node-start>
-            <node-target>8</node-target>
-        </nodes>
-    </edge>
-    <edge id="26">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>8</node-start>
-            <node-target>7</node-target>
-        </nodes>
-    </edge>
-    <edge id="27">
-        <weight>30</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>7</node-start>
-            <node-target>1</node-target>
-        </nodes>
-    </edge>
-    <edge id="28">
-        <weight>30</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>1</node-start>
-            <node-target>7</node-target>
-        </nodes>
-    </edge>
-    <edge id="29">
-        <weight>3</weight>
-        <direction type="none">0</direction>
+        <direction type="none"/>
         <nodes>
             <node-start>8</node-start>
             <node-target>1</node-target>
-        </nodes>
-    </edge>
-    <edge id="30">
-        <weight>3</weight>
-        <direction type="none">0</direction>
-        <nodes>
-            <node-start>1</node-start>
-            <node-target>8</node-target>
         </nodes>
     </edge>
 </edges>

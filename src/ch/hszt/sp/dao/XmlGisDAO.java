@@ -13,6 +13,9 @@ import ch.hszt.sp.models.*;
 
 public class XmlGisDAO implements IGisDAO {
 
+	private boolean isBiDirection;
+	private int xmlNodeLength;
+
 	@Override
 	public List<CNode> getNodes() throws DataAccessException {
 		List<CNode> cNodeList = new ArrayList<CNode>();
@@ -84,8 +87,10 @@ public class XmlGisDAO implements IGisDAO {
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
+			setBiDirection(false);
+			setXmlNodeLength( xmlNodeList.getLength() );
 			CEdge cEdgeObj = new CEdge();
-			for (int i = 0; i < xmlNodeList.getLength(); i++) {
+			for (int i = 0 ; i < xmlNodeList.getLength() ; i++) {
 				Node node = xmlNodeList.item(i);
 
 				//Get and set edge id
@@ -111,9 +116,10 @@ public class XmlGisDAO implements IGisDAO {
 						&& node.getNodeName().equals("direction")) {
 					cEdgeObj.setDirectionType(node.getAttributes().item(0)
 							.getNodeValue());
-					int directionId = Integer.valueOf(
-							node.getFirstChild().getNodeValue()).intValue();
-					cEdgeObj.setDirectionId(directionId);
+					
+					if(cEdgeObj.getDirectionType().equals("none")) {
+						setBiDirection(true);
+					}
 				}
 
 				//Get and set start node
@@ -137,6 +143,15 @@ public class XmlGisDAO implements IGisDAO {
 				 */
 				if (listCounter == 6) {
 					cEdgeList.add(cEdgeObj);
+					/**
+					 * If direction of edge is both
+					 * We create a virtual edge for that
+					 */
+					if(isBiDirection()) {
+						cEdgeList.add( this.createVritualEdge(cEdgeObj) );
+						setBiDirection(false);
+					}
+					
 					cEdgeObj = null;
 					cEdgeObj = new CEdge();
 					listCounter = 0;
@@ -222,8 +237,10 @@ public class XmlGisDAO implements IGisDAO {
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
+			setXmlNodeLength( xmlNodeList.getLength() );
+			System.out.println("LAENGE: " + getXmlNodeLength());
 			CEdge cEdgeObj = new CEdge();
-			for (int i = 0; i < xmlNodeList.getLength(); i++) {
+			for (int i = 0 ; i < xmlNodeList.getLength() ; i++) {
 				Node node = xmlNodeList.item(i);
 
 				//Get and set edge id
@@ -249,9 +266,10 @@ public class XmlGisDAO implements IGisDAO {
 						&& node.getNodeName().equals("direction")) {
 					cEdgeObj.setDirectionType(node.getAttributes().item(0)
 							.getNodeValue());
-					int directionId = Integer.valueOf(
-							node.getFirstChild().getNodeValue()).intValue();
-					cEdgeObj.setDirectionId(directionId);
+					
+					if(cEdgeObj.getDirectionType().equals("none")) {
+						setBiDirection(true);
+					}
 				}
 
 				//Get and set start node
@@ -275,6 +293,14 @@ public class XmlGisDAO implements IGisDAO {
 				 */
 				if (listCounter == 6) {
 					cEdgeMap.put(cEdgeObj.getId(), cEdgeObj);
+					/**
+					 * If direction of edge is both
+					 * We create a virtual edge for that
+					 */
+					if(isBiDirection()) {
+						cEdgeMap.put( (cEdgeObj.getId() + getXmlNodeLength()), this.createVritualEdge( cEdgeObj ) );
+						setBiDirection(false);
+					}
 					cEdgeObj = null;
 					cEdgeObj = new CEdge();
 					listCounter = 0;
@@ -287,5 +313,37 @@ public class XmlGisDAO implements IGisDAO {
 		}
 
 		return cEdgeMap;
+	}
+	
+	/**
+	 * Prepare a virtual edge with new id and opposite start and target ids
+	 * @param cEdge
+	 * @return cEdge virtual
+	 */
+	private CEdge createVritualEdge(CEdge cEdge) {
+		CEdge virtualEdge = new CEdge();
+		virtualEdge.setId(getXmlNodeLength() + cEdge.getId() );
+		virtualEdge.setWeight(cEdge.getWeight());
+		virtualEdge.setDirectionType(cEdge.getDirectionType());
+		virtualEdge.setStartNode(cEdge.getTargetNode());
+		virtualEdge.setTargetNode(cEdge.getStartNode());
+		return virtualEdge;
+	}
+
+	public boolean setBiDirection(boolean isBiDirection) {
+		this.isBiDirection = isBiDirection;
+		return isBiDirection;
+	}
+
+	public boolean isBiDirection() {
+		return isBiDirection;
+	}
+
+	public void setXmlNodeLength(int xmlNodeLength) {
+		this.xmlNodeLength = (--xmlNodeLength/6);
+	}
+
+	public int getXmlNodeLength() {
+		return xmlNodeLength;
 	}
 }

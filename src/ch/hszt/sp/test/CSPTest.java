@@ -14,7 +14,7 @@ import ch.hszt.sp.models.CShortestPathModel;
 public class CSPTest {
 	public static void main(String[] args) throws DataAccessException {		
 		int start = 1;
-		int target = 1;
+		int target = 5;
 		
 		CShortestPathModel csp = new CShortestPathModel();
 		csp.execut();
@@ -43,6 +43,8 @@ public class CSPTest {
 		
 		
 		System.out.println("Distance: " + csp.getDistance(start, target));
+		
+		System.out.println("Edges legnth: " + csp.getEdges().size());
 		
 		
 		//arbeiten mit dem controller!!!

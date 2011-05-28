@@ -17,18 +17,8 @@ import org.xml.sax.SAXParseException;
  * @author Ramy Hasan
  */
 public class CReadXmlDom {
-	/**
-	 * @uml.property  name="xmlFile"
-	 */
 	private String xmlFile;
-	/**
-	 * @uml.property  name="tagName"
-	 */
 	private String tagName;
-	/**
-	 * @uml.property  name="xmlNodeList"
-	 * @uml.associationEnd  
-	 */
 	private NodeList xmlNodeList;
 	
 	/**
@@ -77,8 +67,7 @@ public class CReadXmlDom {
 	}
 
 	/**
-	 * @return
-	 * @uml.property  name="xmlFile"
+	 * @return xml file name
 	 */
 	public String getXmlFile() {
 		return xmlFile;
@@ -86,15 +75,13 @@ public class CReadXmlDom {
 
 	/**
 	 * @param xmlFile
-	 * @uml.property  name="xmlFile"
 	 */
 	public void setXmlFile(String xmlFile) {
 		this.xmlFile = xmlFile;
 	}
 
 	/**
-	 * @return
-	 * @uml.property  name="tagName"
+	 * @return tag name
 	 */
 	public String getTagName() {
 		return tagName;
@@ -102,7 +89,6 @@ public class CReadXmlDom {
 
 	/**
 	 * @param tagName
-	 * @uml.property  name="tagName"
 	 */
 	public void setTagName(String tagName) {
 		this.tagName = tagName;
