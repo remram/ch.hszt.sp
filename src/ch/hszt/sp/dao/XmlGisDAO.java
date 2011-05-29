@@ -238,7 +238,6 @@ public class XmlGisDAO implements IGisDAO {
 
 			int listCounter = 0;
 			setXmlNodeLength( xmlNodeList.getLength() );
-			System.out.println("LAENGE: " + getXmlNodeLength());
 			CEdge cEdgeObj = new CEdge();
 			for (int i = 0 ; i < xmlNodeList.getLength() ; i++) {
 				Node node = xmlNodeList.item(i);
