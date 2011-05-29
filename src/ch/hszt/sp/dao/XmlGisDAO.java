@@ -140,7 +140,7 @@ public class XmlGisDAO implements IGisDAO {
 				 * Each 6 iterations save the data to the ArrayList of CEdge
 				 * Class Afterward rest the object and create a new one for the
 				 * new row!
-				 */
+				 */				
 				if (listCounter == 6) {
 					cEdgeList.add(cEdgeObj);
 					/**
@@ -330,15 +330,28 @@ public class XmlGisDAO implements IGisDAO {
 		return virtualEdge;
 	}
 
+	/**
+	 * Set Edge to bi direction edge
+	 * @param isBiDirection
+	 * @return isBiDirection boolean
+	 */
 	private boolean setBiDirection(boolean isBiDirection) {
 		this.isBiDirection = isBiDirection;
 		return isBiDirection;
 	}
 
+	/**
+	 * Returns the boolean value of bi direction edge
+	 * @return isBiDirection
+	 */
 	private boolean isBiDirection() {
 		return isBiDirection;
 	}
 
+	/**
+	 * Set the length of the xml node
+	 * @param xmlNodeLength
+	 */
 	private void setXmlNodeLength(int xmlNodeLength) {
 		this.xmlNodeLength = (--xmlNodeLength/6);
 	}
