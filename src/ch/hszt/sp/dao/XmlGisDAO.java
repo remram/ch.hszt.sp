@@ -330,20 +330,20 @@ public class XmlGisDAO implements IGisDAO {
 		return virtualEdge;
 	}
 
-	public boolean setBiDirection(boolean isBiDirection) {
+	private boolean setBiDirection(boolean isBiDirection) {
 		this.isBiDirection = isBiDirection;
 		return isBiDirection;
 	}
 
-	public boolean isBiDirection() {
+	private boolean isBiDirection() {
 		return isBiDirection;
 	}
 
-	public void setXmlNodeLength(int xmlNodeLength) {
+	private void setXmlNodeLength(int xmlNodeLength) {
 		this.xmlNodeLength = (--xmlNodeLength/6);
 	}
 
-	public int getXmlNodeLength() {
+	private int getXmlNodeLength() {
 		return xmlNodeLength;
 	}
 }
