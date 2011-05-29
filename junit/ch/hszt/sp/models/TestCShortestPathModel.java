@@ -60,7 +60,7 @@ public class TestCShortestPathModel {
 	}
 
 	/**
-	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#execut()}.
+	 * Test method for {@link ch.hszt.sp.models.CShortestPathModel#execute()}.
 	 * @throws DataAccessException 
 	 */
 	@Test

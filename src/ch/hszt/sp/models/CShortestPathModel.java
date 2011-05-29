@@ -23,7 +23,7 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 		notifyObservers();
 	}
 	
-	public void execut() throws DataAccessException {
+	public void execute() throws DataAccessException {
 		//set data
 		setNodes();
 		setEdges();

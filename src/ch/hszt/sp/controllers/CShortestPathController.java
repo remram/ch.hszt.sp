@@ -19,7 +19,7 @@ public class CShortestPathController {
 	
 	public CShortestPathController() throws DataAccessException {
 		this.spm = new CShortestPathModel();
-		this.spm.execut();
+		this.spm.execute();
 		/*CShortestPathView spv = new CShortestPathView(this);
 		this.spm.addObserver(spv);*/
 	}

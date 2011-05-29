@@ -17,7 +17,7 @@ public class CSPTest {
 		int target = 5;
 		
 		CShortestPathModel csp = new CShortestPathModel();
-		csp.execut();
+		csp.execute();
 		
 		Iterator<Entry<Integer, CEdge>> edgeIter = csp.getEdgesAsMap().entrySet().iterator();
 		while (edgeIter.hasNext()) {

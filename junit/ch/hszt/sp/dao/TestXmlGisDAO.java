@@ -5,7 +5,6 @@ package ch.hszt.sp.dao;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.After;
@@ -13,7 +12,6 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import org.w3c.dom.NodeList;
 
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
