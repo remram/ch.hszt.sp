@@ -72,7 +72,6 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 		cd.execute(getNodes().get(start));
 		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
 		return path;
-		
 	}
 
 	@Override
@@ -107,5 +106,53 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 		CDijkstra cd = new CDijkstra(getNodes(), getEdges());
 		cd.execute(getNodes().get(start));
 		return cd.getDistanceOfShortestPath(getNodes().get(target));
+	}
+
+	/**
+	 * Get shortest path as a List
+	 * This list conatins
+	 * - an ID
+	 * - a start node id
+	 * - a start node name
+	 * - a target node id
+	 * - a target node name
+	 * - the distance between nodes
+	 * 
+	 * @param list
+	 * @return cPath
+	 */
+	@Override
+	public ArrayList<CPath> getShortestPathList(LinkedList<CNode> list) {
+		LinkedList<CNode> path = list;
+		ArrayList<CPath> cPath = new ArrayList<CPath>();
+		
+		if(path.get(0).getId() != 0) {
+			for (int i = 0 ; i < (path.size() - 1) ; i++) {
+				CNode cnStart  = path.get(i);
+				CNode cnTarget = path.get(i);
+				if((i+1) < path.size()) {
+					cnTarget = path.get(++i);
+					--i;
+				}
+				
+				int start       = cnStart.getId();
+				int target      = cnTarget.getId();
+				int pathId      = i + 1;
+				double distance = this.getDistance(--start, --target);
+				CPath cp        = new CPath();
+				
+				cp.setPathId(pathId);
+				cp.setStartNodeId(cnStart.getId());
+				cp.setStartNode(cnStart.getName());
+				cp.setTargetNodeId(cnTarget.getId());
+				cp.setTargetNode(cnTarget.getName());
+				cp.setDistance(distance);
+				
+				cPath.add(cp);
+				
+				cp = null;
+			}
+		}
+		return cPath;
 	}
 }

@@ -17,4 +17,5 @@ public interface IShortestPathModel {
 	public void setNodesAsMap() throws DataAccessException;
 	public Map<Integer, CEdge> getEdgesAsMap();
 	public void setEdgesAsMap() throws DataAccessException;
+	public ArrayList<CPath> getShortestPathList(LinkedList<CNode> list);	
 }

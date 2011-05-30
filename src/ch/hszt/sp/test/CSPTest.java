@@ -1,5 +1,6 @@
 package ch.hszt.sp.test;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
@@ -9,6 +10,7 @@ import ch.hszt.sp.controllers.CShortestPathController;
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
+import ch.hszt.sp.models.CPath;
 import ch.hszt.sp.models.CShortestPathModel;
 
 public class CSPTest {
@@ -45,6 +47,20 @@ public class CSPTest {
 		System.out.println("Distance: " + csp.getDistance(start, target));
 		
 		System.out.println("Edges legnth: " + csp.getEdges().size());
+		
+		ArrayList<CPath> cp = csp.getShortestPathList(path);
+		System.out.println("\nid\tsnid\tsnName\ttnid\ttnName\tdistance");
+		System.out.println("==\t====\t======\t====\t======\t========");
+		for (CPath cPath : cp) {
+			System.out.print(cPath.getPathId());
+			System.out.print("\t" + cPath.getStartNodeId());
+			System.out.print("\t" + cPath.getStartNode());
+			System.out.print("\t" + cPath.getTargetNodeId());
+			System.out.print("\t" + cPath.getTargetNode());
+			System.out.println("\t" + cPath.getDistance());
+		}
+		
+		
 		
 		
 		//arbeiten mit dem controller!!!
