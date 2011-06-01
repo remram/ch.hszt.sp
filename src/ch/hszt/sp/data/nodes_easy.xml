@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nodes>
+    <node id="1">
+        <coordinate x="150" y="300"/>
+        <name>k1</name>
+    </node>    
+    <node id="2">
+        <coordinate x="250" y="100"/>
+        <name>k2</name>
+    </node>    
+    <node id="3">
+        <coordinate x="400" y="200"/>
+        <name>k3</name>
+    </node>
+    <node id="4">
+        <coordinate x="550" y="100"/>
+        <name>k4</name>
+    </node>
+    <node id="5">
+        <coordinate x="650" y="300"/>
+        <name>k5</name>
+    </node>   
+    <node id="6">
+        <coordinate x="550" y="500"/>
+        <name>k6</name>
+    </node>
+    <node id="7">
+        <coordinate x="400" y="400"/>
+        <name>k7</name>
+    </node>
+    <node id="8">
+        <coordinate x="250" y="500"/>
+        <name>k8</name>
+    </node>
+</nodes>

@@ -69,8 +69,8 @@ public class CShortestPathModel extends Observable implements IShortestPathModel
 			return path;
 		}
 		CDijkstra cd = new CDijkstra(getNodes(), getEdges());		
-		cd.execute(getNodes().get(start));
-		LinkedList<CNode> path = cd.getPath(getNodes().get(target));
+		cd.execute(getNodes().get(--start));
+		LinkedList<CNode> path = cd.getPath(getNodes().get(--target));
 		return path;
 	}
 

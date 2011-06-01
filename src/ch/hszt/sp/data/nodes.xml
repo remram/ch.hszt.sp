@@ -1,35 +1,115 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <nodes>
     <node id="1">
-        <coordinate x="150" y="300"/>
+        <coordinate x="105" y="106"/>
         <name>k1</name>
     </node>    
     <node id="2">
-        <coordinate x="250" y="100"/>
+        <coordinate x="215" y="84"/>
         <name>k2</name>
     </node>    
     <node id="3">
-        <coordinate x="400" y="200"/>
+        <coordinate x="253" y="68"/>
         <name>k3</name>
     </node>
     <node id="4">
-        <coordinate x="550" y="100"/>
+        <coordinate x="336" y="66"/>
         <name>k4</name>
     </node>
     <node id="5">
-        <coordinate x="650" y="300"/>
+        <coordinate x="477" y="44"/>
         <name>k5</name>
     </node>   
     <node id="6">
-        <coordinate x="550" y="500"/>
+        <coordinate x="491" y="100"/>
         <name>k6</name>
     </node>
     <node id="7">
-        <coordinate x="400" y="400"/>
+        <coordinate x="494" y="179"/>
         <name>k7</name>
     </node>
     <node id="8">
-        <coordinate x="250" y="500"/>
+        <coordinate x="513" y="250"/>
         <name>k8</name>
+    </node>
+    <node id="9">
+        <coordinate x="534" y="239"/>
+        <name>k9</name>
+    </node>
+    <node id="10">
+        <coordinate x="647" y="395"/>
+        <name>k10</name>
+    </node>
+    <node id="11">
+        <coordinate x="561" y="398"/>
+        <name>k11</name>
+    </node>    
+    <node id="12">
+        <coordinate x="558" y="437"/>
+        <name>k12</name>
+    </node>    
+    <node id="13">
+        <coordinate x="700" y="476"/>
+        <name>k13</name>
+    </node>
+    <node id="14">
+        <coordinate x="695" y="509"/>
+        <name>k14</name>
+    </node>
+    <node id="15">
+        <coordinate x="636" y="548"/>
+        <name>k15</name>
+    </node>   
+    <node id="16">
+        <coordinate x="320" y="504"/>
+        <name>k16</name>
+    </node>
+    <node id="17">
+        <coordinate x="217" y="543"/>
+        <name>k17</name>
+    </node>
+    <node id="18">
+        <coordinate x="138" y="448"/>
+        <name>k18</name>
+    </node>
+    <node id="19">
+        <coordinate x="184" y="435"/>
+        <name>k19</name>
+    </node>
+    <node id="20">
+        <coordinate x="162" y="339"/>
+        <name>k20</name>
+    </node>
+    <node id="21">
+        <coordinate x="82" y="358"/>
+        <name>k21</name>
+    </node>    
+    <node id="22">
+        <coordinate x="285" y="415"/>
+        <name>k22</name>
+    </node>    
+    <node id="23">
+        <coordinate x="327" y="413"/>
+        <name>k23</name>
+    </node>
+    <node id="24">
+        <coordinate x="264" y="316"/>
+        <name>k24</name>
+    </node>
+    <node id="25">
+        <coordinate x="329" y="313"/>
+        <name>k25</name>
+    </node>   
+    <node id="26">
+        <coordinate x="129" y="211"/>
+        <name>k26</name>
+    </node>
+    <node id="27">
+        <coordinate x="238" y="191"/>
+        <name>k27</name>
+    </node>
+    <node id="28">
+        <coordinate x="334" y="172"/>
+        <name>k28</name>
     </node>
 </nodes>
