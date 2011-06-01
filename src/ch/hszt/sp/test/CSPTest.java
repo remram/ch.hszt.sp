@@ -16,7 +16,7 @@ import ch.hszt.sp.models.CShortestPathModel;
 public class CSPTest {
 	public static void main(String[] args) throws DataAccessException {		
 		int start = 1;
-		int target = 20;
+		int target = 9;
 		
 		CShortestPathModel csp = new CShortestPathModel();
 		csp.execute();
