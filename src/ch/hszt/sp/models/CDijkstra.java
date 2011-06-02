@@ -61,7 +61,7 @@ public class CDijkstra {
 	}
 
 	private List<CNode> getNeighbors(CNode cNode) {
-		List<CNode> neighbors = new ArrayList<CNode>();		
+		List<CNode> neighbors = new ArrayList<CNode>();
 		for (CEdge cEdge : edgeList) {
 			CNode cn = new CNode();
 			
@@ -77,12 +77,12 @@ public class CDijkstra {
 
 	private CNode getMinimum(Set<CNode> cNodeSet) {
 		CNode minimum = null;
-		for (CNode CNode : cNodeSet) {
+		for (CNode cNode : cNodeSet) {
 			if (minimum == null) {
-				minimum = CNode;
+				minimum = cNode;
 			} else {
-				if (getShortestDistance(CNode) < getShortestDistance(minimum)) {
-					minimum = CNode;
+				if (getShortestDistance(cNode) < getShortestDistance(minimum)) {
+					minimum = cNode;
 				}
 			}
 		}
@@ -118,20 +118,25 @@ public class CDijkstra {
 	 * @return path LinkedList
 	 */
 	public LinkedList<CNode> getPath(CNode target) {
-		LinkedList<CNode> path = new LinkedList<CNode>();
+		try {
+			LinkedList<CNode> path = new LinkedList<CNode>();
 
-		// Check if a path exists
-		if (predecessors.get(target) == null) {
-			return null;
-		}
-		path.add(target);
-		while (predecessors.get(target) != null) {
-			target = predecessors.get(target);			
+			// Check if a path exists
+			if (predecessors.get(target) == null) {
+				return null;
+			}
 			path.add(target);
+			while (predecessors.get(target) != null) {
+				target = predecessors.get(target);			
+				path.add(target);
+			}
+			// Put it into the correct order
+			Collections.reverse(path);
+			return path;
+		} catch (Exception e) {
+			System.out.println("Fehler beim Pfadberechnung ist aufgetreten!");
 		}
-		// Put it into the correct order
-		Collections.reverse(path);
-		return path;
+		return null;
 	}
 	
 	public double getDistanceOfShortestPath(CNode cNode) {

@@ -44,7 +44,7 @@ public class CShortestPathController {
 		return spm.getShortestPath(start, target);
 	}
 	
-	public double getDistance(int start, int target) {
-		return spm.getDistance(start, target);
+	public double getDistance() {
+		return spm.getDistance();
 	}
 }

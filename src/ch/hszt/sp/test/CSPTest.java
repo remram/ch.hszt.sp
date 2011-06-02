@@ -43,12 +43,11 @@ public class CSPTest {
 			}
 		}
 		
-		
-		System.out.println("Distance: " + csp.getDistance(start, target));
+		System.out.println("Distance: " + csp.getDistance());
 		
 		System.out.println("Edges legnth: " + csp.getEdges().size());
 		
-		ArrayList<CPath> cp = csp.getShortestPathList(path);
+		ArrayList<CPath> cp = csp.getShortestPathList();
 		System.out.println("\nid\tsnid\tsnName\ttnid\ttnName\tdistance");
 		System.out.println("==\t====\t======\t====\t======\t========");
 		for (CPath cPath : cp) {
@@ -67,7 +66,7 @@ public class CSPTest {
 		System.out.println("\n\n=====================\nController output:\n=====================");
 		CShortestPathController spc = new CShortestPathController();
 		System.out.println("ShortestPath from Controller: " + spc.getPath(start, target));
-		System.out.println("ShortestDist from Controller: " + spc.getDistance(start, target));
+		System.out.println("ShortestDist from Controller: " + spc.getDistance());
 		System.out.println("==============================================\nEnd of Controller output!\n==============================================\n\n");
 	}
 }
