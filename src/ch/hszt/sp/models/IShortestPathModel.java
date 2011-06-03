@@ -44,13 +44,14 @@ public interface IShortestPathModel {
 	 * @param target int
 	 * @return LinkedList<CNode>
 	 */
-	public LinkedList<CNode> getShortestPath(int start, int target);
+	public LinkedList<CNode> getShortestPath(int start, int target) throws DataAccessException;
 	
 	/**
 	 * Returns the distance between start and target node
 	 * @return distance double
+	 * @throws DataAccessException 
 	 */
-	public double getDistance();
+	public double getDistance() throws DataAccessException;
 	
 	/**
 	 * Returns a node map

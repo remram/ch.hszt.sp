@@ -40,11 +40,11 @@ public class CShortestPathController {
 		return spm.getEdgesAsMap();
 	}
 	
-	public LinkedList<CNode> getPath(int start, int target) {
+	public LinkedList<CNode> getPath(int start, int target) throws DataAccessException {
 		return spm.getShortestPath(start, target);
 	}
 	
-	public double getDistance() {
+	public double getDistance() throws DataAccessException {
 		return spm.getDistance();
 	}
 }

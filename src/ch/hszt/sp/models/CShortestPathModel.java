@@ -71,37 +71,37 @@ public class CShortestPathModel extends Observable implements
 	}
 
 	@Override
-	public LinkedList<CNode> getShortestPath(int start, int target) {
+	public LinkedList<CNode> getShortestPath(int start, int target) throws DataAccessException {
 		// set the start and target node and convert it anyway to positive
 		// integer
 		setStart(Math.abs(start));
 		setTarget(Math.abs(target));
 		
+		if(!this.mpNode.containsKey(Math.abs(start))) 
+			throw new DataAccessException("Start node was illegal.");
+		if(!this.mpNode.containsKey(Math.abs(target))) 
+			throw new DataAccessException("Target node was illegal.");
+		if(getStart() == getTarget())
+			throw new DataAccessException("Start and target node were the same node!");
+		
 		LinkedList<CNode> cNodePath = null;
 		
 		try {
-			if (getStart() == getTarget()) {
-				cNodePath = new LinkedList<CNode>();
-				CNode cNode = new CNode();
-				cNode.setId(0);
-				cNode.setName("No path was found");
-				cNodePath.add(cNode);
-				// set the path
-				setPath(cNodePath);
-				
-				return cNodePath;
-			}
 			CDijkstra cd = new CDijkstra(getNodes(), getEdges());
 			cd.execute(getNodes().get(getStart()));
 			cNodePath = cd.getPath(getNodes().get(getTarget()));
-
-			if(cNodePath.size() <= 0) {
-				return null;
+			
+			if(cNodePath.equals(null)) {
+				throw new DataAccessException("Returned path was empty");
 			}
 			// set the path
 			setPath(cNodePath);
 		} catch (Exception e) {
-			System.out.println("Fehler ist aufgetreten!");
+			try {
+				throw new DataAccessException("An error has been triggered.");
+			} catch (DataAccessException edae) {
+				edae.printStackTrace();
+			}
 		}
 		return cNodePath;
 	}
@@ -131,7 +131,7 @@ public class CShortestPathModel extends Observable implements
 	}
 
 	@Override
-	public double getDistance() {
+	public double getDistance() throws DataAccessException {
 		if (getStart() == getTarget()) {
 			return 0;
 		}
@@ -189,7 +189,12 @@ public class CShortestPathModel extends Observable implements
 			}
 			return cPath;
 		} catch (Exception e) {
-			System.out.println("Fehler ist aufgetreten!");
+			try {
+				throw new DataAccessException("An error has been triggered.");
+			} catch (DataAccessException edae) {
+				// TODO Auto-generated catch block
+				edae.printStackTrace();
+			}
 		}
 		return null;
 	}

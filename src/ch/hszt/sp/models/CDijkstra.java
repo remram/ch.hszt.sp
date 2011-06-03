@@ -40,10 +40,8 @@ public class CDijkstra {
 	private void findMinimalDistances(CNode cNode) {
 		List<CNode> adjacentNodes = getNeighbors(cNode);
 		for (CNode target : adjacentNodes) {			
-			if (getShortestDistance(target) > getShortestDistance(cNode)
-					+ getDistance(cNode, target)) {
-				distance.put(target,
-						getShortestDistance(cNode) + getDistance(cNode, target));
+			if (getShortestDistance(target) > getShortestDistance(cNode) + getDistance(cNode, target)) {
+				distance.put(target, getShortestDistance(cNode) + getDistance(cNode, target));
 				predecessors.put(target, cNode);
 				unSettledNodes.add(target);
 			}
@@ -57,15 +55,16 @@ public class CDijkstra {
 			}
 		}
 		
-		throw new RuntimeException("Should not happen");
+		throw new RuntimeException("An error has been occurred.");
 	}
 
 	private List<CNode> getNeighbors(CNode cNode) {
 		List<CNode> neighbors = new ArrayList<CNode>();
+
 		for (CEdge cEdge : edgeList) {
 			CNode cn = new CNode();
 			
-			if (cEdge.getStartNode() == cNode.getId()	&& !isSettled(cEdge.getTargetNode())) {
+			if (cEdge.getStartNode() == cNode.getId() && !isSettled(cEdge.getTargetNode())) {
 				int nodeId = cEdge.getTargetNode();
 				cn.setId(nodeId);				
 				cn.setName(nodeList.get(--nodeId).getName());
@@ -118,25 +117,20 @@ public class CDijkstra {
 	 * @return path LinkedList
 	 */
 	public LinkedList<CNode> getPath(CNode target) {
-		try {
-			LinkedList<CNode> path = new LinkedList<CNode>();
+		LinkedList<CNode> path = new LinkedList<CNode>();
 
-			// Check if a path exists
-			if (predecessors.get(target) == null) {
-				return null;
-			}
-			path.add(target);
-			while (predecessors.get(target) != null) {
-				target = predecessors.get(target);			
-				path.add(target);
-			}
-			// Put it into the correct order
-			Collections.reverse(path);
-			return path;
-		} catch (Exception e) {
-			System.out.println("Fehler beim Pfadberechnung ist aufgetreten!");
+		// Check if a path exists
+		if (predecessors.get(target) == null) {
+			return null;
 		}
-		return null;
+		path.add(target);
+		while (predecessors.get(target) != null) {
+			target = predecessors.get(target);			
+			path.add(target);
+		}
+		// Put it into the correct order
+		Collections.reverse(path);
+		return path;
 	}
 	
 	public double getDistanceOfShortestPath(CNode cNode) {
