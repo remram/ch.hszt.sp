@@ -91,5 +91,6 @@ public class ShortestPathsPannel extends JPanel{
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
+			addNode(g);
 	}
 }
