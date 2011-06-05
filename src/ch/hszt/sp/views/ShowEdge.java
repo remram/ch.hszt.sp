@@ -24,7 +24,6 @@ public class ShowEdge extends JPanel
 	 * */
 	private static final long serialVersionUID = 1L;
 	private final Stroke stroke = new BasicStroke(2.0F);
-	//private int ax, ay, bx, by, weight;
 	private Map<Integer,CNode> lnod;
 	private Map<Integer,CEdge> ledg;
 	private LinkedList<CNode> unod;
@@ -32,12 +31,9 @@ public class ShowEdge extends JPanel
 	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg){
 		this.lnod = lnod;
 		this.ledg = ledg;
-		//this.unod = unod;
 	}
 	
-	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg, LinkedList<CNode> unod){
-		this.lnod = lnod;
-		this.ledg = ledg;
+	public void addUNode(LinkedList<CNode> unod){
 		this.unod = unod;
 	}
 	
@@ -61,12 +57,6 @@ public class ShowEdge extends JPanel
         	g2d.setStroke(new BasicStroke(4));
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
         	}
-        
-       /* try{
-        	showUsedEdges(g);
-        }catch(Exception ex){
-        	//ex.printStackTrace();
-        }*/
 	}
     public void showUsedEdges(Graphics g) throws InterruptedException{	
     	Graphics2D g2d = (Graphics2D) g;

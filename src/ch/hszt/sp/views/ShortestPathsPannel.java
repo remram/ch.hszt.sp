@@ -23,23 +23,19 @@ import java.util.Map;
  **/
 public class ShortestPathsPannel extends JPanel{
 
-	//private Image img;
 	private static final long serialVersionUID = 1L;
 	private ArrayList<CNode> cnlist;
-	//private ArrayList<CEdge> cEdge;
-	private LinkedList<CNode> uNode;
 	private Map<Integer, CEdge> ledg;
 	private Map<Integer, CNode> lnod;
 	private Image img;
+	private ShowEdge she;
 	
 	
-	public ShortestPathsPannel(List<CNode> cnlist, List<CEdge> cEdge, List<CNode> uNode, Map<Integer, CNode> lnode, Map<Integer, CEdge>ledge){
-		this.cnlist = (ArrayList<CNode>) cnlist;		
-		//this.cEdge = (ArrayList<CEdge>) cEdge;
-		this.uNode = (LinkedList<CNode>) uNode;
+	public ShortestPathsPannel(List<CNode> cnlist, Map<Integer, CNode> lnode, Map<Integer, CEdge>ledge){
+		this.cnlist = (ArrayList<CNode>) cnlist;
 		this.ledg = ledge;
 		this.lnod = lnode;
-		
+		this.she = new ShowEdge(lnod, ledg);
 	}
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
@@ -52,7 +48,7 @@ public class ShortestPathsPannel extends JPanel{
 	}
 	
 	//Mit dieser Methode kann ein Kartenausschnitt geladen werden.
-	public void addBackground(Graphics g){
+	public void addBackground(Graphics g){System.out.println();
 		try{
 			this.img = new ImageIcon("img/osm-zurich.png").getImage();
 			}catch(IOError err){
@@ -63,9 +59,8 @@ public class ShortestPathsPannel extends JPanel{
 	
 	//Methode die die Kanten auf der Karte darstellt.
 	public void addEdge(Graphics g){
-		ShowEdge she = new ShowEdge(lnod, ledg);
+		
 		try{
-		//she.paintComponent(g);
 		she.showEdges(g);
 		}catch(Exception ex){
 			ex.printStackTrace();
@@ -83,14 +78,13 @@ public class ShortestPathsPannel extends JPanel{
 		}
 	}
 	
-	public void addUEdge(Graphics g){
-		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
+	public void addUEdge(Graphics g, LinkedList<CNode> unod){
+		she.addUNode(unod);
 		try{
-			//she.paintComponent(g);
 			she.showUsedEdges(g);
-			}catch(Exception ex){
+		}catch(Exception ex){
 				ex.printStackTrace();
-			}
-			addNode(g);
+		}
+		addNode(g);
 	}
 }
