@@ -29,6 +29,12 @@ public class ShowEdge extends JPanel
 	private Map<Integer,CEdge> ledg;
 	private LinkedList<CNode> unod;
 	
+	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg){
+		this.lnod = lnod;
+		this.ledg = ledg;
+		//this.unod = unod;
+	}
+	
 	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg, LinkedList<CNode> unod){
 		this.lnod = lnod;
 		this.ledg = ledg;
@@ -37,11 +43,11 @@ public class ShowEdge extends JPanel
 	
 	public void paintComponent(Graphics g){
 		showEdges(g);
-		/*try{
+		try{
 		showUsedEdges(g);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}*/
+		}
 	}
 	
 	public void showEdges(Graphics g){
@@ -71,8 +77,7 @@ public class ShowEdge extends JPanel
     	CNode target;
     	while(ite.hasNext()){
     		Object key = ite.next();
-    		CEdge eval = ledg.get(key);
-    		
+    		CEdge eval = ledg.get(key);    		
     		for(int i = 0; i < unod.size()-1; i++){
     			System.out.println(unod.get(i));
     			start = lnod.get(unod.get(i).getId());

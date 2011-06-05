@@ -51,6 +51,7 @@ public class ShortestPathsPannel extends JPanel{
 		
 	}
 	
+	//Mit dieser Methode kann ein Kartenausschnitt geladen werden.
 	public void addBackground(Graphics g){
 		try{
 			this.img = new ImageIcon("img/osm-zurich.png").getImage();
@@ -60,10 +61,12 @@ public class ShortestPathsPannel extends JPanel{
 		g.drawImage(img, 0,0, null);
 	}
 	
+	//Methode die die Kanten auf der Karte darstellt.
 	public void addEdge(Graphics g){
-		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
+		ShowEdge she = new ShowEdge(lnod, ledg);
 		try{
-		she.paintComponent(g);
+		//she.paintComponent(g);
+		she.showEdges(g);
 		}catch(Exception ex){
 			ex.printStackTrace();
 		}
@@ -79,13 +82,14 @@ public class ShortestPathsPannel extends JPanel{
 			e.printStackTrace();
 		}
 	}
-	/*
+	
 	public void addUEdge(Graphics g){
 		ShowEdge she = new ShowEdge(lnod, ledg, uNode);
 		try{
+			//she.paintComponent(g);
 			she.showUsedEdges(g);
 			}catch(Exception ex){
 				ex.printStackTrace();
 			}
-	}*/
+	}
 }

@@ -23,7 +23,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	private JPanel mapPanel;
+	private ShortestPathsPannel mapPanel;
 	private Observable observer;
 	private ArrayList<CNode> cnlist;
 	private ArrayList<CEdge> cEdge;
@@ -115,24 +115,12 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		// TODO Auto-generated method stub
 		
 	}
-
+/*
 	@Override
 	public void setShortestPath() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void calcDistanceBtn() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void viewPathBtn() {
-		// TODO Auto-generated method stub
-		
-	}
+	}*/
 
 	@Override
 	public void selectNode() {
@@ -153,7 +141,13 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.cEdge = csc.getEdgesAsList();
 			this.lnode = csc.getNodesAsMap();
 			this.ledge = csc.getEdgesAsMap();
-			//this.uNode = csc.getPath(0,4);
+			try {
+				this.uNode = csc.getPath(5, 20);
+			} catch (DataAccessException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		//viewGUI();
 	}
@@ -162,27 +156,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			try {
-				uNode = spc.getPath(5, 21);
-			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			//mapPanel.getGraphics().draw3DRect(50, 50, 100, 100, false);
+			//spc.getPath(5, 20);
 			spc.notifyObserver();
-			
+			mapPanel.addUEdge(mapPanel.getGraphics());
 		}
-	}
-		
-	class CalcDistanceListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			
-		}
-		
 	}
 }
