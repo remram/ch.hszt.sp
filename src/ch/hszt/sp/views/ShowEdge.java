@@ -44,17 +44,17 @@ public class ShowEdge extends JPanel
         while(ite.hasNext()) { 
         	Object ekey = ite.next(); 
         	CEdge eval = ledg.get(ekey);
+        	g2d.setStroke(new BasicStroke(4));
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
         	}
-        if(!unod.isEmpty()){
-        	System.out.println(unod.get(0));
+        
+        try{
         	showUsedEdges(g);
-        }else{
-        	return;
+        }catch(Exception ex){
+        	//ex.printStackTrace();
         }
-    	
 	}
-    public void showUsedEdges(Graphics g){	
+    public void showUsedEdges(Graphics g) throws InterruptedException{	
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setStroke(stroke);
     	g2d.setColor(Color.GREEN);
@@ -70,7 +70,9 @@ public class ShowEdge extends JPanel
     			start = lnod.get(unod.get(i).getId());
 	        	target = lnod.get(unod.get(i+1).getId());
 				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
-		        	g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5, lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
+					g2d.setStroke(new BasicStroke(5));
+					g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
+							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
 	        	}
 			}
     	}

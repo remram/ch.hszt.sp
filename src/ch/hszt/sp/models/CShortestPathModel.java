@@ -31,8 +31,8 @@ public class CShortestPathModel extends Observable implements
 	}
 
 	public void notifyObserver() {
-		setChanged();
-		notifyObservers();
+		//setChanged();
+		//notifyObservers();
 	}
 
 	public void execute() throws DataAccessException {
@@ -43,7 +43,7 @@ public class CShortestPathModel extends Observable implements
 		setEdgesAsMap();
 
 		// notify observer
-		notifyObserver();
+		//this.notifyObserver();
 	}
 
 	@Override

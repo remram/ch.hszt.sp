@@ -26,7 +26,7 @@
     </edge>
     <edge id="4">
         <weight>130</weight>
-        <direction type="none"/>
+        <direction type="one"/>
         <nodes>
             <node-start>4</node-start>
             <node-target>5</node-target>

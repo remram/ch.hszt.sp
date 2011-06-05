@@ -3,14 +3,16 @@ package ch.hszt.sp.controllers;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Map;
+import java.util.Observable;
 
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 import ch.hszt.sp.models.CShortestPathModel;
+import ch.hszt.sp.views.CShortestPathView;
 //import ch.hszt.sp.views.CShortestPathView;
 
-public class CShortestPathController {
+public class CShortestPathController extends Observable{
 	/**
 	 * @uml.property  name="spm"
 	 * @uml.associationEnd  multiplicity="(1 1)"
@@ -19,9 +21,16 @@ public class CShortestPathController {
 	
 	public CShortestPathController() throws DataAccessException {
 		this.spm = new CShortestPathModel();
+		//CShortestPathView spv = 
+		new CShortestPathView(this);
+		//this.spm.addObserver(spv);
 		this.spm.execute();
-		/*CShortestPathView spv = new CShortestPathView(this);
-		this.spm.addObserver(spv);*/
+		notifyObserver();
+	}
+	
+	public void notifyObserver() {
+			setChanged();
+			notifyObservers();
 	}
 	
 	public ArrayList<CNode> getNodesAsList() {
