@@ -36,7 +36,15 @@ public class ShowEdge extends JPanel
 	}
 	
 	public void paintComponent(Graphics g){
-		//System.out.println(unod.get(1));
+		showEdges(g);
+		/*try{
+		showUsedEdges(g);
+		}catch(Exception ex){
+			ex.printStackTrace();
+		}*/
+	}
+	
+	public void showEdges(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(stroke);
         g2d.setColor(Color.BLUE);
@@ -48,11 +56,11 @@ public class ShowEdge extends JPanel
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
         	}
         
-        try{
+       /* try{
         	showUsedEdges(g);
         }catch(Exception ex){
         	//ex.printStackTrace();
-        }
+        }*/
 	}
     public void showUsedEdges(Graphics g) throws InterruptedException{	
     	Graphics2D g2d = (Graphics2D) g;

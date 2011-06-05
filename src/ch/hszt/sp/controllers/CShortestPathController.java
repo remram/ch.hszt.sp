@@ -22,10 +22,11 @@ public class CShortestPathController extends Observable{
 	public CShortestPathController() throws DataAccessException {
 		this.spm = new CShortestPathModel();
 		//CShortestPathView spv = 
-		new CShortestPathView(this);
+		CShortestPathView spv = new CShortestPathView(this);
 		//this.spm.addObserver(spv);
 		this.spm.execute();
 		notifyObserver();
+		spv.viewGUI();
 	}
 	
 	public void notifyObserver() {

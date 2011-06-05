@@ -23,6 +23,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	
 	private static final long serialVersionUID = 1L;
 	private JFrame frame;
+	private JPanel mapPanel;
 	private Observable observer;
 	private ArrayList<CNode> cnlist;
 	private ArrayList<CEdge> cEdge;
@@ -42,7 +43,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
 	public void viewGUI(){
-		frame = new JFrame();
+		this.frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JButton searchPathBtn = new JButton("Search Path");
 		/*try{
@@ -55,17 +56,18 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		searchPathBtn.addActionListener(new ShowPathListener());
 		
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.cEdge, this.uNode, this.lnode, this.ledge);
+		this.mapPanel = mapPanel;
 		
 		JPanel bPanel = new JPanel();
 		
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
-		
 		bPanel.add(searchPathBtn);
 		
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.CENTER, mapPanel);
 		
+		frame.setResizable(false);
 		frame.setSize(848, 615);
 		frame.setVisible(true);
 		
@@ -153,7 +155,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.ledge = csc.getEdgesAsMap();
 			//this.uNode = csc.getPath(0,4);
 		}
-		viewGUI();
+		//viewGUI();
 	}
 		
 	class ShowPathListener implements ActionListener{
@@ -167,6 +169,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			//mapPanel.getGraphics().draw3DRect(50, 50, 100, 100, false);
 			spc.notifyObserver();
 			
 		}
