@@ -24,24 +24,26 @@ public class ShowEdge extends JPanel
 	 * */
 	private static final long serialVersionUID = 1L;
 	private final Stroke stroke = new BasicStroke(2.0F);
-	//private int ax, ay, bx, by, weight;
 	private Map<Integer,CNode> lnod;
 	private Map<Integer,CEdge> ledg;
 	private LinkedList<CNode> unod;
 	
-	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg, LinkedList<CNode> unod){
+	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg){
 		this.lnod = lnod;
 		this.ledg = ledg;
+	}
+	
+	public void addUNode(LinkedList<CNode> unod){
 		this.unod = unod;
 	}
 	
 	public void paintComponent(Graphics g){
 		showEdges(g);
-		/*try{
+		try{
 		showUsedEdges(g);
 		}catch(Exception ex){
 			ex.printStackTrace();
-		}*/
+		}
 	}
 	
 	public void showEdges(Graphics g){
@@ -55,12 +57,6 @@ public class ShowEdge extends JPanel
         	g2d.setStroke(new BasicStroke(4));
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
         	}
-        
-       /* try{
-        	showUsedEdges(g);
-        }catch(Exception ex){
-        	//ex.printStackTrace();
-        }*/
 	}
     public void showUsedEdges(Graphics g) throws InterruptedException{	
     	Graphics2D g2d = (Graphics2D) g;
@@ -71,8 +67,7 @@ public class ShowEdge extends JPanel
     	CNode target;
     	while(ite.hasNext()){
     		Object key = ite.next();
-    		CEdge eval = ledg.get(key);
-    		
+    		CEdge eval = ledg.get(key);    		
     		for(int i = 0; i < unod.size()-1; i++){
     			System.out.println(unod.get(i));
     			start = lnod.get(unod.get(i).getId());

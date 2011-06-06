@@ -22,11 +22,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	 */
 	
 	private static final long serialVersionUID = 1L;
-	private JFrame frame;
-	private JPanel mapPanel;
+	private ShortestPathsPannel mapPanel;
 	private Observable observer;
 	private ArrayList<CNode> cnlist;
-	private ArrayList<CEdge> cEdge;
 	private LinkedList<CNode> uNode;
 	private Map<Integer, CNode> lnode;
 	private Map<Integer, CEdge> ledge;
@@ -43,7 +41,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
 	public void viewGUI(){
-		this.frame = new JFrame();
+		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JButton searchPathBtn = new JButton("Search Path");
 		/*try{
@@ -55,7 +53,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 
 		searchPathBtn.addActionListener(new ShowPathListener());
 		
-		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.cEdge, this.uNode, this.lnode, this.ledge);
+		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
 		
 		JPanel bPanel = new JPanel();
@@ -115,24 +113,12 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		// TODO Auto-generated method stub
 		
 	}
-
+/*
 	@Override
 	public void setShortestPath() {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void calcDistanceBtn() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void viewPathBtn() {
-		// TODO Auto-generated method stub
-		
-	}
+	}*/
 
 	@Override
 	public void selectNode() {
@@ -149,40 +135,23 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	public void update(Observable obs, Object alf){
 		if(obs instanceof CShortestPathController){
 			CShortestPathController csc = (CShortestPathController) obs;
+			this.spc = csc;
 			this.cnlist = csc.getNodesAsList();
-			this.cEdge = csc.getEdgesAsList();
 			this.lnode = csc.getNodesAsMap();
 			this.ledge = csc.getEdgesAsMap();
-			//this.uNode = csc.getPath(0,4);
 		}
-		//viewGUI();
 	}
 		
 	class ShowPathListener implements ActionListener{
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
 			try {
-				uNode = spc.getPath(5, 21);
+				uNode = spc.getPath(8, 27);
 			} catch (DataAccessException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			//mapPanel.getGraphics().draw3DRect(50, 50, 100, 100, false);
-			spc.notifyObserver();
-			
+			mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
 		}
-	}
-		
-	class CalcDistanceListener implements ActionListener{
-
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			// TODO Auto-generated method stub
-			
-			
-		}
-		
 	}
 }

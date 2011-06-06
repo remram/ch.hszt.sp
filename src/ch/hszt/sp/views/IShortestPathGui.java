@@ -6,6 +6,5 @@ public interface IShortestPathGui {
 	void getEdge();
 	void setNodePositions();
 	void setEdges();
-	void setShortestPath();
 }
  
