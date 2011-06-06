@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import ch.hszt.sp.exceptions.DataAccessException;
+
 public class CDijkstra {
 	private final List<CNode> nodeList;
 	private final List<CEdge> edgeList;
@@ -39,6 +41,7 @@ public class CDijkstra {
 
 	private void findMinimalDistances(CNode cNode) {
 		List<CNode> adjacentNodes = getNeighbors(cNode);
+		
 		for (CNode target : adjacentNodes) {			
 			if (getShortestDistance(target) > getShortestDistance(cNode) + getDistance(cNode, target)) {
 				distance.put(target, getShortestDistance(cNode) + getDistance(cNode, target));
@@ -48,9 +51,15 @@ public class CDijkstra {
 		}
 	}
 
-	private double getDistance(CNode cNode, CNode target) {
+	/**
+	 * Returns the distance between start and target node 
+	 * @param startNode
+	 * @param targetNode
+	 * @return weight as double
+	 */
+	private double getDistance(CNode startNode, CNode targetNode) {
 		for (CEdge cEdge : edgeList) {
-			if ((cEdge.getStartNode() == cNode.getId())	&& (cEdge.getTargetNode() == target.getId())) {
+			if ((cEdge.getStartNode() == startNode.getId())	&& (cEdge.getTargetNode() == targetNode.getId())) {
 				return cEdge.getWeight();
 			}
 		}
@@ -58,6 +67,11 @@ public class CDijkstra {
 		throw new RuntimeException("An error has been occurred.");
 	}
 
+	/**
+	 * Returns a list of neighbors of the node
+	 * @param cNode
+	 * @return neighbors
+	 */
 	private List<CNode> getNeighbors(CNode cNode) {
 		List<CNode> neighbors = new ArrayList<CNode>();
 
@@ -74,6 +88,11 @@ public class CDijkstra {
 		return neighbors;
 	}
 
+	/**
+	 * Returns the minimal node
+	 * @param cNodeSet
+	 * @return minimum
+	 */
 	private CNode getMinimum(Set<CNode> cNodeSet) {
 		CNode minimum = null;
 		for (CNode cNode : cNodeSet) {
@@ -119,9 +138,13 @@ public class CDijkstra {
 	public LinkedList<CNode> getPath(CNode target) {
 		LinkedList<CNode> path = new LinkedList<CNode>();
 
-		// Check if a path exists
+		// Check if a path exists try to throw an DataAccessException
 		if (predecessors.get(target) == null) {
-			return null;
+			try {
+				throw new DataAccessException("Target (" + target.getId() + ": " + target.getName() + ") was unreachable!");
+			} catch (DataAccessException e) {
+				e.printStackTrace();
+			}
 		}
 		path.add(target);
 		while (predecessors.get(target) != null) {

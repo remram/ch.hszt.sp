@@ -8,8 +8,8 @@
         -->
         <direction type="none"/>
         <nodes>
-            <node-start>1</node-start>
-            <node-target>2</node-target>
+            <node-start>2</node-start>
+            <node-target>1</node-target>
         </nodes>
     </edge>
     <edge id="2">

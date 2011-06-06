@@ -15,14 +15,15 @@ public class XmlGisDAO implements IGisDAO {
 
 	private boolean isBiDirection;
 	private int xmlNodeLength;
-
+	private static final String FNAME_SUFFIX = ""; 
+	
 	@Override
 	public List<CNode> getNodes() throws DataAccessException {
 		List<CNode> cNodeList = new ArrayList<CNode>();
 
 		try {
 
-			CReadXmlDom rxd = new CReadXmlDom("nodes.xml", "*");
+			CReadXmlDom rxd = new CReadXmlDom("nodes" + FNAME_SUFFIX + ".xml", "*");
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
@@ -83,7 +84,7 @@ public class XmlGisDAO implements IGisDAO {
 		List<CEdge> cEdgeList = new ArrayList<CEdge>();
 
 		try {
-			CReadXmlDom rxd = new CReadXmlDom("edges.xml", "*");
+			CReadXmlDom rxd = new CReadXmlDom("edges" + FNAME_SUFFIX + ".xml", "*");
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
@@ -172,7 +173,7 @@ public class XmlGisDAO implements IGisDAO {
 
 		try {
 
-			CReadXmlDom rxd = new CReadXmlDom("nodes.xml", "*");
+			CReadXmlDom rxd = new CReadXmlDom("nodes" + FNAME_SUFFIX + ".xml", "*");
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
@@ -233,7 +234,7 @@ public class XmlGisDAO implements IGisDAO {
 		Map<Integer,CEdge> cEdgeMap = new HashMap<Integer, CEdge>();
 
 		try {
-			CReadXmlDom rxd = new CReadXmlDom("edges.xml", "*");
+			CReadXmlDom rxd = new CReadXmlDom("edges" + FNAME_SUFFIX + ".xml", "*");
 			NodeList xmlNodeList = rxd.parseXmlFile();
 
 			int listCounter = 0;
