@@ -29,6 +29,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private Map<Integer, CNode> lnode;
 	private Map<Integer, CEdge> ledge;
 	private CShortestPathController spc;
+	private Map<String, Integer> selectedNodes;
 
 	
 	public CShortestPathView(Observable obs){
@@ -44,23 +45,35 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		JButton searchPathBtn = new JButton("Search Path");
-		/*try{
-		Image img = new ImageIcon("img/osm-zurich.png").getImage();
-		}catch(IOError err){
-			err.getCause();
-		}*/
-		searchPathBtn.setMaximumSize(new Dimension(170, 50));
+		
+		searchPathBtn.setMaximumSize(new Dimension(235, 50));
 
 		searchPathBtn.addActionListener(new ShowPathListener());
 		
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
+		this.selectedNodes = mapPanel.getSelectedNodes();
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setMaximumSize(new Dimension(235, 570));
+		textArea.setBackground(Color.white);
+		
+		JScrollPane scrollPane = new JScrollPane(textArea);
+        scrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setPreferredSize(new Dimension(225, 570));
+		textArea.setText("Die Id's der Knoten: \n");
+		for(CNode cnod : cnlist){
+			textArea.setText("\n"+cnod.getId());
+		}
+        textArea.setEditable(false);
 		
 		JPanel bPanel = new JPanel();
 		
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
 		bPanel.add(searchPathBtn);
+		bPanel.add(textArea);
 		
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.CENTER, mapPanel);
@@ -147,7 +160,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			try {
-				uNode = spc.getPath(8, 27);
+				uNode = spc.getPath(selectedNodes.get("start"), selectedNodes.get("target"));
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}

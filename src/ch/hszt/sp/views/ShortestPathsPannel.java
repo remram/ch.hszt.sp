@@ -2,12 +2,12 @@ package ch.hszt.sp.views;
 
 import javax.swing.*;
 
-
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 
 import java.awt.*;
 import java.io.IOError;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ArrayList;
@@ -27,28 +27,51 @@ public class ShortestPathsPannel extends JPanel{
 	private ArrayList<CNode> cnlist;
 	private Map<Integer, CEdge> ledg;
 	private Map<Integer, CNode> lnod;
+	private Map<String, Integer> selectedNodes;
 	private Image img;
 	private ShowEdge she;
 	
-	
+	//Der Konstruktor initiiert die Listen die zur Darstellung der Knoten und Kanten benoetigt werden.
 	public ShortestPathsPannel(List<CNode> cnlist, Map<Integer, CNode> lnode, Map<Integer, CEdge>ledge){
 		this.cnlist = (ArrayList<CNode>) cnlist;
 		this.ledg = ledge;
 		this.lnod = lnode;
 		this.she = new ShowEdge(lnod, ledg);
+		this.selectedNodes = new HashMap<String, Integer>();
+		this.selectedNodes.put("start", 1);
+		this.selectedNodes.put("target", 21);
 	}
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
 	public void paintComponent(Graphics g){
-		
 		addBackground(g);
 		addEdge(g);
 		addNode(g);
-		
+	}
+	
+	//Gibt die Map mit den Gewaehlten Knoten an den Aufrufer zurueck.
+	public Map<String, Integer> getSelectedNodes(){
+		return selectedNodes;
+	}
+	
+	//Setzt in die snMap den Startknoten
+	public void setStartNode(Integer from){
+		selectedNodes.put("Start", from);
+	}
+	
+	//Setzt in die snMap den Zielknoten.
+	public void setTargetNode(Integer to){
+		selectedNodes.put("Target", to);
+	}
+	
+	//Resetet den Start- Zielknoten.
+	public void resetSelectedNodes(){
+		selectedNodes.put("Start", null);
+		selectedNodes.put("Target", null);
 	}
 	
 	//Mit dieser Methode kann ein Kartenausschnitt geladen werden.
-	public void addBackground(Graphics g){System.out.println();
+	public void addBackground(Graphics g){
 		try{
 			this.img = new ImageIcon("img/osm-zurich.png").getImage();
 			}catch(IOError err){
@@ -57,9 +80,8 @@ public class ShortestPathsPannel extends JPanel{
 		g.drawImage(img, 0,0, null);
 	}
 	
-	//Methode die die Kanten auf der Karte darstellt.
+	//Methode, die die ShowEdge Methode showEdges aufruft -> zeichnet die Kanten.
 	public void addEdge(Graphics g){
-		
 		try{
 		she.showEdges(g);
 		}catch(Exception ex){
@@ -67,10 +89,12 @@ public class ShortestPathsPannel extends JPanel{
 		}
 	}
 	
+	//Methode, die die ShowNode Klasse instanziert und alle Knoten die in der cnlist sind auf der Karte darstellt.
 	public void addNode(Graphics g){
 		try {
 			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
+				System.out.println(shn.getMinimumSize());
 				shn.paintNode(g);
 			}
 		} catch (Exception e) {
@@ -78,6 +102,7 @@ public class ShortestPathsPannel extends JPanel{
 		}
 	}
 	
+	//Diese Methode zeichnet die besuchten Kanten und setzt die Knoten erneut ueber die Kanten.
 	public void addUEdge(Graphics g, LinkedList<CNode> unod){
 		she.addUNode(unod);
 		try{

@@ -28,15 +28,18 @@ public class ShowEdge extends JPanel
 	private Map<Integer,CEdge> ledg;
 	private LinkedList<CNode> unod;
 	
+	//Hier werden die Listen mit Knoten und Kanten initialisiert.
 	public ShowEdge(Map<Integer, CNode> lnod, Map<Integer, CEdge> ledg){
 		this.lnod = lnod;
 		this.ledg = ledg;
 	}
 	
+	//Dieser Methode werden die besuchten Knoten uebergeben.
 	public void addUNode(LinkedList<CNode> unod){
 		this.unod = unod;
 	}
 	
+	//Die Komponenten werden auf den Panel geheftet.
 	public void paintComponent(Graphics g){
 		showEdges(g);
 		try{
@@ -46,6 +49,7 @@ public class ShowEdge extends JPanel
 		}
 	}
 	
+	//Zeigt die vorhandenen Kanten aus der XML auf dem Panel (Map).
 	public void showEdges(Graphics g){
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(stroke);
@@ -58,6 +62,8 @@ public class ShowEdge extends JPanel
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
         	}
 	}
+	
+	//Zeichnet die Besuchten Kanten auf dem Panel.
     public void showUsedEdges(Graphics g) throws InterruptedException{	
     	Graphics2D g2d = (Graphics2D) g;
     	g2d.setStroke(stroke);
