@@ -10,12 +10,7 @@ import ch.hszt.sp.exceptions.DataAccessException;
  * 
  **/
 public class ShortestPath {
-	
-
 	public static void main(String[] args) throws DataAccessException {
 		new CShortestPathController();
-		
-		
 	}
-
 }
