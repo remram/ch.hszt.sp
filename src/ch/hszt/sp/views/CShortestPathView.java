@@ -31,27 +31,41 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private CShortestPathController spc;
 	private Map<String, Integer> selectedNodes;
 	private JComboBox start, target;
+	private JLabel startLabel, targetLabel;
+	private JPanel jcbPanel;
+	private Dimension labelDimension, spbtnDimension, jcbDimension;
+	private JFrame frame;
 	
 	public CShortestPathView(Observable obs){
 		this.observer = obs;
 		observer.addObserver(this);
 		if(obs instanceof CShortestPathController){
 			this.spc = (CShortestPathController) obs;
-		}		
+		}
+		this.jcbDimension = new Dimension(60, 50);
+		this.jcbPanel = new JPanel();
+		jcbPanel.setPreferredSize(new Dimension(403, 50));
+		jcbPanel.setMaximumSize(new Dimension(403, 50));
+		this.startLabel = new JLabel("Start:");
+		this.targetLabel = new JLabel("Ziel:");		
+		this.labelDimension = new Dimension(20,30);
+		this.spbtnDimension = new Dimension(246,50);
+		this.frame = new JFrame();
 	}
 	
 	//Die Methode viewGUI verpasst dem Frame zwei Panels die dann alle GUI Komponenten enthalten.
 	public void viewGUI(){
-		JFrame frame = new JFrame();
+		//JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		String buttonText = "SearchPath";
 		
 		JButton searchPathBtn = new JButton("Search Path");
-		
-		searchPathBtn.setPreferredSize(new Dimension(246, 50));
-		searchPathBtn.setMaximumSize(new Dimension(246, 50));
-
+		searchPathBtn.setPreferredSize(spbtnDimension);
+		searchPathBtn.setMaximumSize(spbtnDimension);
 		searchPathBtn.addActionListener(new ShowPathListener());
+		searchPathBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+		/*searchPathBtn.setBorder(BorderFactory.createCompoundBorder(
+		BorderFactory.createLineBorder(
+				Color.red),searchPathBtn.getBorder()));*/
 		
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
@@ -61,8 +75,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBackground(Color.white);
-		textArea.setEditable(false);
-		
+		textArea.setEditable(false);		
 		JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
@@ -74,14 +87,18 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		bPanel.setMaximumSize(new Dimension(246, 580));
 		showNodeMenue();
 		
-		searchPathBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
-		/*searchPathBtn.setBorder(BorderFactory.createCompoundBorder(
-				BorderFactory.createLineBorder(
-						Color.red),searchPathBtn.getBorder()));*/
+		startLabel.setPreferredSize(labelDimension);
+		startLabel.setMaximumSize(labelDimension);
+		targetLabel.setPreferredSize(labelDimension);
+		targetLabel.setMaximumSize(labelDimension);
+		
+		jcbPanel.add(startLabel);
+		jcbPanel.add(start);
+		jcbPanel.add(targetLabel);
+		jcbPanel.add(target);
 		
 		bPanel.add(searchPathBtn);
-		bPanel.add(start);
-		bPanel.add(target);
+		bPanel.add(jcbPanel);
 		bPanel.add(scrollPane);
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
@@ -105,8 +122,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			}
 		
 		start = new JComboBox(nodesStart);
-		start.setPreferredSize(new Dimension(403,25));
-		start.setMaximumSize(new Dimension(403,25));
+		start.setFont(new Font("Verdana", Font.BOLD, 14));
+		start.setPreferredSize(jcbDimension);
+		start.setMaximumSize(jcbDimension);
 		showTargetNodeMenue(cnlist);
 		
 	}
@@ -119,10 +137,10 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		for(int i = 0; i < numbNodes; i++){	
 			nodesTarget[i] = cnlist.get(i).getName();
 		}
-		
 		target = new JComboBox(nodesTarget);
-		target.setPreferredSize(new Dimension(403,25));
-		target.setMaximumSize(new Dimension(403,25));
+		target.setFont(new Font("Verdana", Font.BOLD, 14));
+		target.setPreferredSize(jcbDimension);
+		target.setMaximumSize(jcbDimension);
 	}
 	
 	class NodeListener implements ActionListener {
