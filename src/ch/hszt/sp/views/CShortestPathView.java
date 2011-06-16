@@ -33,7 +33,8 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private JComboBox start, target;
 	private JLabel startLabel, targetLabel;
 	private JPanel jcbPanel;
-	private Dimension labelDimension, spbtnDimension, jcbDimension;
+	private Dimension labelDimension, spbtnDimension, 
+					  jcbDimension,jcbPDimension,bPDimension ,mapPDimension;
 	private JFrame frame;
 	
 	public CShortestPathView(Observable obs){
@@ -43,13 +44,16 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 			this.spc = (CShortestPathController) obs;
 		}
 		this.jcbDimension = new Dimension(60, 50);
-		this.jcbPanel = new JPanel();
-		jcbPanel.setPreferredSize(new Dimension(403, 50));
-		jcbPanel.setMaximumSize(new Dimension(403, 50));
-		this.startLabel = new JLabel("Start:");
-		this.targetLabel = new JLabel("Ziel:");		
+		this.jcbPDimension = new Dimension(403,50);		
 		this.labelDimension = new Dimension(20,30);
 		this.spbtnDimension = new Dimension(246,50);
+		this.mapPDimension = new Dimension(725, 600);
+		this.bPDimension = new Dimension(246, 580);
+		this.jcbPanel = new JPanel();
+		jcbPanel.setPreferredSize(jcbPDimension);
+		jcbPanel.setMaximumSize(jcbPDimension);
+		this.startLabel = new JLabel("Start:");
+		this.targetLabel = new JLabel("Ziel:");
 		this.frame = new JFrame();
 	}
 	
@@ -70,8 +74,8 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
 		this.selectedNodes = mapPanel.getSelectedNodes();
-		mapPanel.setPreferredSize(new Dimension(725, 1000));
-		mapPanel.setMaximumSize(new Dimension(725, 1000));
+		mapPanel.setPreferredSize(mapPDimension);
+		mapPanel.setMaximumSize(mapPDimension);
 		
 		JTextArea textArea = new JTextArea();
 		textArea.setBackground(Color.white);
@@ -83,8 +87,8 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
         //scrollPane.setMaximumSize(new Dimension(246, 478));
 		
 		JPanel bPanel = new JPanel();
-		bPanel.setPreferredSize(new Dimension(246, 580));
-		bPanel.setMaximumSize(new Dimension(246, 580));
+		bPanel.setPreferredSize(bPDimension);
+		bPanel.setMaximumSize(bPDimension);
 		showNodeMenue();
 		
 		startLabel.setPreferredSize(labelDimension);
