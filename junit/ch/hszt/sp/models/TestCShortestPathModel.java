@@ -133,7 +133,7 @@ public class TestCShortestPathModel {
 		
 		assertNotNull(cd);
 		assertNotNull(path);
-		assertFalse("Path list should contains data!", path.isEmpty());
+		assertFalse("Path list should contain data!", path.isEmpty());
 	}
 
 	/**

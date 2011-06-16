@@ -30,7 +30,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	private Map<Integer, CEdge> ledge;
 	private CShortestPathController spc;
 	private Map<String, Integer> selectedNodes;
-
+	private JComboBox start, target;
 	
 	public CShortestPathView(Observable obs){
 		this.observer = obs;
@@ -44,60 +44,95 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	public void viewGUI(){
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		String buttonText = "SearchPath";
+		
 		JButton searchPathBtn = new JButton("Search Path");
 		
-		searchPathBtn.setMaximumSize(new Dimension(235, 50));
+		searchPathBtn.setPreferredSize(new Dimension(246, 50));
+		searchPathBtn.setMaximumSize(new Dimension(246, 50));
 
 		searchPathBtn.addActionListener(new ShowPathListener());
 		
 		ShortestPathsPannel mapPanel = new ShortestPathsPannel(this.cnlist, this.lnode, this.ledge);
 		this.mapPanel = mapPanel;
 		this.selectedNodes = mapPanel.getSelectedNodes();
+		mapPanel.setPreferredSize(new Dimension(725, 1000));
+		mapPanel.setMaximumSize(new Dimension(725, 1000));
 		
 		JTextArea textArea = new JTextArea();
-		textArea.setMaximumSize(new Dimension(235, 570));
 		textArea.setBackground(Color.white);
+		textArea.setEditable(false);
 		
 		JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-        scrollPane.setPreferredSize(new Dimension(225, 570));
-		textArea.setText("Die Id's der Knoten: \n");
-		for(CNode cnod : cnlist){
-			textArea.setText("\n"+cnod.getId());
-		}
-        textArea.setEditable(false);
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        //scrollPane.setPreferredSize(new Dimension(246, 478));
+        //scrollPane.setMaximumSize(new Dimension(246, 478));
 		
 		JPanel bPanel = new JPanel();
+		bPanel.setPreferredSize(new Dimension(246, 580));
+		bPanel.setMaximumSize(new Dimension(246, 580));
+		showNodeMenue();
 		
+		searchPathBtn.setAlignmentX(Component.CENTER_ALIGNMENT);
+		/*searchPathBtn.setBorder(BorderFactory.createCompoundBorder(
+				BorderFactory.createLineBorder(
+						Color.red),searchPathBtn.getBorder()));*/
+		
+		bPanel.add(searchPathBtn);
+		bPanel.add(start);
+		bPanel.add(target);
+		bPanel.add(scrollPane);
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
-		bPanel.add(searchPathBtn);
-		bPanel.add(textArea);
-		
+
 		frame.add(BorderLayout.EAST, bPanel);
-		frame.add(BorderLayout.CENTER, mapPanel);
+		frame.add(BorderLayout.WEST, mapPanel);
 		
 		frame.setResizable(false);
-		frame.setSize(848, 615);
+		frame.setSize(975, 600);
 		frame.setVisible(true);
 		
 	}
 	
-	//Diese Klasse wird das Panel bieten welches die Buttons enthaelt die in der App benoetigt werden
-	class ButtonPanel extends JPanel{
-
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
+	protected void showNodeMenue(){
+		int numbNodes;
+		numbNodes = cnlist.size();
+		String[] nodesStart = new String[numbNodes];
 		
-		public void paintComponent(Graphics g){
-			g.setColor(Color.green);
-			
-		}
+		for(int i = 0; i < numbNodes; i++){	
+				nodesStart[i] = cnlist.get(i).getName();
+			}
+		
+		start = new JComboBox(nodesStart);
+		start.setPreferredSize(new Dimension(403,25));
+		start.setMaximumSize(new Dimension(403,25));
+		showTargetNodeMenue(cnlist);
 		
 	}
+	
+	protected void showTargetNodeMenue(ArrayList<CNode> cnod){
+		int numbNodes;
+		numbNodes = cnod.size();
+		String[] nodesTarget = new String[numbNodes];
+		
+		for(int i = 0; i < numbNodes; i++){	
+			nodesTarget[i] = cnlist.get(i).getName();
+		}
+		
+		target = new JComboBox(nodesTarget);
+		target.setPreferredSize(new Dimension(403,25));
+		target.setMaximumSize(new Dimension(403,25));
+	}
+	
+	class NodeListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+	}
+	
 	public Map<Integer, CNode> getSelectedNode(int in){
 		
 		return this.lnode;

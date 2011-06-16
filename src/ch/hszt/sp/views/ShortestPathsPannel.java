@@ -6,6 +6,8 @@ import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOError;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -39,7 +41,7 @@ public class ShortestPathsPannel extends JPanel{
 		this.she = new ShowEdge(lnod, ledg);
 		this.selectedNodes = new HashMap<String, Integer>();
 		this.selectedNodes.put("start", 1);
-		this.selectedNodes.put("target", 21);
+		this.selectedNodes.put("target", 15);
 	}
 
 	//paintComponent stellt die Komponenten auf dem Pannel dar.
@@ -94,7 +96,7 @@ public class ShortestPathsPannel extends JPanel{
 		try {
 			for (CNode cnode : this.cnlist) {
 				ShowNode shn = new ShowNode(cnode.getxCoordinate(), cnode.getyCoordinate(), cnode.getId(), cnode.getName());
-				System.out.println(shn.getMinimumSize());
+				//Hier bekommt der knoten den Listener.
 				shn.paintNode(g);
 			}
 		} catch (Exception e) {
@@ -111,5 +113,13 @@ public class ShortestPathsPannel extends JPanel{
 				ex.printStackTrace();
 		}
 		addNode(g);
+	}
+	
+	class TestListener implements ActionListener{
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// TODO Auto-generated method stub
+			System.out.println("here");
+		}
 	}
 }

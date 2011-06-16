@@ -82,6 +82,7 @@ public class ShowEdge extends JPanel
 					g2d.setStroke(new BasicStroke(5));
 					g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
 							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
+					//g2d.drawString(">>>", lnod.get(unod.get(i).getId()).getxCoordinate()+100, lnod.get(unod.get(i).getId()).getyCoordinate()+50);
 	        	}
 			}
     	}

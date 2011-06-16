@@ -4,10 +4,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.awt.event.ActionListener;
 
-import javax.swing.JComponent;
+import javax.swing.AbstractButton;
 
 /**
  * 
@@ -15,7 +14,7 @@ import javax.swing.JComponent;
  * @version 1.0
  * Darstellung der Nodes im Pannel
  **/
-class ShowNode extends JComponent implements MouseListener
+class ShowNode extends AbstractButton
 {
 	private static final long serialVersionUID = 1L;
 	private int x, y, sizx, sizy, id;
@@ -29,10 +28,9 @@ class ShowNode extends JComponent implements MouseListener
 		sizx = 23; 
 		sizy = 23;
 		this.nodeName = nodeName;
-		enableInputMethods(true);
-		addMouseListener(this);
+		//enableInputMethods(true);
+		//setEnabled(true);
 	}
-	
 	//Setzt die Knoten auf den Panel.
 	public void paintComponent(Graphics g){
 		paintNode(g);
@@ -63,30 +61,7 @@ class ShowNode extends JComponent implements MouseListener
 	public Dimension getMaximumSize(){
 		return new Dimension(sizx+5, sizy+5);
 	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		getId();
-	}
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+	public void addActionListener(ActionListener arg0){
+		this.fireActionPerformed(null);
 	}
 }
