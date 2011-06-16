@@ -29,11 +29,11 @@
         <name>k7</name>
     </node>
     <node id="8">
-        <coordinate x="513" y="250"/>
+        <coordinate x="505" y="240"/>
         <name>k8</name>
     </node>
     <node id="9">
-        <coordinate x="534" y="239"/>
+        <coordinate x="545" y="247"/>
         <name>k9</name>
     </node>
     <node id="10">

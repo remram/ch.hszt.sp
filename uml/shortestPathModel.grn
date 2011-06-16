@@ -79,6 +79,7 @@
             <x="447"/>
             <y="499"/>
          </bendpoint>
+<<<<<<< HEAD
       </bendpoints>
    </relationship>
    <relationship>
@@ -126,12 +127,45 @@
       <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CShortestPathModel.java[CShortestPathModel"/>
       <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{IShortestPathModel.java[IShortestPathModel"/>
       <bendpoints>
+=======
+>>>>>>> refs/remotes/origin/master
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
       <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
       <targetType="=ch.hszt.sp/src<ch.hszt.sp.dao{IGisDAO.java[IGisDAO"/>
+<<<<<<< HEAD
+=======
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CNode.java[CNode"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyIPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.exceptions{DataAccessException.java[DataAccessException"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CDijkstra.java[CDijkstra"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CNode.java[CNode"/>
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyIPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CDijkstra.java[CDijkstra"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.exceptions{DataAccessException.java[DataAccessException"/>
+>>>>>>> refs/remotes/origin/master
       <bendpoints>
       </bendpoints>
    </relationship>
@@ -151,6 +185,7 @@
       </bendpoints>
    </relationship>
    <relationship>
+<<<<<<< HEAD
       <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
       <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
       <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CEdge.java[CEdge"/>
@@ -172,14 +207,63 @@
       <class="edu.buffalo.cse.green.relationship.dependency.DependencyIPart"/>
       <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CDijkstra.java[CDijkstra"/>
       <targetType="=ch.hszt.sp/src<ch.hszt.sp.exceptions{DataAccessException.java[DataAccessException"/>
+=======
+      <class="edu.buffalo.cse.green.relationship.realization.RealizationPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CShortestPathModel.java[CShortestPathModel"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{IShortestPathModel.java[IShortestPathModel"/>
+>>>>>>> refs/remotes/origin/master
+      <bendpoints>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+<<<<<<< HEAD
+=======
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CShortestPathModel.java[CShortestPathModel"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CDijkstra.java[CDijkstra"/>
+      <bendpoints>
+         <bendpoint>
+            <x="1404"/>
+            <y="604"/>
+         </bendpoint>
+         <bendpoint>
+            <x="1405"/>
+            <y="402"/>
+         </bendpoint>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
+>>>>>>> refs/remotes/origin/master
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
+<<<<<<< HEAD
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CNode.java[CNode"/>
+=======
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CEdge.java[CEdge"/>
       <bendpoints>
       </bendpoints>
    </relationship>
    <relationship>
       <class="edu.buffalo.cse.green.relationship.dependency.DependencyLPart"/>
       <sourceType="=ch.hszt.sp/src<ch.hszt.sp.dao{XmlGisDAO.java[XmlGisDAO"/>
-      <targetType="=ch.hszt.sp/src<ch.hszt.sp.models{CNode.java[CNode"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.data{CReadXmlDom.java[CReadXmlDom"/>
       <bendpoints>
+         <bendpoint>
+            <x="393"/>
+            <y="108"/>
+         </bendpoint>
+      </bendpoints>
+   </relationship>
+   <relationship>
+      <class="edu.buffalo.cse.green.relationship.dependency.DependencyIPart"/>
+      <sourceType="=ch.hszt.sp/src<ch.hszt.sp.models{CShortestPathModel.java[CShortestPathModel"/>
+      <targetType="=ch.hszt.sp/src<ch.hszt.sp.exceptions{DataAccessException.java[DataAccessException"/>
+>>>>>>> refs/remotes/origin/master
+      <bendpoints>
+         <bendpoint>
+            <x="1177"/>
+            <y="506"/>
+         </bendpoint>
       </bendpoints>
    </relationship>
 </uml>
