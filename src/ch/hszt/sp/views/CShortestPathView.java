@@ -14,7 +14,7 @@ import java.util.Map;
 import java.util.Observable;
 import java.util.Observer;
 
-public class CShortestPathView implements IShortestPathListener, IShortestPathGui, Observer{
+public class CShortestPathView implements IShortestPathGui, Observer{
 	
 	/**
 	 * Die Klasse CShortestPathView sorgt fuer das GUI in unserer Applikation
@@ -91,7 +91,9 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		JPanel bPanel = new JPanel();
 		bPanel.setPreferredSize(bPDimension);
 		bPanel.setMaximumSize(bPDimension);
+		
 		showNodeMenue();
+		showTargetNodeMenue();
 		
 		startLabel.setPreferredSize(labelDimension);
 		startLabel.setMaximumSize(labelDimension);
@@ -131,16 +133,16 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		start.setFont(new Font("Verdana", Font.BOLD, 18));
 		start.setPreferredSize(jcbDimension);
 		start.setMaximumSize(jcbDimension);
-		
+		selectedNodes.put("Start", 1);
 		start.addActionListener(new StartNodeListener());
-		showTargetNodeMenue(cnlist);
+		//showTargetNodeMenue(cnlist);
 		
 	}
 	
 	//Zeigt die Auswahl der Zielknoten an.
-	protected void showTargetNodeMenue(ArrayList<CNode> cnod){
+	protected void showTargetNodeMenue(){
 		int numbNodes;
-		numbNodes = cnod.size();
+		numbNodes = cnlist.size();
 		Integer[] nodesTarget = new Integer[numbNodes];
 		
 		for(int i = 0; i < numbNodes; i++){	
@@ -149,12 +151,14 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 		target = new JComboBox(nodesTarget);
 		target.setFont(new Font("Verdana", Font.BOLD, 18));
 		target.setPreferredSize(jcbDimension);
+		selectedNodes.put("Target", 2);
 		target.addActionListener(new TargetNodeListener());
 		target.setMaximumSize(jcbDimension);
 	}
 	
 	//ActionListener fuer die Startknoten.
 	class StartNodeListener implements ActionListener {
+		ArrayList<CNode> targetArr = new ArrayList<CNode>();
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			// TODO Auto-generated method stub
@@ -162,7 +166,7 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	        Integer nodeName = (Integer) node.getSelectedItem();
 	        int selected = new Integer(nodeName).intValue();
 	        selectedNodes.put("Start", selected);
-	        System.out.println(selectedNodes.get("Start"));
+	        //System.out.println(selectedNodes.get("Start"));
 		}
 	}
 	
@@ -175,56 +179,14 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	        Integer nodeName = (Integer) node.getSelectedItem();
 	        int selected = new Integer(nodeName).intValue();
 	        selectedNodes.put("Target", selected);
-	        System.out.println(selectedNodes.get("Target"));
+	        //System.out.println(selectedNodes.get("Target"));
 		}
 	}
-	public Map<Integer, CNode> getSelectedNode(int in){
+	/*public Map<Integer, CNode> getSelectedNode(int in){
 		
 		return this.lnode;
 	}
-
-	@Override
-	public void getNodePosition() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void getEdge() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setNodePositions() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void setEdges() {
-		// TODO Auto-generated method stub
-		
-	}
-/*
-	@Override
-	public void setShortestPath() {
-		// TODO Auto-generated method stub
-		
-	}*/
-
-	@Override
-	public void selectNode() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void selectNodeBtn() {
-		// TODO Auto-generated method stub
-		
-	}
-	
+	*/
 	public void update(Observable obs, Object alf){
 		if(obs instanceof CShortestPathController){
 			CShortestPathController csc = (CShortestPathController) obs;
@@ -236,11 +198,11 @@ public class CShortestPathView implements IShortestPathListener, IShortestPathGu
 	}
 		
 	class ShowPathListener implements ActionListener{
-
+		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			try {
-				uNode = spc.getPath(selectedNodes.get("start"), selectedNodes.get("target"));
+				uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}
