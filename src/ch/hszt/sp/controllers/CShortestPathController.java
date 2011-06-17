@@ -8,6 +8,7 @@ import java.util.Observable;
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
+import ch.hszt.sp.models.CPath;
 import ch.hszt.sp.models.CShortestPathModel;
 import ch.hszt.sp.views.CShortestPathView;
 //import ch.hszt.sp.views.CShortestPathView;
@@ -56,5 +57,9 @@ public class CShortestPathController extends Observable{
 	
 	public double getDistance() throws DataAccessException {
 		return spm.getDistance();
+	}
+	
+	public ArrayList<CPath> getShortestPathList() {
+		return spm.getShortestPathList();
 	}
 }
