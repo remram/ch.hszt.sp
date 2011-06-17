@@ -132,8 +132,10 @@ public class ShowEdge extends JPanel
 		//if direction one, than draw an arrow else not
 		if(direction.equals("one")) {
 			g.drawLine( x, y, (int)baseX, (int)baseY );
+			g.setColor(Color.red);
 			g.fillPolygon( xPoints, yPoints, 3 );
 		} else {
+			//g.setColor(Color.blue);
 			g.drawLine( x, y, xx, yy );
 		}
 		
@@ -174,6 +176,7 @@ public class ShowEdge extends JPanel
 		        			lnod.get(eval.getTargetNode()).getxCoordinate()+5,
 		        			lnod.get(eval.getTargetNode()).getyCoordinate()+5,
 		        			eval.getDirectionType());
+					g.setColor(Color.green);
 					/*g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
 							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);*/
 					//g2d.drawString(">>>", lnod.get(unod.get(i).getId()).getxCoordinate()+100, lnod.get(unod.get(i).getId()).getyCoordinate()+50);

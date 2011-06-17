@@ -34,11 +34,12 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	private Map<String, Integer> selectedNodes;
 	private JComboBox start, target;
 	private JLabel startLabel, targetLabel;
-	private JPanel jcbPanel;
+	private JPanel jcbPanel, tablePanel;
 	private Dimension labelDimension, spbtnDimension, 
 					  jcbDimension,jcbPDimension,bPDimension ,mapPDimension;
 	private JFrame frame;
 	private JTable spTable;
+	private JScrollPane scrollPane;
 	
 	public CShortestPathView(Observable obs){
 		this.observer = obs;
@@ -81,9 +82,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		mapPanel.setPreferredSize(mapPDimension);
 		mapPanel.setMaximumSize(mapPDimension);
 				
-		JScrollPane scrollPane = new JScrollPane(spTable);
-        scrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		
         //scrollPane.setPreferredSize(new Dimension(246, 478));
         //scrollPane.setMaximumSize(new Dimension(246, 478);
         
@@ -104,9 +103,17 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		jcbPanel.add(targetLabel);
 		jcbPanel.add(target);
 		
+		spTable = new JTable(new Object[10][3] ,setJTableTitle());
+		this.scrollPane = new JScrollPane(spTable);
+        scrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        this.tablePanel = new JPanel();
+        tablePanel.add(scrollPane);
+		
 		bPanel.add(searchPathBtn);
 		bPanel.add(jcbPanel);
-		bPanel.add(scrollPane);
+		bPanel.add(tablePanel);
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
 
@@ -119,30 +126,36 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		
 	}
 	
+	public void showTable(){
+		tablePanel.remove(scrollPane);
+		spTable = new JTable(setJTableData() ,setJTableTitle());
+		scrollPane = new JScrollPane(spTable);
+        scrollPane.setVerticalScrollBarPolicy(
+                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        
+        tablePanel.add(scrollPane);
+	}
+	
 	public String[] setJTableTitle(){
 		String[] columnNames = {"Start Node",
 				                "Target Node",
-				                "Distance",
-				                "Total Distance"};
+				                "Distance"};
 		return columnNames;
 	}
 	
-	/*public Object[][] setJTableData(){
+	public Object[][] setJTableData(){
 		
 		//Object[][] data = new String[uNode.size()][uNode.size()];
-		Object[][] data = new Object[4][uNode.size()];
-		int totalDistance = 0;
+		Object[][] data = new Object[tableList.size()][3];
 		for(CPath cPath : tableList){
-			totalDistance += cPath.getDistance();
-		for(int i = 0; i < uNode.size();i++){
-			data[][i] = {{cPath.getStartNode(), cPath.getTargetNode(),
-					     cPath.getDistance(), totalDistance}};
-			
-			}
-			return data;
+			for(int i = 0; i < tableList.size();i++){
+					data[i][0] = cPath.getStartNode();
+					data[i][1] = cPath.getTargetNode();
+					data[i][2] = cPath.getDistance();
+				}
 		}
 		return data;
-	}*/
+	}
 	
 	//Zeigt die Auswahl der vorhandenen Knoten an.
 	protected void showNodeMenue(){
@@ -231,8 +244,8 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 					e.printStackTrace();
 				}
 				mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
+				showTable();
 			}
-			//spTable = new JTable(setJTableData() ,setJTableTitle());
 		}
 	}
 }
