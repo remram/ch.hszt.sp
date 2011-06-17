@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Polygon;
 import java.awt.Stroke;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -51,6 +52,8 @@ public class ShowEdge extends JPanel
 	
 	//Zeigt die vorhandenen Kanten aus der XML auf dem Panel (Map).
 	public void showEdges(Graphics g){
+		int startx, targetx, starty, targety;
+		String test = "one";
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(stroke);
         g2d.setColor(Color.BLUE);
@@ -58,9 +61,30 @@ public class ShowEdge extends JPanel
         while(ite.hasNext()) { 
         	Object ekey = ite.next(); 
         	CEdge eval = ledg.get(ekey);
+        	g.setColor(Color.BLUE);
         	g2d.setStroke(new BasicStroke(4));
         	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
+	        	//Falls es sich, um einweg Strasse handelt.
+        		if(eval.getDirectionType().toString().equals(test)){
+	        		startx  = lnod.get(eval.getStartNode()).getxCoordinate();
+	        		targetx = lnod.get(eval.getTargetNode()).getxCoordinate();
+	        		starty  = lnod.get(eval.getStartNode()).getyCoordinate();
+	        		targety = lnod.get(eval.getTargetNode()).getyCoordinate();
+	        		showEdgeDirection(g, startx, targetx, starty, targety);
+	        	}
         	}
+	}
+	
+	protected void showEdgeDirection(Graphics g, int startx, int targetx, int starty, int targety){
+		int xone, yone;
+		double tana;
+		xone = targetx - startx;
+		yone = targety - starty;
+		g.setColor(Color.red);
+		//g.drawOval(xone, yone, 10, 10);
+		tana = Math.atan2(yone , xone);
+		System.out.println(tana);
+		//g.drawArc(xone, yone, 10, 10, 270, 90);
 	}
 	
 	//Zeichnet die Besuchten Kanten auf dem Panel.
