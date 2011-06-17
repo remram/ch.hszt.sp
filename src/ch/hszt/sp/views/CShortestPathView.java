@@ -5,6 +5,7 @@ import ch.hszt.sp.controllers.CShortestPathController;
 import ch.hszt.sp.exceptions.DataAccessException;
 import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
+import ch.hszt.sp.models.CPath;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -25,6 +26,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	private ShortestPathsPannel mapPanel;
 	private Observable observer;
 	private ArrayList<CNode> cnlist;
+	private ArrayList<CPath> tableList;
 	private LinkedList<CNode> uNode;
 	private Map<Integer, CNode> lnode;
 	private Map<Integer, CEdge> ledge;
@@ -78,8 +80,6 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		this.selectedNodes = mapPanel.getSelectedNodes();
 		mapPanel.setPreferredSize(mapPDimension);
 		mapPanel.setMaximumSize(mapPDimension);
-		
-		this.spTable = new JTable(setJTableData() ,setJTableTitle());
 				
 		JScrollPane scrollPane = new JScrollPane(spTable);
         scrollPane.setVerticalScrollBarPolicy(
@@ -127,30 +127,22 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		return columnNames;
 	}
 	
-	public Object[][] setJTableData(){
+	/*public Object[][] setJTableData(){
 		
 		//Object[][] data = new String[uNode.size()][uNode.size()];
-		
-		/*for (CNode cNode : uNode) {			
-			System.out.print(cNode.getId() + "\t" + cNode.getName());
-			System.out.println("\t\t" + spc.getNodesAsMap().get(cNode.getId()).getName());
-			//data = {cNode.getName()};
-		}*/
-		
-		 Object[][] data = {
-			    {"Name", "Smith",
-			     "Snowboarding", new Integer(5), new Boolean(false)},
-			    {"John", "Doe",
-			     "Rowing", new Integer(3), new Boolean(true)},
-			    {"Sue", "Black",
-			     "Knitting", new Integer(2), new Boolean(false)},
-			    {"Jane", "White",
-			     "Speed reading", new Integer(20), new Boolean(true)},
-			    {"Joe", "Brown",
-			     "Pool", new Integer(10), new Boolean(false)}
-			};
+		Object[][] data = new Object[4][uNode.size()];
+		int totalDistance = 0;
+		for(CPath cPath : tableList){
+			totalDistance += cPath.getDistance();
+		for(int i = 0; i < uNode.size();i++){
+			data[][i] = {{cPath.getStartNode(), cPath.getTargetNode(),
+					     cPath.getDistance(), totalDistance}};
+			
+			}
+			return data;
+		}
 		return data;
-	}
+	}*/
 	
 	//Zeigt die Auswahl der vorhandenen Knoten an.
 	protected void showNodeMenue(){
@@ -234,12 +226,13 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 			}else{
 				try {
 					uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
+					tableList = spc.getShortestPathList();
 				} catch (DataAccessException e) {
 					e.printStackTrace();
-				  }
-				
+				}
 				mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
 			}
+			//spTable = new JTable(setJTableData() ,setJTableTitle());
 		}
 	}
 }
