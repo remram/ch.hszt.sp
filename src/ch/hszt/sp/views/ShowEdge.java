@@ -4,7 +4,6 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Polygon;
 import java.awt.Stroke;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -18,7 +17,7 @@ import ch.hszt.sp.models.CNode;
 public class ShowEdge extends JPanel
 {
 	/**
-	 * @author miro
+	 * @author Miroslav Mirkovic
 	 * @version 1.0
 	 * Die Klasse ShowEdge ist fuer die Dartsellung der Kanten zustaendig.
 	 * 
