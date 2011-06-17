@@ -62,7 +62,15 @@ public class ShowEdge extends JPanel
         	CEdge eval = ledg.get(ekey);
         	g.setColor(Color.BLUE);
         	g2d.setStroke(new BasicStroke(4));
-        	g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
+        	
+        	this.drawArrow(g2d,
+        			lnod.get(eval.getStartNode()).getxCoordinate()+5, 
+        			lnod.get(eval.getStartNode()).getyCoordinate()+5, 
+        			lnod.get(eval.getTargetNode()).getxCoordinate()+5,
+        			lnod.get(eval.getTargetNode()).getyCoordinate()+5,
+        			eval.getDirectionType());
+        	
+        	//g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
 	        	//Falls es sich, um einweg Strasse handelt.
         		if(eval.getDirectionType().toString().equals(test)){
 	        		startx  = lnod.get(eval.getStartNode()).getxCoordinate();
@@ -72,6 +80,63 @@ public class ShowEdge extends JPanel
 	        		showEdgeDirection(g, startx, targetx, starty, targety);
 	        	}
         	}
+	}
+	
+	/**
+	* This function raws an arrowed line
+	* @param g the Graphics2D context to draw on
+	* @param x the x location of the "tail" of the arrow
+	* @param y the y location of the "tail" of the arrow
+	* @param xx the x location of the "head" of the arrow
+	* @param yy the y location of the "head" of the arrow
+	* @param direction the type of edge direction
+	*/
+	private void drawArrow( Graphics2D g, int x, int y, int xx, int yy, String direction) {
+		float arrowWidth = 15.0f ;
+		float theta = 0.623f ;
+		int[] xPoints = new int[ 3 ] ;
+		int[] yPoints = new int[ 3 ] ;
+		float[] vecLine = new float[ 2 ] ;
+		float[] vecLeft = new float[ 2 ] ;
+		float fLength;
+		float th;
+		float ta;
+		float baseX, baseY ;
+	
+		xPoints[ 0 ] = xx ;
+		yPoints[ 0 ] = yy ;
+	
+		// build the line vector
+		vecLine[ 0 ] = (float)xPoints[ 0 ] - x ;
+		vecLine[ 1 ] = (float)yPoints[ 0 ] - y ;
+	
+		// build the arrow base vector - normal to the line
+		vecLeft[ 0 ] = -vecLine[ 1 ] ;
+		vecLeft[ 1 ] = vecLine[ 0 ] ;
+	
+		// setup length parameters
+		fLength = (float)Math.sqrt( vecLine[0] * vecLine[0] + vecLine[1] * vecLine[1] ) ;
+		th = arrowWidth / ( 2.0f * fLength ) ;
+		ta = arrowWidth / ( 2.0f * ( (float)Math.tan( theta ) / 2.0f ) * fLength ) ;
+	
+		// find the base of the arrow
+		baseX = ( (float)xPoints[ 0 ] - ta * vecLine[0]);
+		baseY = ( (float)yPoints[ 0 ] - ta * vecLine[1]);
+	
+		// build the points on the sides of the arrow
+		xPoints[ 1 ] = (int)( baseX + th * vecLeft[0] );
+		yPoints[ 1 ] = (int)( baseY + th * vecLeft[1] );
+		xPoints[ 2 ] = (int)( baseX - th * vecLeft[0] );
+		yPoints[ 2 ] = (int)( baseY - th * vecLeft[1] );
+	
+		//if direction one, than draw an arrow else not
+		if(direction.equals("one")) {
+			g.drawLine( x, y, (int)baseX, (int)baseY );
+			g.fillPolygon( xPoints, yPoints, 3 );
+		} else {
+			g.drawLine( x, y, xx, yy );
+		}
+		
 	}
 	
 	protected void showEdgeDirection(Graphics g, int startx, int targetx, int starty, int targety){
@@ -103,8 +168,14 @@ public class ShowEdge extends JPanel
 	        	target = lnod.get(unod.get(i+1).getId());
 				if(eval.getStartNode() == start.getId() && eval.getTargetNode() == target.getId()){
 					g2d.setStroke(new BasicStroke(5));
-					g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
-							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);
+					this.drawArrow(g2d,
+		        			lnod.get(eval.getStartNode()).getxCoordinate()+5, 
+		        			lnod.get(eval.getStartNode()).getyCoordinate()+5, 
+		        			lnod.get(eval.getTargetNode()).getxCoordinate()+5,
+		        			lnod.get(eval.getTargetNode()).getyCoordinate()+5,
+		        			eval.getDirectionType());
+					/*g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
+							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);*/
 					//g2d.drawString(">>>", lnod.get(unod.get(i).getId()).getxCoordinate()+100, lnod.get(unod.get(i).getId()).getyCoordinate()+50);
 	        	}
 			}
