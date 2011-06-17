@@ -114,7 +114,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.WEST, mapPanel);
 		
-		frame.setResizable(false);
+		frame.setResizable(true);
 		frame.setSize(1100, 600); //width 975
 		frame.setVisible(true);
 		
@@ -182,11 +182,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	        //System.out.println(selectedNodes.get("Target"));
 		}
 	}
-	/*public Map<Integer, CNode> getSelectedNode(int in){
-		
-		return this.lnode;
-	}
-	*/
+	
 	public void update(Observable obs, Object alf){
 		if(obs instanceof CShortestPathController){
 			CShortestPathController csc = (CShortestPathController) obs;
@@ -198,15 +194,20 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	}
 		
 	class ShowPathListener implements ActionListener{
-		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			mapPanel.paintComponent(mapPanel.getGraphics());
+			if(selectedNodes.get("Start")==selectedNodes.get("Target")){
+				JOptionPane.showMessageDialog(frame, "Sie haben den gleichen Start-/Zielknoten gewählt!!!");
+			}else{
 			try {
 				uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
 			} catch (DataAccessException e) {
 				e.printStackTrace();
 			}
+			
 			mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
+			}
 		}
 	}
 }

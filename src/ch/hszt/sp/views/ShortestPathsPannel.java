@@ -6,8 +6,6 @@ import ch.hszt.sp.models.CEdge;
 import ch.hszt.sp.models.CNode;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOError;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -66,12 +64,6 @@ public class ShortestPathsPannel extends JPanel{
 		selectedNodes.put("Target", to);
 	}
 	
-	//Resetet den Start- Zielknoten.
-	public void resetSelectedNodes(){
-		selectedNodes.put("Start", null);
-		selectedNodes.put("Target", null);
-	}
-	
 	//Mit dieser Methode kann ein Kartenausschnitt geladen werden.
 	public void addBackground(Graphics g){
 		try{
@@ -113,13 +105,5 @@ public class ShortestPathsPannel extends JPanel{
 				ex.printStackTrace();
 		}
 		addNode(g);
-	}
-	
-	class TestListener implements ActionListener{
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			// TODO Auto-generated method stub
-			System.out.println("here");
-		}
 	}
 }
