@@ -36,7 +36,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	private Dimension labelDimension, spbtnDimension, 
 					  jcbDimension,jcbPDimension,bPDimension ,mapPDimension;
 	private JFrame frame;
-	private JTextArea textArea;
+	private JTable spTable;
 	
 	public CShortestPathView(Observable obs){
 		this.observer = obs;
@@ -79,10 +79,9 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		mapPanel.setPreferredSize(mapPDimension);
 		mapPanel.setMaximumSize(mapPDimension);
 		
-		this.textArea = new JTextArea();
-		textArea.setBackground(Color.white);
-		textArea.setEditable(false);		
-		JScrollPane scrollPane = new JScrollPane(textArea);
+		this.spTable = new JTable(setJTableData() ,setJTableTitle());
+				
+		JScrollPane scrollPane = new JScrollPane(spTable);
         scrollPane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         //scrollPane.setPreferredSize(new Dimension(246, 478));
@@ -118,6 +117,30 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		frame.setSize(1100, 600); //width 975
 		frame.setVisible(true);
 		
+	}
+	
+	public String[] setJTableTitle(){
+		String[] columnNames = {"Start Node",
+				                "Target Node",
+				                "Distance",
+				                "Total Distance"};
+		return columnNames;
+	}
+	
+	public Object[][] setJTableData(){
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		return data;
 	}
 	
 	//Zeigt die Auswahl der vorhandenen Knoten an.
@@ -200,13 +223,13 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 			if(selectedNodes.get("Start")==selectedNodes.get("Target")){
 				JOptionPane.showMessageDialog(frame, "Sie haben den gleichen Start-/Zielknoten gewählt!!!");
 			}else{
-			try {
-				uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
-			} catch (DataAccessException e) {
-				e.printStackTrace();
-			}
-			
-			mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
+				try {
+					uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
+				} catch (DataAccessException e) {
+					e.printStackTrace();
+				  }
+				
+				mapPanel.addUEdge(mapPanel.getGraphics(), uNode);
 			}
 		}
 	}
