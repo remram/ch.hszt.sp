@@ -30,20 +30,12 @@ public class CShortestPathModel extends Observable implements
 	public CShortestPathModel() {
 	}
 
-	public void notifyObserver() {
-		//setChanged();
-		//notifyObservers();
-	}
-
 	public void execute() throws DataAccessException {
 		// set data
 		setNodes();
 		setEdges();
 		setNodesAsMap();
 		setEdgesAsMap();
-
-		// notify observer
-		//this.notifyObserver();
 	}
 
 	@Override
@@ -192,7 +184,6 @@ public class CShortestPathModel extends Observable implements
 			try {
 				throw new DataAccessException("An error has been triggered.");
 			} catch (DataAccessException edae) {
-				// TODO Auto-generated catch block
 				edae.printStackTrace();
 			}
 		}
