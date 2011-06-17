@@ -70,13 +70,6 @@ public class CNode {
 
 	@Override
 	public int hashCode() {
-		/*final int prime = 31;
-		int result = 1;
-		result = prime
-				* result
-				+ ((new Integer(this.id) == null) ? 0 : new Integer(this.id)
-						.hashCode());
-		return result;*/
 		return 0;
 	}
 
@@ -99,6 +92,8 @@ public class CNode {
 
 	@Override
 	public String toString() {
-		return name;
+		return 	"Id: " + this.id + " , Name: " + this.name + 
+				" , Coordinate(x,y): (" + this.xCoordinate + 
+				"," + this.yCoordinate + ")";
 	}
 }
