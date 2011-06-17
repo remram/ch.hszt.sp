@@ -151,7 +151,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		target = new JComboBox(nodesTarget);
 		target.setFont(new Font("Verdana", Font.BOLD, 18));
 		target.setPreferredSize(jcbDimension);
-		selectedNodes.put("Target", 2);
+		selectedNodes.put("Target", 1);
 		target.addActionListener(new TargetNodeListener());
 		target.setMaximumSize(jcbDimension);
 	}
