@@ -144,16 +144,17 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	}
 	
 	public Object[][] setJTableData(){
-		
-		//Object[][] data = new String[uNode.size()][uNode.size()];
 		Object[][] data = new Object[tableList.size()][3];
-		for(CPath cPath : tableList){
-			for(int i = 0; i < tableList.size();i++){
+		int i = 0;
+		int tableListSize = tableList.size();
+		CPath cPath;
+     			while(i < tableListSize){
+     				cPath = tableList.get(i);
 					data[i][0] = cPath.getStartNode();
 					data[i][1] = cPath.getTargetNode();
 					data[i][2] = cPath.getDistance();
+					i++;
 				}
-		}
 		return data;
 	}
 	

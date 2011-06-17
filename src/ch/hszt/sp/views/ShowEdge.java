@@ -77,7 +77,6 @@ public class ShowEdge extends JPanel
 	        		targetx = lnod.get(eval.getTargetNode()).getxCoordinate();
 	        		starty  = lnod.get(eval.getStartNode()).getyCoordinate();
 	        		targety = lnod.get(eval.getTargetNode()).getyCoordinate();
-	        		showEdgeDirection(g, startx, targetx, starty, targety);
 	        	}
         	}
 	}
@@ -139,18 +138,6 @@ public class ShowEdge extends JPanel
 			g.drawLine( x, y, xx, yy );
 		}
 		
-	}
-	
-	protected void showEdgeDirection(Graphics g, int startx, int targetx, int starty, int targety){
-		int xone, yone;
-		double tana;
-		xone = targetx - startx;
-		yone = targety - starty;
-		g.setColor(Color.red);
-		//g.drawOval(xone, yone, 10, 10);
-		tana = Math.atan2(yone , xone);
-		System.out.println(tana);
-		//g.drawArc(xone, yone, 10, 10, 270, 90);
 	}
 	
 	//Zeichnet die Besuchten Kanten auf dem Panel.
