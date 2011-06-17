@@ -114,7 +114,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		frame.add(BorderLayout.WEST, mapPanel);
 		
 		frame.setResizable(true);
-		frame.setSize(1100, 600); //width 975
+		frame.setSize(1150, 600); //width 975
 		frame.setVisible(true);
 		
 	}
@@ -128,8 +128,17 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	}
 	
 	public Object[][] setJTableData(){
-		Object[][] data = {
-			    {"Kathy", "Smith",
+		
+		//Object[][] data = new String[uNode.size()][uNode.size()];
+		
+		/*for (CNode cNode : uNode) {			
+			System.out.print(cNode.getId() + "\t" + cNode.getName());
+			System.out.println("\t\t" + spc.getNodesAsMap().get(cNode.getId()).getName());
+			//data = {cNode.getName()};
+		}*/
+		
+		 Object[][] data = {
+			    {"Name", "Smith",
 			     "Snowboarding", new Integer(5), new Boolean(false)},
 			    {"John", "Doe",
 			     "Rowing", new Integer(3), new Boolean(true)},
