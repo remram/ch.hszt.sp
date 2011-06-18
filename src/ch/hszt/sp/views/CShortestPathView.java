@@ -130,8 +130,8 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		frame.add(BorderLayout.EAST, bPanel);
 		frame.add(BorderLayout.WEST, mapPanel);
 		
-		frame.setResizable(true);
-		frame.setSize(1150, 600); //width 975
+		frame.setResizable(false);
+		frame.setSize(1110, 600); //width 975
 		frame.setVisible(true);
 		
 	}
