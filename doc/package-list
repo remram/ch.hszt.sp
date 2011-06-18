@@ -4,5 +4,4 @@ ch.hszt.sp.dao
 ch.hszt.sp.data
 ch.hszt.sp.exceptions
 ch.hszt.sp.models
-ch.hszt.sp.test
 ch.hszt.sp.views
