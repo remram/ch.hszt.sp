@@ -1,5 +1,6 @@
 package ch.hszt.sp.views;
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
 
 import ch.hszt.sp.controllers.CShortestPathController;
 import ch.hszt.sp.exceptions.DataAccessException;
@@ -33,13 +34,15 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	private CShortestPathController spc;
 	private Map<String, Integer> selectedNodes;
 	private JComboBox start, target;
-	private JLabel startLabel, targetLabel;
+	private JLabel startLabel, targetLabel, lblDistance;
 	private JPanel jcbPanel, tablePanel;
 	private Dimension labelDimension, spbtnDimension, 
 					  jcbDimension,jcbPDimension,bPDimension ,mapPDimension;
 	private JFrame frame;
 	private JTable spTable;
 	private JScrollPane scrollPane;
+	
+	protected double distance = 0;
 	
 	public CShortestPathView(Observable obs){
 		this.observer = obs;
@@ -58,6 +61,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		jcbPanel.setMaximumSize(jcbPDimension);
 		this.startLabel = new JLabel("Start:");
 		this.targetLabel = new JLabel("Ziel:");
+		this.lblDistance = new JLabel("Gesammte Distanz: " + distance);
 		this.frame = new JFrame();
 	}
 	
@@ -103,17 +107,23 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 		jcbPanel.add(targetLabel);
 		jcbPanel.add(target);
 		
-		spTable = new JTable(new Object[10][3] ,setJTableTitle());
+		spTable = new JTable(new Object[1][3] ,setJTableTitle());
+		spTable.setPreferredScrollableViewportSize(new Dimension(350, 400));
+		spTable.setFillsViewportHeight(false);
 		this.scrollPane = new JScrollPane(spTable);
         scrollPane.setVerticalScrollBarPolicy(
                 JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         
-        this.tablePanel = new JPanel();
+        this.tablePanel = new JPanel(new BorderLayout());
         tablePanel.add(scrollPane);
+        
+        JPanel jpnlDistance = new JPanel(new BorderLayout());
+        jpnlDistance.add(this.lblDistance);
 		
 		bPanel.add(searchPathBtn);
 		bPanel.add(jcbPanel);
 		bPanel.add(tablePanel);
+		bPanel.add(jpnlDistance);
 		//BoxLayout um die Buttons untereinander anzuordnen
 		bPanel.setLayout(new BoxLayout(bPanel, BoxLayout.PAGE_AXIS));
 
@@ -127,14 +137,40 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 	}
 	
 	public void showTable(){
-		tablePanel.remove(scrollPane);
-		spTable = new JTable(setJTableData() ,setJTableTitle());
-		scrollPane = new JScrollPane(spTable);
-        scrollPane.setVerticalScrollBarPolicy(
-                JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        
-        tablePanel.add(scrollPane);
+		spTable.setModel(new SPAbstractTableModel());
+		lblDistance.setText("Gesammte Distanz: " + Double.toString(distance));
+		//reset distance
+		distance = 0;
 	}
+	
+	class SPAbstractTableModel extends AbstractTableModel {
+		private static final long serialVersionUID = -1302179318146054150L;
+		private String[] columnNames = setJTableTitle();
+        private Object[][] data = setJTableData();
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return data.length;
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+        public Object getValueAt(int row, int col) {
+            return data[row][col];
+        }
+
+        /*
+         * table isn't editable.
+         */
+        public boolean isCellEditable(int row, int col) {
+        	return false;
+        }
+    }
 	
 	public String[] setJTableTitle(){
 		String[] columnNames = {"Start Node",
@@ -153,6 +189,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 					data[i][0] = cPath.getStartNode();
 					data[i][1] = cPath.getTargetNode();
 					data[i][2] = cPath.getDistance();
+					distance += cPath.getDistance();
 					i++;
 				}
 		return data;
@@ -240,7 +277,7 @@ public class CShortestPathView implements IShortestPathGui, Observer{
 			}else{
 				try {
 					uNode = spc.getPath(selectedNodes.get("Start"), selectedNodes.get("Target"));
-					tableList = spc.getShortestPathList();
+					tableList = spc.getShortestPathList();						
 				} catch (DataAccessException e) {
 					e.printStackTrace();
 				}

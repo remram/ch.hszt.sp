@@ -82,7 +82,7 @@ public class ShowEdge extends JPanel
 	}
 	
 	/**
-	* This function raws an arrowed line
+	* This function draws an arrowed line
 	* @param g the Graphics2D context to draw on
 	* @param x the x location of the "tail" of the arrow
 	* @param y the y location of the "tail" of the arrow
@@ -131,10 +131,9 @@ public class ShowEdge extends JPanel
 		//if direction one, than draw an arrow else not
 		if(direction.equals("one")) {
 			g.drawLine( x, y, (int)baseX, (int)baseY );
-			g.setColor(Color.red);
+			g.setColor(Color.magenta);
 			g.fillPolygon( xPoints, yPoints, 3 );
 		} else {
-			//g.setColor(Color.blue);
 			g.drawLine( x, y, xx, yy );
 		}
 		
