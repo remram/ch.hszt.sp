@@ -66,11 +66,11 @@ public class ShortestPathsPannel extends JPanel{
 	
 	//Mit dieser Methode kann ein Kartenausschnitt geladen werden.
 	public void addBackground(Graphics g){
-		try{
-			this.img = new ImageIcon("img/osm-zurich.png").getImage();
-			}catch(IOError err){
-				err.getCause();
-			}
+		try{	    	
+	    	this.img = new ImageIcon(ClassLoader.getSystemResource("osm-zurich.png")).getImage();
+		} catch(IOError err){
+			err.getCause();
+		}
 		g.drawImage(img, 0,0, null);
 	}
 	

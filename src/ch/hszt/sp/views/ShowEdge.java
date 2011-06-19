@@ -51,8 +51,6 @@ public class ShowEdge extends JPanel
 	
 	//Zeigt die vorhandenen Kanten aus der XML auf dem Panel (Map).
 	public void showEdges(Graphics g){
-		int startx, targetx, starty, targety;
-		String test = "one";
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setStroke(stroke);
         g2d.setColor(Color.BLUE);
@@ -69,16 +67,7 @@ public class ShowEdge extends JPanel
         			lnod.get(eval.getTargetNode()).getxCoordinate()+5,
         			lnod.get(eval.getTargetNode()).getyCoordinate()+5,
         			eval.getDirectionType());
-        	
-        	//g2d.drawLine(lnod.get(eval.getStartNode()).getxCoordinate()+5, lnod.get(eval.getStartNode()).getyCoordinate()+5, lnod.get(eval.getTargetNode()).getxCoordinate()+5,lnod.get(eval.getTargetNode()).getyCoordinate()+5);
-	        	//Falls es sich, um einweg Strasse handelt.
-        		if(eval.getDirectionType().toString().equals(test)){
-	        		startx  = lnod.get(eval.getStartNode()).getxCoordinate();
-	        		targetx = lnod.get(eval.getTargetNode()).getxCoordinate();
-	        		starty  = lnod.get(eval.getStartNode()).getyCoordinate();
-	        		targety = lnod.get(eval.getTargetNode()).getyCoordinate();
-	        	}
-        	}
+        }
 	}
 	
 	/**
@@ -163,9 +152,6 @@ public class ShowEdge extends JPanel
 		        			lnod.get(eval.getTargetNode()).getyCoordinate()+5,
 		        			eval.getDirectionType());
 					g.setColor(Color.green);
-					/*g2d.drawLine(lnod.get(unod.get(i).getId()).getxCoordinate()+5, lnod.get(unod.get(i).getId()).getyCoordinate()+5,
-							lnod.get(unod.get(i+1).getId()).getxCoordinate()+5, lnod.get(unod.get(i+1).getId()).getyCoordinate()+5);*/
-					//g2d.drawString(">>>", lnod.get(unod.get(i).getId()).getxCoordinate()+100, lnod.get(unod.get(i).getId()).getyCoordinate()+50);
 	        	}
 			}
     	}

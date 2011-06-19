@@ -1,7 +1,7 @@
 package ch.hszt.sp.data;
 
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -41,8 +41,15 @@ public class CReadXmlDom {
 			DocumentBuilderFactory factory = DocumentBuilderFactory
 					.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
-			Document document = builder.parse(new File("src/ch/hszt/sp/data/"
-					+ this.xmlFile));
+			
+			InputStream propIn = getClass().getResourceAsStream(this.xmlFile);
+			Document document = builder.parse(propIn);
+			
+			/*URL url = this.getClass().getClassLoader().getResource("ch/hszt/sp/data/" + this.xmlFile);
+			Document document = builder.parse(new File(url.getFile()));*/
+			
+			
+			
 			//Get list of nodes by tag name			
 			this.xmlNodeList = document.getElementsByTagName(this.tagName);
 			//Error and exception handling
